@@ -4,5 +4,14 @@
     "Choose network": "🐧 👉🖥️",
     "Start by choosing the network for your organization": "🐧 👉🖥️🔛 🌐",
     "Create a new organization": "🐧🆕🌐",
-    "Enter an organization’s name": "🐧🌐❓"
+    "Enter an organization’s name": "🐧🌐❓",
+    "Find out more": "➕🐟🐠🐟",
+    "Mainnet uses real funds.": "🖥️🎣❗.",
+    "No organization with that name exists.": "❄️❄️❄️❄️❄️.",
+    "Or open an existing organization": "❄️❄️❄️👉 🌐",
+    "Then create a new organization": "❄️❄️❄️ 🌐❄️❄️❄️",
+    "This app was configured to connect to an unsupported network. Please\n            change the network environment settings.": "❄️❄️❄️☠️ 🖥️❗ .  🐧🖥️",
+    "about the risks and what’s been done to mitigate them.": "⚡🦈.",
+    "create-organization": "<0><0>👉❄️🌐</0></0><1>❄️🌐</1>",
+    "demo-organization": "❄️ 🌐 🚫❄️ 🐧 . <2>🐬🌐 💥 🐚🔍🐧</2>."
 }
