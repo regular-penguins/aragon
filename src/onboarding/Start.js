@@ -191,8 +191,8 @@ class StartContent extends React.PureComponent {
           <p>
             <Text size="large" color={theme.textSecondary}>
               {smallMode
-                ? 'Choose network'
-                : 'Start by choosing the network for your organization'}
+                ? t('Choose network')
+                : t('Start by choosing the network for your organization')}
             </Text>
           </p>
 
@@ -211,14 +211,14 @@ class StartContent extends React.PureComponent {
                   <IconAttention />
                 </span>
                 <p>
-                  Mainnet uses real funds.{' '}
+            t(Mainnet uses real funds.){' '}
                   <StrongSafeLink
                     href={MAINNET_RISKS_BLOG_POST}
                     target="_blank"
                   >
-                    Find out more
+                    t(Find out more)
                   </StrongSafeLink>{' '}
-                  about the risks and what’s been done to mitigate them.
+                  t(about the risks and what’s been done to mitigate them.)
                 </p>
               </Disclosure>
             )}
@@ -230,7 +230,7 @@ class StartContent extends React.PureComponent {
             <Action>
               <p>
                 <Text size="large" color={theme.textSecondary}>
-                  Then create a new organization
+                  t(Then create a new organization)
                 </Text>
               </p>
               <Button
@@ -238,7 +238,7 @@ class StartContent extends React.PureComponent {
                 onClick={this.props.onCreate}
                 disabled={!canCreate}
               >
-                Create a new organization
+                t(Create a new organization)
               </Button>
               {this.renderWarning()}
             </Action>
