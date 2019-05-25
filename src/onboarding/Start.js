@@ -302,7 +302,7 @@ class StartContent extends React.PureComponent {
                   )}
                   {domainCheckStatus === DomainCheckRejected && (
                     <DomainStatus size={smallMode ? 'large' : 'xsmall'}>
-                      t('No organization with that name exists.'')
+                      No organization with that name exists.'
                     </DomainStatus>
                   )}
                 </SubmitWrap>
@@ -313,11 +313,13 @@ class StartContent extends React.PureComponent {
         {demoDao && (
           <p>
             <Text size="normal" color={theme.textSecondary}>
-              t(Not ready to create an organization? Try browsing this){' '}
+            <Trans i18nKey="demo-organization">
+              Not ready to create an organization? Try browsing this{' '}
               <ButtonLink onClick={this.handleOpenDemoOrganization}>
-                t(demo organization)
+                demo organization
               </ButtonLink>{' '}
-              t(instead.)
+              instead.
+              </Trans>
             </Text>
           </p>
         )}
@@ -363,11 +365,13 @@ class StartContent extends React.PureComponent {
     if (!hasAccount) {
       return (
         <ActionInfo>
+          <Trans i18nKey="unlock-enable">
           Please unlock and{' '}
           <ButtonLink onClick={onRequestEnable} style={{ color: '#000' }}>
             enable
           </ButtonLink>{' '}
           {providerString('your Ethereum provider', walletProviderId)}.
+        </Trans>
         </ActionInfo>
       )
     }
