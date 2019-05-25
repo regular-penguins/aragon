@@ -13,5 +13,11 @@
     "missing-provider": "Instal·la un proveïdor d'Ethereum (i.e. <2>MetaMask</2>)",
     "missing-provider-frame": "Instal·la <2>Frame</2> com el teu proveïdor d'Ethereum",
     "demo-organization": "Encara no estàs preparat per crear una organització? Prova de navegar per aquesta <2>nom de l'organització</2>.",
-    "unlock-enable": "Desbloqueja i <2>habilita</2> ."
+    "unlock-enable": "Desbloqueja i <2>habilita</2> .",
+    "create-organization": "<0><0>Després crea una nova organització</0></0><1>Crea una nova organització</1>",
+    "need-minimum-balance": "Com a mínim cal ETH.<5></5>",
+    "select-network-type": "Tria la xarxa",
+    "unsupported-network": "S'ha configurat la app per conectar-se a amb una xarxa no soportada. Canvia la configuració de xarxa.",
+    "use-desktop-browser": "Si voleu <1>crear</1> una organització feu servir el navegador d'escriptori.",
+    "warning-mainnet-real-funds": "La xarxa principal fa servir fons reals. <2>Descobreix més</2> sobre els riscs i que s'ha fet per mitigar-los."
 }
