@@ -91,8 +91,8 @@ class Start extends React.Component {
               {below('medium') && (
                 <Warning>
                   <Trans i18nKey="use-desktop-browser">
-                  If you want to <span>create</span> an organization, please use
-                  your desktop browser.
+                    If you want to <span>create</span> an organization, please
+                    use your desktop browser.
                   </Trans>
                 </Warning>
               )}
@@ -213,16 +213,16 @@ class StartContent extends React.PureComponent {
                   <IconAttention />
                 </span>
                 <p>
-                <Trans i18nKey="warning-mainnet-real-funds">
-                  Mainnet uses real funds.{' '}
-                  <StrongSafeLink
-                    href={MAINNET_RISKS_BLOG_POST}
-                    target="_blank"
-                  >
-                    Find out more
-                  </StrongSafeLink>{' '}
-                  about the risks and what’s been done to mitigate them.
-                </Trans>
+                  <Trans i18nKey="warning-mainnet-real-funds">
+                    Mainnet uses real funds.{' '}
+                    <StrongSafeLink
+                      href={MAINNET_RISKS_BLOG_POST}
+                      target="_blank"
+                    >
+                      Find out more
+                    </StrongSafeLink>{' '}
+                    about the risks and what’s been done to mitigate them.
+                  </Trans>
                 </p>
               </Disclosure>
             )}
@@ -232,22 +232,21 @@ class StartContent extends React.PureComponent {
         <TwoActions>
           {!smallMode && (
             <Action>
-               <Trans i18nKey="create-organization">
-              <p>
-                <Text size="large" color={theme.textSecondary}>
-                  Then create a new organization
-                </Text>
-                
-              </p>
-              <Button
-                mode="strong"
-                onClick={this.props.onCreate}
-                disabled={!canCreate}
-              >
-                Create a new organization
-              </Button>
-              {this.renderWarning()}
-              </Trans>
+              
+                <p>
+                  <Text size="large" color={theme.textSecondary}>
+                    t('Then create a new organization')                    
+                  </Text>
+                </p>
+                <Button
+                  mode="strong"
+                  onClick={this.props.onCreate}
+                  disabled={!canCreate}
+                >
+                  t('Create a new organization')
+                </Button>
+                {this.renderWarning()}
+              
             </Action>
           )}
           <form onSubmit={onOpenOrganization}>
@@ -386,8 +385,8 @@ class StartContent extends React.PureComponent {
       return (
         <ActionInfo>
           <Trans i18nKey="unsupported-network">
-          This app was configured to connect to an unsupported network. Please
-          change the network environment settings.
+            This app was configured to connect to an unsupported network. Please
+            change the network environment settings.
           </Trans>
         </ActionInfo>
       )
@@ -395,31 +394,29 @@ class StartContent extends React.PureComponent {
     if (walletNetwork !== network.type) {
       return (
         <ActionInfo>
-          <Trans i18nKey="select-network-type">
-          Please select the {sanitizeNetworkType(network.type)} network in{' '}
-          {providerString('your Ethereum provider', walletProviderId)}.
-        </Trans>
+            SEM
+            Please select the {sanitizeNetworkType(network.type)} network in{' '}
+            {providerString('your Ethereum provider', walletProviderId)}.
         </ActionInfo>
       )
     }
     if (!this.enoughBalance()) {
       return (
         <ActionInfo>
-          <Trans i18nKey="need-minimum-balance">
-          You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
-          {this.unknownBalance()
-            ? ' (your account balance is unknown)'
-            : ` (you have ${this.formattedBalance()} ETH)`}
-          .<br />
-          {network.type === 'rinkeby' && (
-            <SafeLink target="_blank" href="https://faucet.rinkeby.io/">
-              Request Ether on the Rinkeby Network
-            </SafeLink>
-          )}
-          {network.type === 'private' &&
-            'Please import an account with enough ETH.'}
-        </Trans>
-        </ActionInfo>
+            SEM
+            You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
+            {this.unknownBalance()
+              ? ' (your account balance is unknown)'
+              : ` (you have ${this.formattedBalance()} ETH)`}
+            .<br />
+            {network.type === 'rinkeby' && (
+              <SafeLink target="_blank" href="https://faucet.rinkeby.io/">
+                Request Ether on the Rinkeby Network
+              </SafeLink>
+            )}
+            {network.type === 'private' &&
+              'Please import an account with enough ETH.'}
+       </ActionInfo>
       )
     }
     return null
