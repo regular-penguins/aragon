@@ -13,5 +13,9 @@
     "missing-provider": "Instala un proveedor de Ethereum (i.e. <2>MetaMask</2>)",
     "missing-provider-frame": "Instala <2>Frame</2> como proveedor de Ethereum",
     "demo-organization": "¿No estás preparado para crear una organización? Prueba de navegar por esta <2>organización de demostración</2>.",
-    "unlock-enable": "Desbloquea y <2>habilita</2>."
+    "unlock-enable": "Desbloquea y <2>habilita</2>.",
+    "create-organization": "<0><0>Luego crea una nueva organización</0></0><1>Crea una nueva organización</1>",
+    "unsupported-network": "Esta app se ha configurado para conectarse con una red no suportada. Cambia la configuración de la red.",
+    "use-desktop-browser": "Si quieres <1>crear</1> una organización usa tu navegador de escritorio.",
+    "warning-mainnet-real-funds": "La red principal usa fondos reales <2>Saber más</2> sobre los riesgos y que se ha hecho para mitigarlos."
 }
