@@ -1,6 +1,15 @@
 {
   "Choose network": "Choose network",
+  "Create a new organization": "Create a new organization",
+  "Enter an organization’s name": "Enter an organization’s name",
   "Find an existing organization": "Find an existing organization",
+  "Find out more": "Find out more",
+  "Mainnet uses real funds.": "Mainnet uses real funds.",
+  "Or open an existing organization": "Or open an existing organization",
   "Start by choosing the network for your organization": "Start by choosing the network for your organization",
-  "Welcome to Aragon": "Welcome to Aragon"
+  "Then create a new organization": "Then create a new organization",
+  "Welcome to Aragon": "Welcome to Aragon",
+  "about the risks and what’s been done to mitigate them.": "about the risks and what’s been done to mitigate them.",
+  "missing-provider": "Please install an Ethereum provider (e.g. <2>MetaMask</2>)",
+  "missing-provider-frame": "Please install <2>Frame</2> as your Ethereum provider"
 }

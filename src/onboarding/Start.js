@@ -211,14 +211,14 @@ class StartContent extends React.PureComponent {
                   <IconAttention />
                 </span>
                 <p>
-            t(Mainnet uses real funds.){' '}
+                  t('Mainnet uses real funds.'){' '}
                   <StrongSafeLink
                     href={MAINNET_RISKS_BLOG_POST}
                     target="_blank"
                   >
-                    t(Find out more)
+                    t('Find out more')
                   </StrongSafeLink>{' '}
-                  t(about the risks and what’s been done to mitigate them.)
+                  t('about the risks and what’s been done to mitigate them.')
                 </p>
               </Disclosure>
             )}
@@ -230,7 +230,7 @@ class StartContent extends React.PureComponent {
             <Action>
               <p>
                 <Text size="large" color={theme.textSecondary}>
-                  t(Then create a new organization)
+                  t('Then create a new organization')
                 </Text>
               </p>
               <Button
@@ -238,7 +238,7 @@ class StartContent extends React.PureComponent {
                 onClick={this.props.onCreate}
                 disabled={!canCreate}
               >
-                t(Create a new organization)
+                t('Create a new organization')
               </Button>
               {this.renderWarning()}
             </Action>
@@ -248,8 +248,8 @@ class StartContent extends React.PureComponent {
               <p>
                 <Text size="large" color={theme.textSecondary}>
                   {smallMode
-                    ? 'Enter an organization’s name'
-                    : 'Or open an existing organization'}
+                    ? t('Enter an organization’s name')
+                    : t('Or open an existing organization')}
                 </Text>
               </p>
 
@@ -302,7 +302,7 @@ class StartContent extends React.PureComponent {
                   )}
                   {domainCheckStatus === DomainCheckRejected && (
                     <DomainStatus size={smallMode ? 'large' : 'xsmall'}>
-                      No organization with that name exists.
+                      t('No organization with that name exists.'')
                     </DomainStatus>
                   )}
                 </SubmitWrap>
@@ -313,11 +313,11 @@ class StartContent extends React.PureComponent {
         {demoDao && (
           <p>
             <Text size="normal" color={theme.textSecondary}>
-              Not ready to create an organization? Try browsing this{' '}
+        t(Not ready to create an organization? Try browsing this){' '}
               <ButtonLink onClick={this.handleOpenDemoOrganization}>
-                demo organization
+                t(demo organization)
               </ButtonLink>{' '}
-              instead.
+              t(instead.)
             </Text>
           </p>
         )}
@@ -337,19 +337,23 @@ class StartContent extends React.PureComponent {
         <ActionInfo>
           {isElectron() ? (
             <React.Fragment>
-              Please install{' '}
+               <Trans i18nKey="missing-provider-frame">
+          Please install{' '}
               <SafeLink href="https://frame.sh/" target="_blank">
                 Frame
               </SafeLink>{' '}
               as your Ethereum provider
+              </Trans>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              Please install an Ethereum provider (e.g.{' '}
-              <SafeLink href="https://metamask.io/" target="_blank">
-                MetaMask
-              </SafeLink>
-              )
+              <Trans i18nKey="missing-provider">
+                Please install an Ethereum provider (e.g.{' '}
+                <SafeLink href="https://metamask.io/" target="_blank">
+                  MetaMask
+                </SafeLink>
+                )
+              </Trans>
             </React.Fragment>
           )}
           .
