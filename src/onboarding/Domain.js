@@ -5,7 +5,7 @@ import { theme, Text, TextInput, IconCheck, IconCross } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../utils'
 import LoadingRing from '../components/LoadingRing'
-import { withTranslation} from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 import {
   DomainCheckNone,
@@ -38,7 +38,7 @@ class Domain extends React.Component {
     this.focusEl = el
   }
   render() {
-    const { domain, domainCheckStatus, screenTransitionStyles } = this.props
+    const { domain, domainCheckStatus, screenTransitionStyles, t } = this.props
     return (
       <Main>
         <Content style={screenTransitionStyles}>
@@ -48,6 +48,7 @@ class Domain extends React.Component {
             onDomainChange={this.handleDomainChange}
             onSubmit={this.handleSubmit}
             focusElRef={this.handleFocusElRef}
+            t={t}
           />
         </Content>
       </Main>

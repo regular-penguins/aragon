@@ -1,4 +1,5 @@
 {
+  "All done! Your decentralized organization is ready.": "All done! Your decentralized organization is ready.",
   "An organization with that name already exists.": "An organization with that name already exists.",
   "Check if your organization name is available": "Check if your organization name is available",
   "Choose network": "Choose network",
@@ -7,6 +8,7 @@
   "Enter an organization’s name": "Enter an organization’s name",
   "Find an existing organization": "Find an existing organization",
   "Find out more": "Find out more",
+  "Get Started": "Get Started",
   "Mainnet uses real funds.": "Mainnet uses real funds.",
   "No organization with that name exists.": "No organization with that name exists.",
   "Or open an existing organization": "Or open an existing organization",

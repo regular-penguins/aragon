@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { theme, Text, Button } from '@aragon/ui'
 import { animated } from 'react-spring'
+import { withTranslation } from 'react-i18next'
 
 class Launch extends React.Component {
   render() {
@@ -21,11 +22,11 @@ class LaunchContent extends React.PureComponent {
       <Content>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            All done! Your decentralized organization is ready.
+            t('All done! Your decentralized organization is ready.')
           </Text>
         </Title>
         <StyledButton mode="strong" onClick={this.props.onConfirm}>
-          Get Started
+          t('Get Started')
         </StyledButton>
       </Content>
     )
@@ -58,4 +59,4 @@ const StyledButton = styled(Button)`
   width: 170px;
 `
 
-export default Launch
+export default withTranslation()(Launch)
