@@ -13,5 +13,11 @@
     "This app was configured to connect to an unsupported network. Please\n            change the network environment settings.": "❄️❄️❄️☠️ 🖥️❗ .  🐧🖥️",
     "about the risks and what’s been done to mitigate them.": "⚡🦈.",
     "create-organization": "<0><0>👉❄️🌐</0></0><1>❄️🌐</1>",
-    "demo-organization": "❄️ 🌐 🚫❄️ 🐧 . <2>🐬🌐 💥 🐚🔍🐧</2>."
+    "demo-organization": "❄️ 🌐 🚫❄️ 🐧 . <2>🐬🌐 💥 🐚🔍🐧</2>.",
+    "missing-provider": "🐧 ☝️🦊",
+    "missing-provider-frame": "🐧 ☝️🎞️",
+    "unlock-enable": "🔓  <2>🐟</2>.",
+    "unsupported-network": "🐧 👉 ❄️ ☠️ 💾🖥️. ❄️ 🐬 🖥️✨🐟 🐋.",
+    "use-desktop-browser": "❄️ ☃️<1>🍣</1>🐧 🐟 .",
+    "warning-mainnet-real-funds": "🐟 🐠⚡🦈. <2>🔎🐧</2> ❄️❄️."
 }
