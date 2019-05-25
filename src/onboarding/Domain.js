@@ -5,6 +5,7 @@ import { theme, Text, TextInput, IconCheck, IconCross } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../utils'
 import LoadingRing from '../components/LoadingRing'
+import { withTranslation, Trans } from 'react-i18next'
 
 import {
   DomainCheckNone,
@@ -61,12 +62,12 @@ class DomainContent extends React.PureComponent {
       <React.Fragment>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            Claim a domain name
+            t('Claim a domain name')
           </Text>
         </Title>
         <p>
           <Text size="large" color={theme.textSecondary}>
-            Check if your organization name is available
+            t('Check if your organization name is available')
           </Text>
         </p>
         <form onSubmit={this.props.onSubmit}>
@@ -101,7 +102,7 @@ class DomainContent extends React.PureComponent {
           <p style={{ marginTop: '10px' }}>
             {domainCheckStatus === DomainCheckRejected && (
               <Text size="xsmall">
-                An organization with that name already exists.
+                t('An organization with that name already exists.')'
               </Text>
             )}
           </p>
@@ -162,4 +163,4 @@ const CheckContainer = styled.span`
   transition: transform 100ms ease-in-out;
 `
 
-export default Domain
+export default withTranslation()(Domain)
