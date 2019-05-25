@@ -10,6 +10,8 @@
     "Or open an existing organization": "O obre una organització existent",
     "Then create a new organization": "Després crea una nova organització",
     "about the risks and what’s been done to mitigate them.": "sobre els riscs i que s'ha fet per mitigar-los.",
-    "missing-provider": "Instal·la un proveïdor d'Ethereum, si us plau (i.e. <2>MetaMask</2>)",
-    "missing-provider-frame": "Instal·la <2>Frame</2> com el teu proveïdor d'Ethereum, si us plau"
+    "missing-provider": "Instal·la un proveïdor d'Ethereum (i.e. <2>MetaMask</2>)",
+    "missing-provider-frame": "Instal·la <2>Frame</2> com el teu proveïdor d'Ethereum",
+    "demo-organization": "Encara no estàs preparat per crear una organització? Prova de navegar per aquesta <2>nom de l'organització</2>.",
+    "unlock-enable": "Desbloqueja i <2>habilita</2> ."
 }
