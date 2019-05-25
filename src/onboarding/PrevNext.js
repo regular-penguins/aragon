@@ -5,6 +5,7 @@ import { Spring, animated } from 'react-spring'
 import { Button } from '@aragon/ui'
 import { lerp } from '../math-utils'
 import springs from '../springs'
+import { withTranslation } from 'react-i18next'
 
 class PrevNext extends React.Component {
   render() {
@@ -59,7 +60,7 @@ class PrevNextContent extends React.PureComponent {
           onClick={this.props.onPrev}
           disabled={!this.props.enablePrev}
         >
-          Back
+          t('Back')
         </Button>
         <StrongButton
           mode="strong"
@@ -88,4 +89,4 @@ const StrongButton = styled(Button).attrs({ mode: 'strong' })`
   min-width: 120px;
 `
 
-export default PrevNext
+export default withTranslation()(PrevNext)
