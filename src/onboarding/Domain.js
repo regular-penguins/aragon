@@ -5,6 +5,7 @@ import { theme, Text, TextInput, IconCheck, IconCross } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../utils'
 import LoadingRing from '../components/LoadingRing'
+import { withTranslation } from 'react-i18next'
 
 import {
   DomainCheckNone,
@@ -37,7 +38,7 @@ class Domain extends React.Component {
     this.focusEl = el
   }
   render() {
-    const { domain, domainCheckStatus, screenTransitionStyles } = this.props
+    const { domain, domainCheckStatus, screenTransitionStyles, t } = this.props
     return (
       <Main>
         <Content style={screenTransitionStyles}>
@@ -47,6 +48,7 @@ class Domain extends React.Component {
             onDomainChange={this.handleDomainChange}
             onSubmit={this.handleSubmit}
             focusElRef={this.handleFocusElRef}
+            t={t}
           />
         </Content>
       </Main>
@@ -56,17 +58,17 @@ class Domain extends React.Component {
 
 class DomainContent extends React.PureComponent {
   render() {
-    const { domainCheckStatus } = this.props
+    const { domainCheckStatus, t } = this.props
     return (
       <React.Fragment>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            Claim a domain name
+            {t('Claim a domain name')}
           </Text>
         </Title>
         <p>
           <Text size="large" color={theme.textSecondary}>
-            Check if your organization name is available
+            {t('Check if your organization name is available')}
           </Text>
         </p>
         <form onSubmit={this.props.onSubmit}>
@@ -101,7 +103,7 @@ class DomainContent extends React.PureComponent {
           <p style={{ marginTop: '10px' }}>
             {domainCheckStatus === DomainCheckRejected && (
               <Text size="xsmall">
-                An organization with that name already exists.
+                {t('An organization with that name already exists.')}
               </Text>
             )}
           </p>
@@ -162,4 +164,4 @@ const CheckContainer = styled.span`
   transition: transform 100ms ease-in-out;
 `
 
-export default Domain
+export default withTranslation()(Domain)
