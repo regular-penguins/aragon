@@ -5,7 +5,7 @@ import { theme, Text, TextInput, IconCheck, IconCross } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../utils'
 import LoadingRing from '../components/LoadingRing'
-import { withTranslation, Trans } from 'react-i18next'
+import { withTranslation} from 'react-i18next'
 
 import {
   DomainCheckNone,
