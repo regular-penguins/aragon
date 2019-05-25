@@ -2,6 +2,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import BN from 'bn.js'
+import { withTranslation, Trans } from 'react-i18next'
+
 import {
   Button,
   DropDown,
@@ -78,6 +80,7 @@ class Start extends React.Component {
       selectorNetworks,
       onRequestEnable,
       screenTransitionStyles,
+      t,
     } = this.props
 
     return (
@@ -87,8 +90,10 @@ class Start extends React.Component {
             <Content style={screenTransitionStyles}>
               {below('medium') && (
                 <Warning>
-                  If you want to <span>create</span> an organization, please use
-                  your desktop browser.
+                  <Trans i18nKey="use-desktop-browser">
+                    If you want to <span>create</span> an organization, please
+                    use your desktop browser.
+                  </Trans>
                 </Warning>
               )}
               <StartContent
@@ -106,6 +111,7 @@ class Start extends React.Component {
                 selectorNetworks={selectorNetworks}
                 onRequestEnable={onRequestEnable}
                 smallMode={below('medium')}
+                t={t}
               />
             </Content>
           )}
@@ -158,6 +164,7 @@ class StartContent extends React.PureComponent {
       onDomainChange,
       onOpenOrganization,
       smallMode,
+      t,
     } = this.props
 
     const canCreate =
@@ -176,7 +183,9 @@ class StartContent extends React.PureComponent {
             weight="bold"
             color={theme.textDimmed}
           >
-            {smallMode ? 'Find an existing organization' : 'Welcome to Aragon'}
+            {smallMode
+              ? t('Find an existing organization')
+              : t('Welcome to Aragon')}
           </Text>
         </Title>
 
@@ -184,8 +193,8 @@ class StartContent extends React.PureComponent {
           <p>
             <Text size="large" color={theme.textSecondary}>
               {smallMode
-                ? 'Choose network'
-                : 'Start by choosing the network for your organization'}
+                ? t('Choose network')
+                : t('Start by choosing the network for your organization')}
             </Text>
           </p>
 
@@ -204,14 +213,16 @@ class StartContent extends React.PureComponent {
                   <IconAttention />
                 </span>
                 <p>
-                  Mainnet uses real funds.{' '}
-                  <StrongSafeLink
-                    href={MAINNET_RISKS_BLOG_POST}
-                    target="_blank"
-                  >
-                    Find out more
-                  </StrongSafeLink>{' '}
-                  about the risks and what’s been done to mitigate them.
+                  <Trans i18nKey="warning-mainnet-real-funds">
+                    Mainnet uses real funds.{' '}
+                    <StrongSafeLink
+                      href={MAINNET_RISKS_BLOG_POST}
+                      target="_blank"
+                    >
+                      Find out more
+                    </StrongSafeLink>{' '}
+                    about the risks and what’s been done to mitigate them.
+                  </Trans>
                 </p>
               </Disclosure>
             )}
@@ -223,7 +234,7 @@ class StartContent extends React.PureComponent {
             <Action>
               <p>
                 <Text size="large" color={theme.textSecondary}>
-                  Then create a new organization
+                  {t('Then create a new organization')}
                 </Text>
               </p>
               <Button
@@ -231,7 +242,7 @@ class StartContent extends React.PureComponent {
                 onClick={this.props.onCreate}
                 disabled={!canCreate}
               >
-                Create a new organization
+                {t('Create a new organization')}
               </Button>
               {this.renderWarning()}
             </Action>
@@ -241,8 +252,8 @@ class StartContent extends React.PureComponent {
               <p>
                 <Text size="large" color={theme.textSecondary}>
                   {smallMode
-                    ? 'Enter an organization’s name'
-                    : 'Or open an existing organization'}
+                    ? t('Enter an organization’s name')
+                    : t('Or open an existing organization')}
                 </Text>
               </p>
 
@@ -295,7 +306,7 @@ class StartContent extends React.PureComponent {
                   )}
                   {domainCheckStatus === DomainCheckRejected && (
                     <DomainStatus size={smallMode ? 'large' : 'xsmall'}>
-                      No organization with that name exists.
+                      {t('No organization with that name exists.')}
                     </DomainStatus>
                   )}
                 </SubmitWrap>
@@ -306,11 +317,13 @@ class StartContent extends React.PureComponent {
         {demoDao && (
           <p>
             <Text size="normal" color={theme.textSecondary}>
-              Not ready to create an organization? Try browsing this{' '}
-              <ButtonLink onClick={this.handleOpenDemoOrganization}>
-                demo organization
-              </ButtonLink>{' '}
-              instead.
+              <Trans i18nKey="demo-organization">
+                Not ready to create an organization? Try browsing this{' '}
+                <ButtonLink onClick={this.handleOpenDemoOrganization}>
+                  demo organization
+                </ButtonLink>{' '}
+                instead.
+              </Trans>
             </Text>
           </p>
         )}
@@ -324,25 +337,30 @@ class StartContent extends React.PureComponent {
       walletNetwork,
       walletProviderId,
       onRequestEnable,
+      t,
     } = this.props
     if (!hasWallet) {
       return (
         <ActionInfo>
           {isElectron() ? (
             <React.Fragment>
-              Please install{' '}
-              <SafeLink href="https://frame.sh/" target="_blank">
-                Frame
-              </SafeLink>{' '}
-              as your Ethereum provider
+              <Trans i18nKey="missing-provider-frame">
+                Please install{' '}
+                <SafeLink href="https://frame.sh/" target="_blank">
+                  Frame
+                </SafeLink>{' '}
+                as your Ethereum provider
+              </Trans>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              Please install an Ethereum provider (e.g.{' '}
-              <SafeLink href="https://metamask.io/" target="_blank">
-                MetaMask
-              </SafeLink>
-              )
+              <Trans i18nKey="missing-provider">
+                Please install an Ethereum provider (e.g.{' '}
+                <SafeLink href="https://metamask.io/" target="_blank">
+                  MetaMask
+                </SafeLink>
+                )
+              </Trans>
             </React.Fragment>
           )}
           .
@@ -352,45 +370,55 @@ class StartContent extends React.PureComponent {
     if (!hasAccount) {
       return (
         <ActionInfo>
-          Please unlock and{' '}
-          <ButtonLink onClick={onRequestEnable} style={{ color: '#000' }}>
-            enable
-          </ButtonLink>{' '}
-          {providerString('your Ethereum provider', walletProviderId)}.
+          <Trans i18nKey="unlock-enable">
+            Please unlock and{' '}
+            <ButtonLink onClick={onRequestEnable} style={{ color: '#000' }}>
+              enable
+            </ButtonLink>{' '}
+            {providerString('your Ethereum provider', walletProviderId)}.
+          </Trans>
         </ActionInfo>
       )
     }
     if (network.type === 'unknown') {
       return (
         <ActionInfo>
-          This app was configured to connect to an unsupported network. Please
-          change the network environment settings.
+          <Trans i18nKey="unsupported-network">
+            This app was configured to connect to an unsupported network. Please
+            change the network environment settings.
+          </Trans>
         </ActionInfo>
       )
     }
     if (walletNetwork !== network.type) {
       return (
         <ActionInfo>
-          Please select the {sanitizeNetworkType(network.type)} network in{' '}
-          {providerString('your Ethereum provider', walletProviderId)}.
+          {t('Please select the {networkType} network in {provider}.', {
+            networkType: sanitizeNetworkType(network.type),
+            provider: providerString(
+              'your Ethereum provider',
+              walletProviderId
+            ),
+          })}
         </ActionInfo>
       )
     }
     if (!this.enoughBalance()) {
+      const minBalance = fromWei(String(MINIMUM_BALANCE))
       return (
         <ActionInfo>
-          You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
+          {t('You need at least {{minBalance}} ETH', { minBalance })}
           {this.unknownBalance()
-            ? ' (your account balance is unknown)'
-            : ` (you have ${this.formattedBalance()} ETH)`}
+            ? t(' (your account balance is unknown)')
+            : t(` (you have {n} ETH)`, { n: this.formattedBalance() })}
           .<br />
           {network.type === 'rinkeby' && (
             <SafeLink target="_blank" href="https://faucet.rinkeby.io/">
-              Request Ether on the Rinkeby Network
+              {t('Request Ether on the Rinkeby Network')}
             </SafeLink>
           )}
           {network.type === 'private' &&
-            'Please import an account with enough ETH.'}
+            t('Please import an account with enough ETH.')}
         </ActionInfo>
       )
     }
@@ -656,4 +684,4 @@ const ButtonLink = styled.button.attrs({ type: 'button' })`
   border: 0;
 `
 
-export default Start
+export default withTranslation()(Start)
