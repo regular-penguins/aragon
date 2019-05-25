@@ -2,5 +2,14 @@
     "Welcome to Aragon": "Bienvenidos a Aragon",
     "Find an existing organization": "Busca una organización existente",
     "Choose network": "Escoge una red",
-    "Start by choosing the network for your organization": "Empieza eligiendo una red para tu organización"
+    "Start by choosing the network for your organization": "Empieza eligiendo una red para tu organización",
+    "Create a new organization": "Crear una nueva organización",
+    "Enter an organization’s name": "Introduce el nombre de una organización",
+    "Find out more": "Saber más",
+    "Mainnet uses real funds.": "La red principal usa fondos reales.",
+    "Or open an existing organization": "O abre una organización existente",
+    "Then create a new organization": "Luego crea una nueva organización",
+    "about the risks and what’s been done to mitigate them.": "sobre los riesgos y que se ha hecho para mitigarlos.",
+    "missing-provider": "Instala un proveedor de Ethereum, por favor (i.e. <2>MetaMask</2>)",
+    "missing-provider-frame": "Instala <2>Frame</2> como proveedor de Ethereum"
 }
