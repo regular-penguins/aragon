@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BN from 'bn.js'
-import { withTranslation } from 'react-i18next'
+import { withTranslation, Trans } from 'react-i18next'
 
 import {
   Button,
@@ -313,7 +313,7 @@ class StartContent extends React.PureComponent {
         {demoDao && (
           <p>
             <Text size="normal" color={theme.textSecondary}>
-        t(Not ready to create an organization? Try browsing this){' '}
+              t(Not ready to create an organization? Try browsing this){' '}
               <ButtonLink onClick={this.handleOpenDemoOrganization}>
                 t(demo organization)
               </ButtonLink>{' '}
@@ -337,12 +337,12 @@ class StartContent extends React.PureComponent {
         <ActionInfo>
           {isElectron() ? (
             <React.Fragment>
-               <Trans i18nKey="missing-provider-frame">
-          Please install{' '}
-              <SafeLink href="https://frame.sh/" target="_blank">
-                Frame
-              </SafeLink>{' '}
-              as your Ethereum provider
+              <Trans i18nKey="missing-provider-frame">
+                Please install{' '}
+                <SafeLink href="https://frame.sh/" target="_blank">
+                  Frame
+                </SafeLink>{' '}
+                as your Ethereum provider
               </Trans>
             </React.Fragment>
           ) : (
