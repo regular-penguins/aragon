@@ -2,5 +2,14 @@
     "Welcome to Aragon": "Benvinguts a Aragon",
     "Find an existing organization": "Busca una organització existent",
     "Choose network": "Tria una xarxa",
-    "Start by choosing the network for your organization": "Comença triant una xarxa per la teva organització"
+    "Start by choosing the network for your organization": "Comença triant una xarxa per la teva organització",
+    "Create a new organization": "Crea una nova organització",
+    "Enter an organization’s name": "Introdueix el nom de l'organització",
+    "Find out more": "Descobrir més",
+    "Mainnet uses real funds.": "La xarxa principal utilitza fons reals.",
+    "Or open an existing organization": "O obre una organització existent",
+    "Then create a new organization": "Després crea una nova organització",
+    "about the risks and what’s been done to mitigate them.": "sobre els riscs i que s'ha fet per mitigar-los.",
+    "missing-provider": "Instal·la un proveïdor d'Ethereum, si us plau (i.e. <2>MetaMask</2>)",
+    "missing-provider-frame": "Instal·la <2>Frame</2> com el teu proveïdor d'Ethereum, si us plau"
 }
