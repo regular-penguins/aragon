@@ -6,6 +6,9 @@ import { Main } from '@aragon/ui'
 import GlobalErrorHandler from './GlobalErrorHandler'
 import App from './App'
 
+// Import i18n (needs to be bundled ;))
+import './i18n'
+
 const PACKAGE_VERSION = process.env.REACT_APP_PACKAGE_VERSION || ''
 const PACKAGE_VERSION_KEY = 'PACKAGE_VERSION_KEY'
 
