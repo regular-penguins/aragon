@@ -23,5 +23,7 @@
     "No organization with that name exists.": "No existeix cap organització amb aquest nom.",
     "An organization with that name already exists.": "Ja existeix una organització amb aquests nom.",
     "Check if your organization name is available": "Comproveu que el nom de la vostra organització estigui disponible",
-    "Claim a domain name": "Reclameu un nom de domini"
+    "Claim a domain name": "Reclameu un nom de domini",
+    "All done! Your decentralized organization is ready.": "Tot fet! La vostra organització descentralitzada està preparada.",
+    "Get Started": "Començar"
 }
