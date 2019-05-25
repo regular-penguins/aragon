@@ -18,5 +18,8 @@
     "unsupported-network": "Esta app se ha configurado para conectarse con una red no suportada. Cambia la configuración de la red.",
     "use-desktop-browser": "Si quieres <1>crear</1> una organización usa tu navegador de escritorio.",
     "warning-mainnet-real-funds": "La red principal usa fondos reales <2>Saber más</2> sobre los riesgos y que se ha hecho para mitigarlos.",
-    "No organization with that name exists.": "No existe ninguna organización con este nombre."
+    "No organization with that name exists.": "No existe ninguna organización con este nombre.",
+    "An organization with that name already exists.": "Ya existe una organización con este nombre.",
+    "Check if your organization name is available": "Comprueba que el nombre de tu organización esté disponible",
+    "Claim a domain name": "Reclama un nombre de dominio"
 }
