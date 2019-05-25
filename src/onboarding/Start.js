@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react'
 import styled from 'styled-components'
+import { withTranslation } from 'react-i18next'
 import BN from 'bn.js'
 import {
   Button,
@@ -78,6 +79,7 @@ class Start extends React.Component {
       selectorNetworks,
       onRequestEnable,
       screenTransitionStyles,
+      t,
     } = this.props
 
     return (
@@ -106,6 +108,7 @@ class Start extends React.Component {
                 selectorNetworks={selectorNetworks}
                 onRequestEnable={onRequestEnable}
                 smallMode={below('medium')}
+                t={t}
               />
             </Content>
           )}
@@ -158,6 +161,7 @@ class StartContent extends React.PureComponent {
       onDomainChange,
       onOpenOrganization,
       smallMode,
+      t,
     } = this.props
 
     const canCreate =
@@ -176,7 +180,7 @@ class StartContent extends React.PureComponent {
             weight="bold"
             color={theme.textDimmed}
           >
-            {smallMode ? 'Find an existing organization' : 'Welcome to Aragon'}
+            {smallMode ? t('Find an existing organization') : t('Welcome to Aragon')}
           </Text>
         </Title>
 
@@ -656,4 +660,4 @@ const ButtonLink = styled.button.attrs({ type: 'button' })`
   border: 0;
 `
 
-export default Start
+export default withTranslation()(Start)
