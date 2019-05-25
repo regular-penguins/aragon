@@ -90,8 +90,10 @@ class Start extends React.Component {
             <Content style={screenTransitionStyles}>
               {below('medium') && (
                 <Warning>
+                  <Trans i18nKey="use-desktop-browser">
                   If you want to <span>create</span> an organization, please use
                   your desktop browser.
+                  </Trans>
                 </Warning>
               )}
               <StartContent
@@ -211,14 +213,16 @@ class StartContent extends React.PureComponent {
                   <IconAttention />
                 </span>
                 <p>
-                  t('Mainnet uses real funds.'){' '}
+                <Trans i18nKey="warning-mainnet-real-funds">
+                  Mainnet uses real funds.{' '}
                   <StrongSafeLink
                     href={MAINNET_RISKS_BLOG_POST}
                     target="_blank"
                   >
-                    t('Find out more')
+                    Find out more
                   </StrongSafeLink>{' '}
-                  t('about the risks and what’s been done to mitigate them.')
+                  about the risks and what’s been done to mitigate them.
+                </Trans>
                 </p>
               </Disclosure>
             )}
@@ -228,19 +232,22 @@ class StartContent extends React.PureComponent {
         <TwoActions>
           {!smallMode && (
             <Action>
+               <Trans i18nKey="create-organization">
               <p>
                 <Text size="large" color={theme.textSecondary}>
-                  t('Then create a new organization')
+                  Then create a new organization
                 </Text>
+                
               </p>
               <Button
                 mode="strong"
                 onClick={this.props.onCreate}
                 disabled={!canCreate}
               >
-                t('Create a new organization')
+                Create a new organization
               </Button>
               {this.renderWarning()}
+              </Trans>
             </Action>
           )}
           <form onSubmit={onOpenOrganization}>
@@ -313,12 +320,12 @@ class StartContent extends React.PureComponent {
         {demoDao && (
           <p>
             <Text size="normal" color={theme.textSecondary}>
-            <Trans i18nKey="demo-organization">
-              Not ready to create an organization? Try browsing this{' '}
-              <ButtonLink onClick={this.handleOpenDemoOrganization}>
-                demo organization
-              </ButtonLink>{' '}
-              instead.
+              <Trans i18nKey="demo-organization">
+                Not ready to create an organization? Try browsing this{' '}
+                <ButtonLink onClick={this.handleOpenDemoOrganization}>
+                  demo organization
+                </ButtonLink>{' '}
+                instead.
               </Trans>
             </Text>
           </p>
@@ -366,34 +373,39 @@ class StartContent extends React.PureComponent {
       return (
         <ActionInfo>
           <Trans i18nKey="unlock-enable">
-          Please unlock and{' '}
-          <ButtonLink onClick={onRequestEnable} style={{ color: '#000' }}>
-            enable
-          </ButtonLink>{' '}
-          {providerString('your Ethereum provider', walletProviderId)}.
-        </Trans>
+            Please unlock and{' '}
+            <ButtonLink onClick={onRequestEnable} style={{ color: '#000' }}>
+              enable
+            </ButtonLink>{' '}
+            {providerString('your Ethereum provider', walletProviderId)}.
+          </Trans>
         </ActionInfo>
       )
     }
     if (network.type === 'unknown') {
       return (
         <ActionInfo>
+          <Trans i18nKey="unsupported-network">
           This app was configured to connect to an unsupported network. Please
           change the network environment settings.
+          </Trans>
         </ActionInfo>
       )
     }
     if (walletNetwork !== network.type) {
       return (
         <ActionInfo>
+          <Trans i18nKey="select-network-type">
           Please select the {sanitizeNetworkType(network.type)} network in{' '}
           {providerString('your Ethereum provider', walletProviderId)}.
+        </Trans>
         </ActionInfo>
       )
     }
     if (!this.enoughBalance()) {
       return (
         <ActionInfo>
+          <Trans i18nKey="need-minimum-balance">
           You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
           {this.unknownBalance()
             ? ' (your account balance is unknown)'
@@ -406,6 +418,7 @@ class StartContent extends React.PureComponent {
           )}
           {network.type === 'private' &&
             'Please import an account with enough ETH.'}
+        </Trans>
         </ActionInfo>
       )
     }

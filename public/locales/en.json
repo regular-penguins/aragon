@@ -10,8 +10,14 @@
   "Then create a new organization": "Then create a new organization",
   "Welcome to Aragon": "Welcome to Aragon",
   "about the risks and what’s been done to mitigate them.": "about the risks and what’s been done to mitigate them.",
+  "create-organization": "<0><0>Then create a new organization</0></0><1>Create a new organization</1>",
   "demo-organization": "Not ready to create an organization? Try browsing this <2>demo organization</2> instead.",
   "missing-provider": "Please install an Ethereum provider (e.g. <2>MetaMask</2>)",
   "missing-provider-frame": "Please install <2>Frame</2> as your Ethereum provider",
-  "unlock-enable": "Please unlock and <2>enable</2> ."
+  "need-minimum-balance": "You need at least  ETH.<5></5>",
+  "select-network-type": "Please select the  network in .",
+  "unlock-enable": "Please unlock and <2>enable</2> .",
+  "unsupported-network": "This app was configured to connect to an unsupported network. Please change the network environment settings.",
+  "use-desktop-browser": "If you want to <1>create</1> an organization, please use your desktop browser.",
+  "warning-mainnet-real-funds": "Mainnet uses real funds. <2>Find out more</2> about the risks and what’s been done to mitigate them."
 }
