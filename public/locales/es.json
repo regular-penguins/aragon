@@ -21,5 +21,8 @@
     "No organization with that name exists.": "No existe ninguna organización con este nombre.",
     "An organization with that name already exists.": "Ya existe una organización con este nombre.",
     "Check if your organization name is available": "Comprueba que el nombre de tu organización esté disponible",
-    "Claim a domain name": "Reclama un nombre de dominio"
+    "Claim a domain name": "Reclama un nombre de dominio",
+    "All done! Your decentralized organization is ready.": "¡Todo Listo! Su organización descentralizada está preparada.",
+    "Back": "Retroceso",
+    "Get Started": "Empezar"
 }
