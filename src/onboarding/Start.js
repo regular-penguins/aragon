@@ -232,21 +232,19 @@ class StartContent extends React.PureComponent {
         <TwoActions>
           {!smallMode && (
             <Action>
-              
-                <p>
-                  <Text size="large" color={theme.textSecondary}>
-                    t('Then create a new organization')                    
-                  </Text>
-                </p>
-                <Button
-                  mode="strong"
-                  onClick={this.props.onCreate}
-                  disabled={!canCreate}
-                >
-                  t('Create a new organization')
-                </Button>
-                {this.renderWarning()}
-              
+              <p>
+                <Text size="large" color={theme.textSecondary}>
+                  t('Then create a new organization')
+                </Text>
+              </p>
+              <Button
+                mode="strong"
+                onClick={this.props.onCreate}
+                disabled={!canCreate}
+              >
+                t('Create a new organization')
+              </Button>
+              {this.renderWarning()}
             </Action>
           )}
           <form onSubmit={onOpenOrganization}>
@@ -308,7 +306,7 @@ class StartContent extends React.PureComponent {
                   )}
                   {domainCheckStatus === DomainCheckRejected && (
                     <DomainStatus size={smallMode ? 'large' : 'xsmall'}>
-                      No organization with that name exists.'
+                      t('No organization with that name exists.')
                     </DomainStatus>
                   )}
                 </SubmitWrap>
@@ -384,39 +382,35 @@ class StartContent extends React.PureComponent {
     if (network.type === 'unknown') {
       return (
         <ActionInfo>
-          <Trans i18nKey="unsupported-network">
-            This app was configured to connect to an unsupported network. Please
-            change the network environment settings.
-          </Trans>
+            t('This app was configured to connect to an unsupported network. Please
+            change the network environment settings.')
         </ActionInfo>
       )
     }
     if (walletNetwork !== network.type) {
       return (
         <ActionInfo>
-            SEM
-            Please select the {sanitizeNetworkType(network.type)} network in{' '}
-            {providerString('your Ethereum provider', walletProviderId)}.
+          SEM Please select the {sanitizeNetworkType(network.type)} network in{' '}
+          {providerString('your Ethereum provider', walletProviderId)}.
         </ActionInfo>
       )
     }
     if (!this.enoughBalance()) {
       return (
         <ActionInfo>
-            SEM
-            You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
-            {this.unknownBalance()
-              ? ' (your account balance is unknown)'
-              : ` (you have ${this.formattedBalance()} ETH)`}
-            .<br />
-            {network.type === 'rinkeby' && (
-              <SafeLink target="_blank" href="https://faucet.rinkeby.io/">
-                Request Ether on the Rinkeby Network
-              </SafeLink>
-            )}
-            {network.type === 'private' &&
-              'Please import an account with enough ETH.'}
-       </ActionInfo>
+          SEM You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
+          {this.unknownBalance()
+            ? ' (your account balance is unknown)'
+            : ` (you have ${this.formattedBalance()} ETH)`}
+          .<br />
+          {network.type === 'rinkeby' && (
+            <SafeLink target="_blank" href="https://faucet.rinkeby.io/">
+              Request Ether on the Rinkeby Network
+            </SafeLink>
+          )}
+          {network.type === 'private' &&
+            'Please import an account with enough ETH.'}
+        </ActionInfo>
       )
     }
     return null
