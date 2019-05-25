@@ -20,5 +20,8 @@
     "unsupported-network": "S'ha configurat la app per conectar-se a amb una xarxa no soportada. Canvia la configuració de xarxa.",
     "use-desktop-browser": "Si voleu <1>crear</1> una organització feu servir el navegador d'escriptori.",
     "warning-mainnet-real-funds": "La xarxa principal fa servir fons reals. <2>Descobreix més</2> sobre els riscs i que s'ha fet per mitigar-los.",
-    "No organization with that name exists.": "No existeix cap organització amb aquest nom."
+    "No organization with that name exists.": "No existeix cap organització amb aquest nom.",
+    "An organization with that name already exists.": "Ja existeix una organització amb aquests nom.",
+    "Check if your organization name is available": "Comproveu que el nom de la vostra organització estigui disponible",
+    "Claim a domain name": "Reclameu un nom de domini"
 }
