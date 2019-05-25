@@ -234,7 +234,7 @@ class StartContent extends React.PureComponent {
             <Action>
               <p>
                 <Text size="large" color={theme.textSecondary}>
-                  t('Then create a new organization')
+                  {t('Then create a new organization')}
                 </Text>
               </p>
               <Button
@@ -242,7 +242,7 @@ class StartContent extends React.PureComponent {
                 onClick={this.props.onCreate}
                 disabled={!canCreate}
               >
-                t('Create a new organization')
+                {t('Create a new organization')}
               </Button>
               {this.renderWarning()}
             </Action>
@@ -306,7 +306,7 @@ class StartContent extends React.PureComponent {
                   )}
                   {domainCheckStatus === DomainCheckRejected && (
                     <DomainStatus size={smallMode ? 'large' : 'xsmall'}>
-                      t('No organization with that name exists.')
+                      {t('No organization with that name exists.')}
                     </DomainStatus>
                   )}
                 </SubmitWrap>
@@ -337,6 +337,7 @@ class StartContent extends React.PureComponent {
       walletNetwork,
       walletProviderId,
       onRequestEnable,
+      t,
     } = this.props
     if (!hasWallet) {
       return (
@@ -392,26 +393,32 @@ class StartContent extends React.PureComponent {
     if (walletNetwork !== network.type) {
       return (
         <ActionInfo>
-          SEM Please select the {sanitizeNetworkType(network.type)} network in{' '}
-          {providerString('your Ethereum provider', walletProviderId)}.
+          {t('Please select the {networkType} network in {provider}.', {
+            networkType: sanitizeNetworkType(network.type),
+            provider: providerString(
+              'your Ethereum provider',
+              walletProviderId
+            ),
+          })}
         </ActionInfo>
       )
     }
     if (!this.enoughBalance()) {
+      const minBalance = fromWei(String(MINIMUM_BALANCE))
       return (
         <ActionInfo>
-          SEM You need at least {fromWei(String(MINIMUM_BALANCE))} ETH
+          {t('You need at least {{minBalance}} ETH', { minBalance })}
           {this.unknownBalance()
-            ? ' (your account balance is unknown)'
-            : ` (you have ${this.formattedBalance()} ETH)`}
+            ? t(' (your account balance is unknown)')
+            : t(` (you have {n} ETH)`, { n: this.formattedBalance() })}
           .<br />
           {network.type === 'rinkeby' && (
             <SafeLink target="_blank" href="https://faucet.rinkeby.io/">
-              Request Ether on the Rinkeby Network
+              {t('Request Ether on the Rinkeby Network')}
             </SafeLink>
           )}
           {network.type === 'private' &&
-            'Please import an account with enough ETH.'}
+            t('Please import an account with enough ETH.')}
         </ActionInfo>
       )
     }

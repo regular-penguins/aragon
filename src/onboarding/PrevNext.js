@@ -17,6 +17,7 @@ class PrevNext extends React.Component {
       visible,
       direction,
       isSigningNext,
+      t,
     } = this.props
     return (
       <Spring
@@ -43,6 +44,7 @@ class PrevNext extends React.Component {
               enablePrev={enablePrev}
               enableNext={enableNext}
               isSigningNext={isSigningNext}
+              t={t}
             />
           </Main>
         )}
@@ -53,6 +55,7 @@ class PrevNext extends React.Component {
 
 class PrevNextContent extends React.PureComponent {
   render() {
+    const { t } = this.props
     return (
       <React.Fragment>
         <Button
@@ -60,7 +63,7 @@ class PrevNextContent extends React.PureComponent {
           onClick={this.props.onPrev}
           disabled={!this.props.enablePrev}
         >
-          t('Back')
+          {t('Back')}
         </Button>
         <StrongButton
           mode="strong"

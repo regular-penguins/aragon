@@ -58,17 +58,17 @@ class Domain extends React.Component {
 
 class DomainContent extends React.PureComponent {
   render() {
-    const { domainCheckStatus } = this.props
+    const { domainCheckStatus, t } = this.props
     return (
       <React.Fragment>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            t('Claim a domain name')
+            {t('Claim a domain name')}
           </Text>
         </Title>
         <p>
           <Text size="large" color={theme.textSecondary}>
-            t('Check if your organization name is available')
+            {t('Check if your organization name is available')}
           </Text>
         </p>
         <form onSubmit={this.props.onSubmit}>
@@ -103,7 +103,7 @@ class DomainContent extends React.PureComponent {
           <p style={{ marginTop: '10px' }}>
             {domainCheckStatus === DomainCheckRejected && (
               <Text size="xsmall">
-                t('An organization with that name already exists.')'
+                {t('An organization with that name already exists.')}
               </Text>
             )}
           </p>

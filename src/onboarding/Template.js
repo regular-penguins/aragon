@@ -5,8 +5,9 @@ import { theme, Text } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../utils'
 import TemplateCard from './TemplateCard'
+import { withTranslation } from 'react-i18next'
 
-class Template extends React.Component {
+class Template extends React.PureComponent {
   static defaultProps = {
     onSelect: noop,
   }
@@ -14,7 +15,7 @@ class Template extends React.Component {
     this.props.onSelect(template)
   }
   render() {
-    const { templates, activeTemplate, screenTransitionStyles } = this.props
+    const { templates, activeTemplate, screenTransitionStyles, t } = this.props
     return (
       <Main>
         <Content style={screenTransitionStyles}>
@@ -22,6 +23,7 @@ class Template extends React.Component {
             templates={templates}
             activeTemplate={activeTemplate}
             handleTemplateSelect={this.handleTemplateSelect}
+            t={t}
           />
         </Content>
       </Main>
@@ -29,19 +31,20 @@ class Template extends React.Component {
   }
 }
 
-class TemplateContent extends React.PureComponent {
+class TemplateContent extends React.Component {
   render() {
+    const { t } = this.props
     return (
       <React.Fragment>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            Create a new organization
+            {t('Create a new organization')}
           </Text>
         </Title>
 
         <p>
           <Text size="large" color={theme.textSecondary}>
-            Choose a template to get started
+            {t('Choose a template to get started')}
           </Text>
         </p>
 
@@ -98,4 +101,4 @@ const TemplateCardWrapper = styled.div`
   }
 `
 
-export default Template
+export default withTranslation()(Template)

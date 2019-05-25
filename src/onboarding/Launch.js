@@ -7,10 +7,10 @@ import { withTranslation } from 'react-i18next'
 
 class Launch extends React.Component {
   render() {
-    const { onConfirm, screenTransitionStyles } = this.props
+    const { onConfirm, screenTransitionStyles, t } = this.props
     return (
       <Main style={screenTransitionStyles}>
-        <LaunchContent onConfirm={onConfirm} />
+        <LaunchContent onConfirm={onConfirm} t={t} />
       </Main>
     )
   }
@@ -18,11 +18,12 @@ class Launch extends React.Component {
 
 class LaunchContent extends React.PureComponent {
   render() {
+    const { t } = this.props
     return (
       <Content>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            t('All done! Your decentralized organization is ready.')
+            {t('All done! Your decentralized organization is ready.')}
           </Text>
         </Title>
         <StyledButton mode="strong" onClick={this.props.onConfirm}>

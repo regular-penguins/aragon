@@ -1,9 +1,10 @@
 import '@babel/polyfill'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { Main } from '@aragon/ui'
 import GlobalErrorHandler from './GlobalErrorHandler'
+
 import App from './App'
 
 // Import i18n (needs to be bundled ;))
@@ -39,10 +40,12 @@ if (
 }
 
 ReactDOM.render(
-  <GlobalErrorHandler>
-    <Main>
-      <App />
-    </Main>
-  </GlobalErrorHandler>,
+  <Suspense fallback="">
+    <GlobalErrorHandler>
+      <Main>
+        <App />
+      </Main>
+    </GlobalErrorHandler>
+  </Suspense>,
   document.getElementById('root')
 )
