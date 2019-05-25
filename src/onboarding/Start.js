@@ -383,8 +383,8 @@ class StartContent extends React.PureComponent {
       return (
         <ActionInfo>
           <Trans i18nKey="unsupported-network">
-          This app was configured to connect to an unsupported network.
-          Please change the network environment settings.
+            This app was configured to connect to an unsupported network. Please
+            change the network environment settings.
           </Trans>
         </ActionInfo>
       )
