@@ -15,7 +15,7 @@ import {
 } from '../symbols'
 
 import { withTranslation } from 'react-i18next'
-
+import { Trans } from 'react-i18next'
 
 class Sign extends React.Component {
   static defaultProps = {
@@ -50,9 +50,9 @@ class SignContent extends React.PureComponent {
 
         <p>
           <Text size="large" color={theme.textSecondary}>
-            <Trans i18nKey="open-and-sign-tx"> 
-            Your wallet should open and you need to sign two transactions, one
-            after another.
+            <Trans i18nKey="open-and-sign-tx">
+              Your wallet should open and you need to sign two transactions, one
+              after another.
             </Trans>
           </Text>
         </p>
@@ -87,10 +87,10 @@ class SignContent extends React.PureComponent {
         {daoCreationStatus !== DAO_CREATION_STATUS_ERROR && (
           <Note>
             <Text size="xsmall" color={theme.textSecondary}>
-            <Trans i18nKey="processing-transaction">
-              It might take some time before these transactions get processed,
-              depending on the status of the network. Please be patient and do
-              not close this page until it finishes.
+              <Trans i18nKey="processing-transaction">
+                It might take some time before these transactions get processed,
+                depending on the status of the network. Please be patient and do
+                not close this page until it finishes.
               </Trans>
             </Text>
           </Note>
