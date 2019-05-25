@@ -382,8 +382,10 @@ class StartContent extends React.PureComponent {
     if (network.type === 'unknown') {
       return (
         <ActionInfo>
-            t('This app was configured to connect to an unsupported network. Please
-            change the network environment settings.')
+          <Trans i18nKey="unsupported-network">
+          This app was configured to connect to an unsupported network.
+          Please change the network environment settings.
+          </Trans>
         </ActionInfo>
       )
     }
