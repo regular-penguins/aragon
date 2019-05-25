@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import BN from 'bn.js'
 import { withTranslation } from 'react-i18next'
 
-
 import {
   Button,
   DropDown,
@@ -81,7 +80,7 @@ class Start extends React.Component {
       selectorNetworks,
       onRequestEnable,
       screenTransitionStyles,
-      t
+      t,
     } = this.props
 
     return (
@@ -163,7 +162,7 @@ class StartContent extends React.PureComponent {
       onDomainChange,
       onOpenOrganization,
       smallMode,
-      t
+      t,
     } = this.props
 
     const canCreate =
@@ -182,7 +181,9 @@ class StartContent extends React.PureComponent {
             weight="bold"
             color={theme.textDimmed}
           >
-            {smallMode ? 'Find an existing organization' : t('Welcome to Aragon')}
+            {smallMode
+              ? t('Find an existing organization')
+              : t('Welcome to Aragon')}
           </Text>
         </Title>
 
