@@ -14,8 +14,7 @@ import {
   DAO_CREATION_STATUS_ERROR,
 } from '../symbols'
 
-import { withTranslation } from 'react-i18next'
-import { Trans } from 'react-i18next'
+import { withTranslation, Trans } from 'react-i18next'
 
 class Sign extends React.Component {
   static defaultProps = {

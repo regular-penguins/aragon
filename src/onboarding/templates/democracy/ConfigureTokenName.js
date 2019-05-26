@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Field, TextInput, Text, theme } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../../../utils'
+import { withTranslation, Trans } from 'react-i18next'
 
 class ConfigureTokenName extends React.Component {
   static defaultProps = {
@@ -61,13 +62,15 @@ class ConfigureTokenNameContent extends React.PureComponent {
     } = this.props
     return (
       <Content>
-        <Title>Democracy Project</Title>
+        <Title>t('Democracy Project')</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <p style={{ textAlign: 'center' }}>
               <Text size="large" color={theme.textSecondary}>
+              <Trans i18nKey="choose-token-symbol">
                 Choose the token name and symbol. You can’t change these later,
                 so pick carefully.
+              </Trans>
               </Text>
             </p>
             <Fields>
@@ -170,4 +173,4 @@ const SuffixField = styled(Field)`
   }
 `
 
-export default ConfigureTokenName
+export default withTranslation()(ConfigureTokenName)
