@@ -11,7 +11,7 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    lng: 'iu',
+    lng: navigator.language && navigator.language.split('-')[0],
     fallbackLng: 'en',
     ns: '',
     defaultNS: '',
