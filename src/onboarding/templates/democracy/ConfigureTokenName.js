@@ -36,7 +36,7 @@ class ConfigureTokenName extends React.Component {
     this.formEl = el
   }
   render() {
-    const { fields, screenTransitionStyles } = this.props
+    const { fields, screenTransitionStyles, t } = this.props
     return (
       <Main style={screenTransitionStyles}>
         <ConfigureTokenNameContent
@@ -45,6 +45,7 @@ class ConfigureTokenName extends React.Component {
           handleTokenSymbolChange={this.handleTokenSymbolChange}
           onSubmit={this.handleSubmit}
           formRef={this.handleFormRef}
+          t={t}
         />
       </Main>
     )
@@ -59,10 +60,11 @@ class ConfigureTokenNameContent extends React.PureComponent {
       handleTokenSymbolChange,
       onSubmit,
       formRef,
+      t,
     } = this.props
     return (
       <Content>
-        <Title>t('Democracy Project')</Title>
+        <Title>{t('Democracy Project')}</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <p style={{ textAlign: 'center' }}>

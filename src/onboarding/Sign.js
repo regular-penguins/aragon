@@ -22,13 +22,19 @@ class Sign extends React.Component {
     onTryAgain: noop,
   }
   render() {
-    const { daoCreationStatus, onTryAgain, screenTransitionStyles } = this.props
+    const {
+      daoCreationStatus,
+      onTryAgain,
+      screenTransitionStyles,
+      t,
+    } = this.props
     return (
       <Main>
         <Content style={screenTransitionStyles}>
           <SignContent
             daoCreationStatus={daoCreationStatus}
             onTryAgain={onTryAgain}
+            t={t}
           />
         </Content>
       </Main>
@@ -38,7 +44,7 @@ class Sign extends React.Component {
 
 class SignContent extends React.PureComponent {
   render() {
-    const { daoCreationStatus, onTryAgain } = this.props
+    const { daoCreationStatus, onTryAgain, t } = this.props
     return (
       <React.Fragment>
         <Title>
@@ -60,25 +66,25 @@ class SignContent extends React.PureComponent {
           <Transaction>
             <TransactionTitle>
               <Text weight="bold" color={theme.textSecondary} smallcaps>
-                t('Token creation')
+                {t('Token creation')}
               </Text>
             </TransactionTitle>
-            {this.renderTxStatus(daoCreationStatus)}
+            {this.renderTxStatus(daoCreationStatus, t)}
           </Transaction>
           <Transaction>
             <TransactionTitle>
               <Text weight="bold" color={theme.textSecondary} smallcaps>
-                t('Organization creation')
+                {t('Organization creation')}
               </Text>
             </TransactionTitle>
-            {this.renderTxStatus(daoCreationStatus)}
+            {this.renderTxStatus(daoCreationStatus, t)}
           </Transaction>
         </Transactions>
 
         {daoCreationStatus === DAO_CREATION_STATUS_ERROR && (
           <TryAgain>
             <Button mode="outline" compact onClick={onTryAgain}>
-              t('Try Again')
+              {t('Try Again')}
             </Button>
           </TryAgain>
         )}
@@ -97,44 +103,46 @@ class SignContent extends React.PureComponent {
       </React.Fragment>
     )
   }
-  renderTxStatus(daoCreationStatus) {
-    if (daoCreationStatus === DAO_CREATION_STATUS_ERROR) return <TxFailure />
-    if (daoCreationStatus === DAO_CREATION_STATUS_SUCCESS) return <TxSuccess />
-    return <TxPending />
+  renderTxStatus(daoCreationStatus, t) {
+    if (daoCreationStatus === DAO_CREATION_STATUS_ERROR)
+      return <TxFailure t={t} />
+    if (daoCreationStatus === DAO_CREATION_STATUS_SUCCESS)
+      return <TxSuccess t={t} />
+    return <TxPending t={t} />
   }
 }
 
-const TxSuccess = () => (
+const TxSuccess = ({ t }) => (
   <StyledTx>
     <TxIconWrapper>
       <img src={imgSuccess} alt="" />
     </TxIconWrapper>
     <p>
-      <Text size="xsmall">t('Successful transaction.')</Text>
+      <Text size="xsmall">{t('Successful transaction.')}</Text>
     </p>
   </StyledTx>
 )
 
-const TxFailure = () => (
+const TxFailure = ({ t }) => (
   <StyledTx>
     <TxIconWrapper>
       <img src={imgError} alt="" />
     </TxIconWrapper>
     <p>
       <Text color={theme.negative} size="xsmall">
-        t('Error with the transaction.')
+        {t('Error with the transaction.')}
       </Text>
     </p>
   </StyledTx>
 )
 
-const TxPending = () => (
+const TxPending = ({ t }) => (
   <StyledTx>
     <TxIconWrapper>
       <img src={imgPending} alt="" />
     </TxIconWrapper>
     <p>
-      <Text size="xsmall">t('Waiting…')</Text>
+      <Text size="xsmall">{t('Waiting…')}</Text>
     </p>
   </StyledTx>
 )
