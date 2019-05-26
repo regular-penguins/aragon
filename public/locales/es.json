@@ -23,7 +23,7 @@
     "Check if your organization name is available": "Comprueba que el nombre de tu organización esté disponible",
     "Claim a domain name": "Reclama un nombre de dominio",
     "All done! Your decentralized organization is ready.": "¡Todo Listo! Su organización descentralizada está preparada.",
-    "Back": "Retroceso",
+    "Back": "Atrás",
     "Get Started": "Empezar",
     "Error with the transaction.": "Error con la transacción.",
     "Organization creation": "Organización creada",
@@ -33,5 +33,6 @@
     "Try Again": "Vuelva a intentarlo",
     "Waiting…": "Esperando…",
     "Democracy Project": "Proyecto de democracia",
-    "choose-token-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado."
+    "choose-token-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado.",
+    "choose-voting-settings": "Elige tu configuración para la votación, No podrás cambiarlo después, escoge con cuidado."
 }
