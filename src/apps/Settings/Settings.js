@@ -205,9 +205,9 @@ class Settings extends React.Component {
               </div>
               <Note>
                 <Trans i18nKey="only-browser-data-deleted">
-                This will only delete the data stored in your browser to make
-                the app load faster. No data related to the organization itself
-                will be altered.
+                  This will only delete the data stored in your browser to make
+                  the app load faster. No data related to the organization
+                  itself will be altered.
                 </Trans>
               </Note>
             </Option>
@@ -221,6 +221,5 @@ class Settings extends React.Component {
 const Content = styled.div`
   max-width: 600px;
 `
-
 
 export default withTranslation()(Settings)
