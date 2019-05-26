@@ -14,6 +14,8 @@ import {
   DAO_CREATION_STATUS_ERROR,
 } from '../symbols'
 
+import { withTranslation, Trans } from 'react-i18next'
+
 class Sign extends React.Component {
   static defaultProps = {
     daoCreationStatus: DAO_CREATION_STATUS_NONE,
@@ -41,14 +43,16 @@ class SignContent extends React.PureComponent {
       <React.Fragment>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            Sign transactions
+            t('Sign transactions')
           </Text>
         </Title>
 
         <p>
           <Text size="large" color={theme.textSecondary}>
-            Your wallet should open and you need to sign two transactions, one
-            after another.
+            <Trans i18nKey="open-and-sign-tx">
+              Your wallet should open and you need to sign two transactions, one
+              after another.
+            </Trans>
           </Text>
         </p>
 
@@ -56,7 +60,7 @@ class SignContent extends React.PureComponent {
           <Transaction>
             <TransactionTitle>
               <Text weight="bold" color={theme.textSecondary} smallcaps>
-                Token creation
+                t('Token creation')
               </Text>
             </TransactionTitle>
             {this.renderTxStatus(daoCreationStatus)}
@@ -64,7 +68,7 @@ class SignContent extends React.PureComponent {
           <Transaction>
             <TransactionTitle>
               <Text weight="bold" color={theme.textSecondary} smallcaps>
-                Organization creation
+                t('Organization creation')
               </Text>
             </TransactionTitle>
             {this.renderTxStatus(daoCreationStatus)}
@@ -74,7 +78,7 @@ class SignContent extends React.PureComponent {
         {daoCreationStatus === DAO_CREATION_STATUS_ERROR && (
           <TryAgain>
             <Button mode="outline" compact onClick={onTryAgain}>
-              Try Again
+              t('Try Again')
             </Button>
           </TryAgain>
         )}
@@ -82,9 +86,11 @@ class SignContent extends React.PureComponent {
         {daoCreationStatus !== DAO_CREATION_STATUS_ERROR && (
           <Note>
             <Text size="xsmall" color={theme.textSecondary}>
-              It might take some time before these transactions get processed,
-              depending on the status of the network. Please be patient and do
-              not close this page until it finishes.
+              <Trans i18nKey="processing-transaction">
+                It might take some time before these transactions get processed,
+                depending on the status of the network. Please be patient and do
+                not close this page until it finishes.
+              </Trans>
             </Text>
           </Note>
         )}
@@ -104,7 +110,7 @@ const TxSuccess = () => (
       <img src={imgSuccess} alt="" />
     </TxIconWrapper>
     <p>
-      <Text size="xsmall">Successful transaction.</Text>
+      <Text size="xsmall">t('Successful transaction.')</Text>
     </p>
   </StyledTx>
 )
@@ -116,7 +122,7 @@ const TxFailure = () => (
     </TxIconWrapper>
     <p>
       <Text color={theme.negative} size="xsmall">
-        Error with the transaction.
+        t('Error with the transaction.')
       </Text>
     </p>
   </StyledTx>
@@ -128,7 +134,7 @@ const TxPending = () => (
       <img src={imgPending} alt="" />
     </TxIconWrapper>
     <p>
-      <Text size="xsmall">Waiting…</Text>
+      <Text size="xsmall">t('Waiting…')</Text>
     </p>
   </StyledTx>
 )
@@ -204,4 +210,4 @@ const TryAgain = styled.div`
   margin-top: 50px;
 `
 
-export default Sign
+export default withTranslation()(Sign)
