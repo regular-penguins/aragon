@@ -33,5 +33,7 @@
     "Successful transaction.": "Transacció exitosa.",
     "Token creation": "Creació de token",
     "Try Again": "Torneu-ho a provar",
-    "Waiting…": "Esperant…"
+    "Waiting…": "Esperant…",
+    "Democracy Project": "Projecte de democràcia",
+    "choose-token-symbol": "Trieu el nom i el símbol del token. No podreu canviar-ho més tard, escull amb compte."
 }
