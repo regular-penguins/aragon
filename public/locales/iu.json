@@ -66,5 +66,17 @@
     "Organization name": "🌐",
     "Please import an account with enough ETH.": "🐧 🥂🐧. 🌐 🐟🐠.",
     "Please select the {networkType} network in {provider}.": "🐧 🥂🐧.  {networkType} 🌐 🐟🐠 {provider}.",
-    "Request Ether on the Rinkeby Network": "🐧 🥂🐧. 🌐 🐟🐠"
+    "Request Ether on the Rinkeby Network": "🐧 🥂🐧. 🌐 🐟🐠",
+    "Support": "🐧 🥂",
+    "Token Name": "🐧 🌐",
+    "Token Symbol": "🐧",
+    "Token project with Democracy": "🐧 🐧",
+    "Token project with Multisig": "🐧 🥂🐧",
+    "Vote Duration": "⏱️",
+    "You need at least {{minBalance}} ETH": "⏱️ {{minBalance}} ETH",
+    "myorganization": "🐧☝️🎞️",
+    "need-minimum-balance": "🐧 ☝️🎞️<5></5>",
+    "only-browser-data-deleted": "🐧 ☝️🎞️.",
+    "open-and-sign-tx": "  🐧 ☝️🎞️.",
+    "processing-transaction": "🐧 ☝️🎞️."
 }
