@@ -68,8 +68,8 @@ class ConfigureTokenNameContent extends React.PureComponent {
             <p style={{ textAlign: 'center' }}>
               <Text size="large" color={theme.textSecondary}>
                 <Trans i18nKey="choose-name-symbol">
-                Choose the token name and symbol. You can’t change these later,
-                so pick carefully.
+                  Choose the token name and symbol. You can’t change these
+                  later, so pick carefully.
                 </Trans>
               </Text>
             </p>
@@ -173,4 +173,4 @@ const SuffixField = styled(Field)`
   }
 `
 
-export default withTranslation()(ConfigureMultisigToken)
+export default withTranslation()(ConfigureTokenName)
