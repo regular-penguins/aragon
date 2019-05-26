@@ -36,7 +36,7 @@
     "Democracy Project": "🐧🗳️🐧",
     "choose-token-symbol": "🐧❄️ 🌊❄️ ❄️ 🐟 🌐. ↩️❌⌛🐧",
     "choose-voting-settings": "🐧❄️ 🗳️❄️ ❄️ 🐟 🌐. ↩️❌⌛🐧.",
-    "+ Add signer": "➕ 🖋️ 🐧",
+    "+ Add signer": "+ 🐧",
     "Address": "📭🐧",
     "Clear application cache": "🛁🐧 🌐",
     "Do not send ether or tokens to this address!": "❌👉🐟🐠📭❄️.",
@@ -50,5 +50,10 @@
     "Signatures required": "🐧🖋️❓",
     "Token project with multisig": "🐟❄️🐧🖋️🐧",
     "add-wallet-and-number-signatures": "🐟❄️🐧🖋️🐧❄️☃️💨🐟❄️🐧🖋️🐧",
-    "choose-name-symbol": "🐧❄️ 🌊❄️ ❄️ 🐟 🌐. ↩️❌⌛🐧."
+    "choose-name-symbol": "🐧❄️ 🌊❄️ ❄️ 🐟 🌐. ↩️❌⌛🐧.",
+    " (you have {n} ETH)": " (➕ 🐧{n} ETH)",
+    " (your account balance is unknown)": " (➕ 🖋️ 🐧)",
+    "Choose a template to get started": "🐧 🥂🐧. 🌐 🐟🐠",
+    "Claim Domain": "🐧 🥂🐧. 🌐 🐟🐠",
+    "Configure": "🐠"
 }
