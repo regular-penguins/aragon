@@ -36,5 +36,12 @@
     "Waiting…": "Esperant…",
     "Democracy Project": "Projecte de democràcia",
     "choose-token-symbol": "Trieu el nom i el símbol del token. No podreu canviar-ho més tard, escull amb compte.",
-    "choose-voting-settings": "Trieu la configuració de la vostra votació. No podreu canviar-ho després, escull amb compte."
+    "choose-voting-settings": "Trieu la configuració de la vostra votació. No podreu canviar-ho després, escull amb compte.",
+    "+ Add signer": "+ Afegeixi firmant",
+    "Multisig signer": "Signatura Multifirma",
+    "Remove last": "Eliminar l'últim",
+    "Signatures required": "Es requereixen signatures",
+    "Token project with multisig": "Projecte token amb multifirma",
+    "add-wallet-and-number-signatures": "Afegeixi les adreces de la signatura multifirma, trieu el número de signatures necessàries per firmar una transacció",
+    "choose-name-symbol": "Trieu el nom i el símbol del token. No podreu canviar-ho més tard, escull amb compte."
 }
