@@ -6,6 +6,7 @@ import { AppType } from '../../../prop-types'
 import Section from '../Section'
 import AppCard from '../AppCard'
 import EmptyBlock from '../EmptyBlock'
+import { withTranslation } from 'react-i18next'
 
 class BrowseByApp extends React.Component {
   static propTypes = {
@@ -20,10 +21,10 @@ class BrowseByApp extends React.Component {
       <Section title="Browse by app">
         {(() => {
           if (loading) {
-            return <EmptyBlock>Loading apps…</EmptyBlock>
+            return <EmptyBlock>t('Loading apps…')</EmptyBlock>
           }
           if (apps.length === 0) {
-            return <EmptyBlock>No apps installed.</EmptyBlock>
+            return <EmptyBlock>t('No apps installed.')</EmptyBlock>
           }
           return (
             <Apps>
@@ -55,4 +56,5 @@ const Apps = styled.div`
   )}
 `
 
-export default BrowseByApp
+
+export default withTranslation()(BrowseByApp)

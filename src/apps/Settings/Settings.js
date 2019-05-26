@@ -23,6 +23,8 @@ import DaoSettings from './DaoSettings'
 import Option from './Option'
 import Note from './Note'
 
+import { withTranslation, Trans } from 'react-i18next'
+
 // Only USD for now
 const AVAILABLE_CURRENCIES = ['USD']
 
@@ -185,7 +187,7 @@ class Settings extends React.Component {
               />
             </Field>
             <Button mode="secondary" onClick={this.handleNodeSettingsSave}>
-              Save settings
+              t('Save settings')
             </Button>
           </Option>
           {wrapper && (
@@ -198,13 +200,15 @@ class Settings extends React.Component {
             >
               <div>
                 <Button mode="secondary" onClick={this.handleRefreshCache}>
-                  Clear application cache
+                  t('Clear application cache')
                 </Button>
               </div>
               <Note>
-                This will only delete the data stored in your browser to make
-                the app load faster. No data related to the organization itself
-                will be altered.
+                <Trans i18nKey="only-browser-data-deleted">
+                  This will only delete the data stored in your browser to make
+                  the app load faster. No data related to the organization
+                  itself will be altered.
+                </Trans>
               </Note>
             </Option>
           )}
@@ -218,4 +222,4 @@ const Content = styled.div`
   max-width: 600px;
 `
 
-export default Settings
+export default withTranslation()(Settings)
