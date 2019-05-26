@@ -24,5 +24,14 @@
     "Claim a domain name": "Reclama un nombre de dominio",
     "All done! Your decentralized organization is ready.": "¡Todo Listo! Su organización descentralizada está preparada.",
     "Back": "Retroceso",
-    "Get Started": "Empezar"
+    "Get Started": "Empezar",
+    "Error with the transaction.": "Error con la transacción.",
+    "Organization creation": "Organización creada",
+    "Sign transactions": "Firma las transacciones",
+    "Successful transaction.": "Transacción exitosa.",
+    "Token creation": "Creación de token",
+    "Try Again": "Vuelva a intentarlo",
+    "Waiting…": "Esperando…",
+    "Democracy Project": "Proyecto de democracia",
+    "choose-token-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado."
 }
