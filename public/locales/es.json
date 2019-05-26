@@ -31,5 +31,7 @@
     "Successful transaction.": "Transacción exitosa.",
     "Token creation": "Creación de token",
     "Try Again": "Vuelva a intentarlo",
-    "Waiting…": "Esperando…"
+    "Waiting…": "Esperando…",
+    "Democracy Project": "Proyecto de democracia",
+    "choose-token-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado."
 }
