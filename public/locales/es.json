@@ -45,5 +45,9 @@
     "Signatures required": "Se requieren firmas",
     "Token project with multisig": "Proyecto token con multifirma",
     "add-wallet-and-number-signatures": "Añade las direcciones de las carteras de la signatura multifirma y elige el numero de firmar necesarias para firmar una transacción",
-    "choose-name-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado."
+    "choose-name-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado.",
+    "Clear application cache": "Limpia el cache de la aplicación",
+    "Loading apps…": "Cargando apps…",
+    "No apps installed.": "No hay apps instaladas.",
+    "Save settings": "Guardar configuración"
 }
