@@ -65,7 +65,7 @@ const DaoSettings = React.memo(
           <Note>
             <strong>t('Do not send ether or tokens to this address!')</strong>
             <br />
-              SEM Go to the{' '}
+            SEM Go to the{' '}
             {financeApp ? (
               <ButtonLink onClick={handleOpenFinance}>Finance app</ButtonLink>
             ) : (
@@ -104,11 +104,11 @@ const DaoSettings = React.memo(
             </div>
             <Note>
               <Trans i18nKey="token-request">
-              Requesting tokens will assign random <strong>TEST</strong> tokens
-              to your organization. The tokens are named after existing
-              projects, but keep in mind <strong>THEY ARE NOT</strong> the real
-              ones. You can view the received tokens in the Token Balances on
-              the Finance app.
+                Requesting tokens will assign random <strong>TEST</strong>{' '}
+                tokens to your organization. The tokens are named after existing
+                projects, but keep in mind <strong>THEY ARE NOT</strong> the
+                real ones. You can view the received tokens in the Token
+                Balances on the Finance app.
               </Trans>
             </Note>
           </Option>
@@ -201,6 +201,5 @@ const Label = styled.label`
 const AppItem = styled.li`
   margin-bottom: 24px;
 `
-
 
 export default withTranslation()(DaoSettings)
