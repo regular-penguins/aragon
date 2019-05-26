@@ -6,8 +6,8 @@ export const Sign = Symbol('Sign')
 export const Launch = Symbol('Launch')
 
 export const ProgressBarGroups = [
-  { group: Template, label: 'Choose Template' },
-  { group: Domain, label: 'Claim Domain' },
-  { group: Configure, label: 'Configure' },
-  { group: Launch, label: 'Launch' },
+  { group: Template, label: t => t('Choose Template') },
+  { group: Domain, label: t => t('Claim Domain') },
+  { group: Configure, label: t => t('Configure') },
+  { group: Launch, label: t => t('Launch') },
 ]

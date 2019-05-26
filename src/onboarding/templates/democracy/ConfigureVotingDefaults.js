@@ -80,7 +80,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
               </Text>
             </TextContainer>
             <Fields>
-              <InlineField label="Support">
+              <InlineField label={t('Support')}>
                 <SymbolInput
                   adornment="%"
                   adornmentPosition="end"
@@ -90,7 +90,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                   onChange={handleSupportChange}
                 />
               </InlineField>
-              <InlineField label="Min. Quorum">
+              <InlineField label={t('Min. Quorum')}>
                 <SymbolInput
                   adornment="%"
                   adornmentPosition="end"
@@ -100,7 +100,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                   onChange={handleMinQuorumChange}
                 />
               </InlineField>
-              <InlineField label="Vote Duration">
+              <InlineField label={t('Vote Duration')}>
                 <SymbolInput
                   adornment="H"
                   adornmentPosition="end"

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Field, TextInput, Text, theme } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../../../utils'
+import { withTranslation } from 'react-i18next'
 
 class ConfigureTokenName extends React.Component {
   static defaultProps = {
@@ -35,7 +36,7 @@ class ConfigureTokenName extends React.Component {
     this.formEl = el
   }
   render() {
-    const { fields, screenTransitionStyles } = this.props
+    const { fields, screenTransitionStyles, t } = this.props
     return (
       <Main style={screenTransitionStyles}>
         <ConfigureTokenNameContent
@@ -44,6 +45,7 @@ class ConfigureTokenName extends React.Component {
           handleTokenSymbolChange={this.handleTokenSymbolChange}
           onSubmit={this.handleSubmit}
           formRef={this.handleFormRef}
+          t={t}
         />
       </Main>
     )
@@ -58,6 +60,7 @@ class ConfigureTokenNameContent extends React.PureComponent {
       handleTokenSymbolChange,
       onSubmit,
       formRef,
+      t,
     } = this.props
     return (
       <Content>
@@ -73,20 +76,20 @@ class ConfigureTokenNameContent extends React.PureComponent {
             <Fields>
               <Rows>
                 <Row>
-                  <SuffixField label="Token Name">
+                  <SuffixField label={t('Token Name')}>
                     <InputSized
                       width={200}
                       value={fields.tokenName}
                       onChange={handleTokenNameChange}
-                      placeholder="My Organization Token"
+                      placeholder={t('My Organization Token')}
                     />
                   </SuffixField>
-                  <SuffixField label="Token Symbol">
+                  <SuffixField label={t('Token Symbol')}>
                     <InputSized
                       width={80}
                       value={fields.tokenSymbol}
                       onChange={handleTokenSymbolChange}
-                      placeholder="MOT"
+                      placeholder={t('MOT')}
                     />
                   </SuffixField>
                 </Row>
@@ -170,4 +173,4 @@ const SuffixField = styled(Field)`
   }
 `
 
-export default ConfigureTokenName
+export default withTranslation()(ConfigureTokenName)

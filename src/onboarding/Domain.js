@@ -76,7 +76,7 @@ class DomainContent extends React.PureComponent {
             <TextInput
               id="domain-field"
               ref={this.props.focusElRef}
-              placeholder="myorganization"
+              placeholder={t('myorganization')}
               onChange={this.props.onDomainChange}
               style={{ textAlign: 'right' }}
               value={this.props.domain}

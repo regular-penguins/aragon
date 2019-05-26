@@ -78,20 +78,20 @@ class ConfigureTokenNameContent extends React.PureComponent {
             <Fields>
               <Rows>
                 <Row>
-                  <SuffixField label="Token Name">
+                  <SuffixField label={t('Token Name')}>
                     <InputSized
                       width={200}
                       value={fields.tokenName}
                       onChange={handleTokenNameChange}
-                      placeholder="My Organization Token"
+                      placeholder={t('My Organization Token')}
                     />
                   </SuffixField>
-                  <SuffixField label="Token Symbol">
+                  <SuffixField label={t('Token Symbol')}>
                     <InputSized
                       width={80}
                       value={fields.tokenSymbol}
                       onChange={handleTokenSymbolChange}
-                      placeholder="MOT"
+                      placeholder={t('MOT')}
                     />
                   </SuffixField>
                 </Row>

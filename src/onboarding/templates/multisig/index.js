@@ -10,7 +10,7 @@ const defaultSignersValue = {
 
 const template = {
   name: 'multisig',
-  label: 'Token project with Multisig',
+  label: t => t('Token project with Multisig'),
   icon,
   fields: {
     signers: {

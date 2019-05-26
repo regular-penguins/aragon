@@ -8,7 +8,7 @@ const isFloatString = value => /^\d*\.?\d*$/.test(value)
 
 const template = {
   name: 'democracy',
-  label: 'Token project with Democracy',
+  label: t => t('Token project with Democracy'),
   icon,
   fields: {
     support: {

@@ -263,7 +263,7 @@ class StartContent extends React.PureComponent {
                     id="onboard-start-domain"
                     onChange={onDomainChange}
                     value={domain}
-                    placeholder="Organization name"
+                    placeholder={t('Organization name')}
                   />
                   <label htmlFor="onboard-start-domain">
                     <Text weight="bold" sie={smallMode ? 'large' : 'normal'}>

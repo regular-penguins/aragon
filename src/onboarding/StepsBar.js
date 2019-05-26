@@ -6,6 +6,7 @@ import { Text } from '@aragon/ui'
 import * as Steps from './steps'
 import { lerp } from '../math-utils'
 import springs from '../springs'
+import { withTranslation } from 'react-i18next'
 
 const STEPS_COUNT = Steps.ProgressBarGroups.length
 
@@ -21,6 +22,7 @@ class ProgressBar extends React.Component {
   render() {
     const stepIndex = this.currentStepIndex()
     const visible = stepIndex > -1
+    const { t } = this.props
 
     return (
       <Spring
@@ -52,7 +54,7 @@ class ProgressBar extends React.Component {
                 {Steps.ProgressBarGroups.map(({ label }, index) => (
                   <StepWrapper
                     key={index}
-                    label={label}
+                    label={label(t)}
                     active={
                       stepIndex >= index ||
                       Math.floor(stepProgress + 0.05) >= index + 1
@@ -138,4 +140,4 @@ const Disc = styled.div`
   background: ${({ active }) => (active ? COLOR_ACTIVE : COLOR_INACTIVE)};
 `
 
-export default ProgressBar
+export default withTranslation()(ProgressBar)

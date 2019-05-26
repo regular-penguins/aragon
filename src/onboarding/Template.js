@@ -55,7 +55,7 @@ class TemplateContent extends React.Component {
                 <TemplateCard
                   template={template}
                   icon={icon}
-                  label={label}
+                  label={label(t)}
                   active={template === this.props.activeTemplate}
                   onSelect={this.props.handleTemplateSelect}
                 />
