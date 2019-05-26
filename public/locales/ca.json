@@ -47,5 +47,7 @@
     "Address": "Adreça",
     "Do not send ether or tokens to this address!": "No envieu ether o tokens a aquesta adreça!",
     "Request test tokens": "Sol·licita tokens de prova",
-    "Resolving DAO address…": "Resolvent adreces DAO…"
+    "Resolving DAO address…": "Resolvent adreces DAO…",
+    "Clear application cache": "Neteja el cache de l'aplicació",
+    "Save settings": "Guarda la configuració"
 }
