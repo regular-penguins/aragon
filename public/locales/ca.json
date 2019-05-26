@@ -26,7 +26,7 @@
     "Claim a domain name": "Reclameu un nom de domini",
     "All done! Your decentralized organization is ready.": "Tot fet! La vostra organització descentralitzada està preparada.",
     "Get Started": "Començar",
-    "Back": "Retrocés",
+    "Back": "Enrera",
     "Error with the transaction.": "Hi ha un error amb la transacció.",
     "Organization creation": "Creació de l'organització",
     "Sign transactions": "Firma transaccions",
@@ -35,5 +35,6 @@
     "Try Again": "Torneu-ho a provar",
     "Waiting…": "Esperant…",
     "Democracy Project": "Projecte de democràcia",
-    "choose-token-symbol": "Trieu el nom i el símbol del token. No podreu canviar-ho més tard, escull amb compte."
+    "choose-token-symbol": "Trieu el nom i el símbol del token. No podreu canviar-ho més tard, escull amb compte.",
+    "choose-voting-settings": "Trieu la configuració de la vostra votació. No podreu canviar-ho després, escull amb compte."
 }
