@@ -10,7 +10,7 @@ import { toChecksumAddress } from '../../web3-utils'
 import airdrop, { testTokensEnabled } from '../../testnet/airdrop'
 import Option from './Option'
 import Note from './Note'
-
+import { withTranslation, Trans } from 'react-i18next'
 const AppsList = styled.ul`
   list-style: none;
 `
@@ -53,19 +53,19 @@ const DaoSettings = React.memo(
         >
           {checksummedDaoAddr ? (
             <div>
-              <Label>Address</Label>
+              <Label>t('Address')</Label>
               <LocalIdentityBadge
                 entity={checksummedDaoAddr}
                 shorten={shortAddresses}
               />
             </div>
           ) : (
-            <p>Resolving DAO address…</p>
+            <p>t('Resolving DAO address…')</p>
           )}
           <Note>
-            <strong>Do not send ether or tokens to this address!</strong>
+            <strong>t('Do not send ether or tokens to this address!')</strong>
             <br />
-            Go to the{' '}
+              SEM Go to the{' '}
             {financeApp ? (
               <ButtonLink onClick={handleOpenFinance}>Finance app</ButtonLink>
             ) : (
@@ -89,7 +89,7 @@ const DaoSettings = React.memo(
                 disabled={!enableTransactions}
                 style={{ opacity: enableTransactions ? 1 : 0.6 }}
               >
-                Request test tokens
+                t('Request test tokens')
               </Button>
               {!enableTransactions && (
                 <Text size="small" style={{ marginLeft: '10px' }}>
@@ -103,11 +103,13 @@ const DaoSettings = React.memo(
               )}
             </div>
             <Note>
+              <Trans i18nKey="token-request">
               Requesting tokens will assign random <strong>TEST</strong> tokens
               to your organization. The tokens are named after existing
               projects, but keep in mind <strong>THEY ARE NOT</strong> the real
               ones. You can view the received tokens in the Token Balances on
               the Finance app.
+              </Trans>
             </Note>
           </Option>
         )}
@@ -200,4 +202,5 @@ const AppItem = styled.li`
   margin-bottom: 24px;
 `
 
-export default DaoSettings
+
+export default withTranslation()(DaoSettings)
