@@ -51,7 +51,7 @@ class ConfigureMultisigAddresses extends React.Component {
     this.formEl = el
   }
   render() {
-    const { fields, screenTransitionStyles } = this.props
+    const { fields, screenTransitionStyles, t } = this.props
     return (
       <Main style={screenTransitionStyles}>
         <ConfigureMultisigAddressesContent
@@ -62,6 +62,7 @@ class ConfigureMultisigAddresses extends React.Component {
           onAddSigner={this.handleAddSigner}
           onRemoveSigner={this.handleRemoveSigner}
           onSignerChange={this.handleSignerChange}
+          t={t}
         />
       </Main>
     )
@@ -78,20 +79,21 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
       onRemoveSigner,
       onSignerChange,
       onNeededSignaturesChange,
+      t,
     } = this.props
     const neededSignaturesItems = fields.signers.addresses.map((signer, i) =>
       String(i + 1)
     )
     return (
       <Content>
-        <Title>t('Token project with multisig')</Title>
+        <Title>{t('Token project with multisig')}</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <Intro>
               <Text size="large" color={theme.textSecondary} align="center">
                 <Trans i18nKey="add-wallet-and-number-signatures">
-                Add the wallet addresses of the multisig signers, and choose the
-                number of signatures needed for signing a transaction
+                  Add the wallet addresses of the multisig signers, and choose
+                  the number of signatures needed for signing a transaction
                 </Trans>
               </Text>
             </Intro>
@@ -99,7 +101,7 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
               <div>
                 <GroupTitle>
                   <Text color={theme.textSecondary} weight="bold" smallcaps>
-                    t('Multisig signer')
+                    {t('Multisig signer')}
                   </Text>
                 </GroupTitle>
 
@@ -121,7 +123,7 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
                 </InputsView>
 
                 <Button mode="secondary" compact onClick={onAddSigner}>
-                  '(+ Add signer)
+                  {t('+ Add signer')}
                 </Button>
                 {fields.signers.addresses.length > 1 && (
                   <Button
@@ -131,14 +133,14 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
                     style={{ marginLeft: '10px' }}
                     compact
                   >
-                    t('Remove last')
+                    {t('Remove last')}
                   </Button>
                 )}
               </div>
               <div>
                 <GroupTitle>
                   <Text color={theme.textSecondary} weight="bold" smallcaps>
-                    t('Signatures required)
+                    {t('Signatures required')}
                   </Text>
                 </GroupTitle>
                 <DropDown
@@ -262,6 +264,5 @@ const InputError = styled(Text.Paragraph).attrs({
 })`
   margin-top: 2px;
 `
-
 
 export default withTranslation()(ConfigureMultisigAddresses)

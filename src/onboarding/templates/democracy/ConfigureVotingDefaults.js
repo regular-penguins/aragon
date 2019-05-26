@@ -37,7 +37,7 @@ class ConfigureVotingDefaults extends React.Component {
     this.formEl = el
   }
   render() {
-    const { fields, screenTransitionStyles } = this.props
+    const { fields, screenTransitionStyles, t } = this.props
     return (
       <Main style={screenTransitionStyles}>
         <ConfigureVotingDefaultsContent
@@ -47,6 +47,7 @@ class ConfigureVotingDefaults extends React.Component {
           handleVoteDurationChange={this.handleVoteDurationChange}
           onSubmit={this.handleSubmit}
           formRef={this.handleFormRef}
+          t={t}
         />
       </Main>
     )
@@ -62,11 +63,12 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
       handleVoteDurationChange,
       onSubmit,
       formRef,
+      t,
     } = this.props
     const adornmentSettings = { padding: 7 }
     return (
       <Content>
-        <Title>t('Democracy Project')</Title>
+        <Title>{t('Democracy Project')}</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <TextContainer>
