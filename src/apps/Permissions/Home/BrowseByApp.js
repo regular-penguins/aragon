@@ -13,12 +13,13 @@ class BrowseByApp extends React.Component {
     apps: PropTypes.arrayOf(AppType).isRequired,
     loading: PropTypes.bool.isRequired,
     onOpenApp: PropTypes.func.isRequired,
+    t: PropTypes.func,
   }
 
   render() {
     const { loading, apps, onOpenApp, t } = this.props
     return (
-      <Section title="Browse by app">
+      <Section title={t('Browse by app')}>
         {(() => {
           if (loading) {
             return <EmptyBlock>{t('Loading apps…')}</EmptyBlock>
