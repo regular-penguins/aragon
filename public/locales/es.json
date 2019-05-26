@@ -34,5 +34,16 @@
     "Waiting…": "Esperando…",
     "Democracy Project": "Proyecto de democracia",
     "choose-token-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado.",
-    "choose-voting-settings": "Elige tu configuración para la votación, No podrás cambiarlo después, escoge con cuidado."
+    "choose-voting-settings": "Elige tu configuración para la votación, No podrás cambiarlo después, escoge con cuidado.",
+    "+ Add signer": "+ Añade firma",
+    "Address": "Dirección",
+    "Do not send ether or tokens to this address!": "¡No envíe ether o tokens a esta dirección!",
+    "Multisig signer": "Signatura multifirma",
+    "Remove last": "Elimina el último",
+    "Request test tokens": "Solicita tokens de prueba",
+    "Resolving DAO address…": "Resolviendo la dirección DAO…",
+    "Signatures required": "Se requieren firmas",
+    "Token project with multisig": "Proyecto token con multifirma",
+    "add-wallet-and-number-signatures": "Añade las direcciones de las carteras de la signatura multifirma y elige el numero de firmar necesarias para firmar una transacción",
+    "choose-name-symbol": "Elige el nombre y el símbolo del token. No podrás cambiarlo después, escoge con cuidado."
 }
