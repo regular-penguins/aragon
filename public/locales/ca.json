@@ -26,5 +26,12 @@
     "Claim a domain name": "Reclameu un nom de domini",
     "All done! Your decentralized organization is ready.": "Tot fet! La vostra organització descentralitzada està preparada.",
     "Get Started": "Començar",
-    "Back": "Retrocés"
+    "Back": "Retrocés",
+    "Error with the transaction.": "Hi ha un error amb la transacció.",
+    "Organization creation": "Creació de l'organització",
+    "Sign transactions": "Firma transaccions",
+    "Successful transaction.": "Transacció exitosa.",
+    "Token creation": "Creació de token",
+    "Try Again": "Torneu-ho a provar",
+    "Waiting…": "Esperant…"
 }
