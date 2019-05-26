@@ -49,5 +49,7 @@
     "Request test tokens": "Sol·licita tokens de prova",
     "Resolving DAO address…": "Resolvent adreces DAO…",
     "Clear application cache": "Neteja el cache de l'aplicació",
-    "Save settings": "Guarda la configuració"
+    "Save settings": "Guarda la configuració",
+    "Loading apps…": "Carregant apps…",
+    "No apps installed.": "No hi han apps instal·lades."
 }
