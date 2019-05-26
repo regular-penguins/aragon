@@ -16,15 +16,15 @@ class BrowseByApp extends React.Component {
   }
 
   render() {
-    const { loading, apps, onOpenApp } = this.props
+    const { loading, apps, onOpenApp, t } = this.props
     return (
       <Section title="Browse by app">
         {(() => {
           if (loading) {
-            return <EmptyBlock>t('Loading apps…')</EmptyBlock>
+            return <EmptyBlock>{t('Loading apps…')}</EmptyBlock>
           }
           if (apps.length === 0) {
-            return <EmptyBlock>t('No apps installed.')</EmptyBlock>
+            return <EmptyBlock>{t('No apps installed.')}</EmptyBlock>
           }
           return (
             <Apps>
@@ -55,6 +55,5 @@ const Apps = styled.div`
     `
   )}
 `
-
 
 export default withTranslation()(BrowseByApp)
