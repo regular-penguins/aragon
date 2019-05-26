@@ -90,8 +90,8 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
             <Intro>
               <Text size="large" color={theme.textSecondary} align="center">
                 <Trans i18nKey="add-wallet-and-number-signatures">
-                Add the wallet addresses of the multisig signers, and choose the
-                number of signatures needed for signing a transaction
+                  Add the wallet addresses of the multisig signers, and choose
+                  the number of signatures needed for signing a transaction
                 </Trans>
               </Text>
             </Intro>
@@ -121,7 +121,7 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
                 </InputsView>
 
                 <Button mode="secondary" compact onClick={onAddSigner}>
-                  '(+ Add signer)
+                  t('+ Add signer')
                 </Button>
                 {fields.signers.addresses.length > 1 && (
                   <Button
@@ -138,7 +138,7 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
               <div>
                 <GroupTitle>
                   <Text color={theme.textSecondary} weight="bold" smallcaps>
-                    t('Signatures required)
+                    t('Signatures required')
                   </Text>
                 </GroupTitle>
                 <DropDown
@@ -262,6 +262,5 @@ const InputError = styled(Text.Paragraph).attrs({
 })`
   margin-top: 2px;
 `
-
 
 export default withTranslation()(ConfigureMultisigAddresses)

@@ -1,4 +1,5 @@
 {
+  "+ Add signer": "+ Add signer",
   "All done! Your decentralized organization is ready.": "All done! Your decentralized organization is ready.",
   "An organization with that name already exists.": "An organization with that name already exists.",
   "Back": "Back",
@@ -19,6 +20,7 @@
   "Organization creation": "Organization creation",
   "Remove last": "Remove last",
   "Sign transactions": "Sign transactions",
+  "Signatures required": "Signatures required",
   "Start by choosing the network for your organization": "Start by choosing the network for your organization",
   "Successful transaction.": "Successful transaction.",
   "Then create a new organization": "Then create a new organization",
@@ -29,6 +31,7 @@
   "Welcome to Aragon": "Welcome to Aragon",
   "about the risks and what’s been done to mitigate them.": "about the risks and what’s been done to mitigate them.",
   "add-wallet-and-number-signatures": "Add the wallet addresses of the multisig signers, and choose the number of signatures needed for signing a transaction",
+  "choose-name-symbol": "Choose the token name and symbol. You can’t change these later, so pick carefully.",
   "choose-token-symbol": "Choose the token name and symbol. You can’t change these later, so pick carefully.",
   "choose-voting-settings": "Choose your voting settings below. You can’t change the support required later, so pick carefully.",
   "create-organization": "<0><0>Then create a new organization</0></0><1>Create a new organization</1>",

@@ -2,7 +2,7 @@ import BN from 'bn.js'
 import ConfigureVotingDefaults from './ConfigureVotingDefaults'
 import ConfigureTokenName from './ConfigureTokenName'
 import icon from './assets/icon.svg'
-import { withTranslation, Trans } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 const isIntegerString = value => /^\d*$/.test(value)
 const isFloatString = value => /^\d*\.?\d*$/.test(value)
@@ -118,6 +118,5 @@ const template = {
     }
   },
 }
-
 
 export default withTranslation()(template)
