@@ -173,4 +173,4 @@ const SuffixField = styled(Field)`
   }
 `
 
-export default withTranslation()(ConfigureTokenName)
+export default withTranslation()(ConfigureMultisigToken)
