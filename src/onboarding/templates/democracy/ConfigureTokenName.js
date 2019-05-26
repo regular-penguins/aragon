@@ -59,7 +59,6 @@ class ConfigureTokenNameContent extends React.PureComponent {
       handleTokenSymbolChange,
       onSubmit,
       formRef,
-      t,
     } = this.props
     return (
       <Content>

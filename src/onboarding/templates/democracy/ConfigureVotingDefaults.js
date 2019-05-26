@@ -62,7 +62,6 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
       handleVoteDurationChange,
       onSubmit,
       formRef,
-      t,
     } = this.props
     const adornmentSettings = { padding: 7 }
     return (
@@ -72,10 +71,10 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <TextContainer>
               <Text size="large" color={theme.textSecondary} align="center">
-              <Trans i18nKey="choose-voting-settings">
-                Choose your voting settings below. You can’t change the support
-                required later, so pick carefully.
-              </Trans>
+                <Trans i18nKey="choose-voting-settings">
+                  Choose your voting settings below. You can’t change the
+                  support required later, so pick carefully.
+                </Trans>
               </Text>
             </TextContainer>
             <Fields>
@@ -112,11 +111,11 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
             </Fields>
             <TextContainer>
               <Text size="xsmall" color={theme.textSecondary} align="left">
-              <Trans i18nKey="quorum-threshold">
-                The support and minimum quorum thresholds are <em>strict</em>{' '}
-                requirements, such that votes will only pass if they achieve
-                approval percentages <em>greater than</em> these thresholds.
-              </Trans>
+                <Trans i18nKey="quorum-threshold">
+                  The support and minimum quorum thresholds are <em>strict</em>{' '}
+                  requirements, such that votes will only pass if they achieve
+                  approval percentages <em>greater than</em> these thresholds.
+                </Trans>
               </Text>
             </TextContainer>
           </SubmitForm>
