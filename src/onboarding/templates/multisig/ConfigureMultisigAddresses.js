@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Button, TextInput, Text, DropDown, theme } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../../../utils'
+import { withTranslation, Trans } from 'react-i18next'
 
 class ConfigureMultisigAddresses extends React.Component {
   static defaultProps = {
@@ -83,20 +84,22 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
     )
     return (
       <Content>
-        <Title>Token project with multisig</Title>
+        <Title>t('Token project with multisig')</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <Intro>
               <Text size="large" color={theme.textSecondary} align="center">
+                <Trans i18nKey="add-wallet-and-number-signatures">
                 Add the wallet addresses of the multisig signers, and choose the
                 number of signatures needed for signing a transaction
+                </Trans>
               </Text>
             </Intro>
             <FieldGroups>
               <div>
                 <GroupTitle>
                   <Text color={theme.textSecondary} weight="bold" smallcaps>
-                    Multisig signer
+                    t('Multisig signer')
                   </Text>
                 </GroupTitle>
 
@@ -118,7 +121,7 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
                 </InputsView>
 
                 <Button mode="secondary" compact onClick={onAddSigner}>
-                  + Add signer
+                  '(+ Add signer)
                 </Button>
                 {fields.signers.addresses.length > 1 && (
                   <Button
@@ -128,14 +131,14 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
                     style={{ marginLeft: '10px' }}
                     compact
                   >
-                    Remove last
+                    t('Remove last')
                   </Button>
                 )}
               </div>
               <div>
                 <GroupTitle>
                   <Text color={theme.textSecondary} weight="bold" smallcaps>
-                    Signatures required
+                    t('Signatures required)
                   </Text>
                 </GroupTitle>
                 <DropDown
@@ -260,4 +263,5 @@ const InputError = styled(Text.Paragraph).attrs({
   margin-top: 2px;
 `
 
-export default ConfigureMultisigAddresses
+
+export default withTranslation()(ConfigureMultisigAddresses)

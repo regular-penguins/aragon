@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Field, TextInput, Text, theme } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../../../utils'
+import { withTranslation, Trans } from 'react-i18next'
 
 class ConfigureVotingDefaults extends React.Component {
   static defaultProps = {
@@ -65,13 +66,15 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
     const adornmentSettings = { padding: 7 }
     return (
       <Content>
-        <Title>Democracy Project</Title>
+        <Title>t('Democracy Project')</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <TextContainer>
               <Text size="large" color={theme.textSecondary} align="center">
-                Choose your voting settings below. You can’t change the support
-                required later, so pick carefully.
+                <Trans i18nKey="choose-voting-settings">
+                  Choose your voting settings below. You can’t change the
+                  support required later, so pick carefully.
+                </Trans>
               </Text>
             </TextContainer>
             <Fields>
@@ -108,9 +111,11 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
             </Fields>
             <TextContainer>
               <Text size="xsmall" color={theme.textSecondary} align="left">
-                The support and minimum quorum thresholds are <em>strict</em>{' '}
-                requirements, such that votes will only pass if they achieve
-                approval percentages <em>greater than</em> these thresholds.
+                <Trans i18nKey="quorum-threshold">
+                  The support and minimum quorum thresholds are <em>strict</em>{' '}
+                  requirements, such that votes will only pass if they achieve
+                  approval percentages <em>greater than</em> these thresholds.
+                </Trans>
               </Text>
             </TextContainer>
           </SubmitForm>
@@ -179,5 +184,4 @@ const InlineField = styled(Field)`
     margin-left: 55px;
   }
 `
-
-export default ConfigureVotingDefaults
+export default withTranslation()(ConfigureVotingDefaults)
