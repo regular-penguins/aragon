@@ -1,24 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import EscapeOutside from '../EscapeOutside/EscapeOutside'
 import { Button, breakpoint, font } from '@aragon/ui'
 import { noop } from '../../utils'
 
-const Modal = ({ title, body, onHide, More, blocking }) => (
-  <Main>
-    <WrapModal role="alertdialog" onEscapeOutside={blocking ? noop : onHide}>
-      <Header>{title}</Header>
-      <Body>{body}</Body>
-      <Footer>
-        <Button mode="text" onClick={onHide} style={{ paddingLeft: '0' }}>
-          Close
-        </Button>
-        {More}
-      </Footer>
-    </WrapModal>
-  </Main>
-)
+const Modal = ({ title, body, onHide, More, blocking }) => {
+  const { t } = useTranslation()
+  return (
+    <Main>
+      <WrapModal role="alertdialog" onEscapeOutside={blocking ? noop : onHide}>
+        <Header>{title}</Header>
+        <Body>{body}</Body>
+        <Footer>
+          <Button mode="text" onClick={onHide} style={{ paddingLeft: '0' }}>
+            {t('Close')}
+          </Button>
+          {More}
+        </Footer>
+      </WrapModal>
+    </Main>
+  )
+}
 
 Modal.propTypes = {
   title: PropTypes.node.isRequired,

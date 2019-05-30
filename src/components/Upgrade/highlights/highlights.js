@@ -14,14 +14,11 @@ const highlights = [
   {
     title: {
       small: null,
-      large: 'Custom labels for apps and addresses',
+      large: t => t('Custom labels for apps and addresses'),
     },
     description: {
       small: null,
-      large: `
-        Give addresses and apps their own custom labels so you can easily stay
-        organized and navigate your organization.
-      `,
+      large: t => t(`x-upgrade-custom-labels`),
     },
     visual: {
       small: small1,
@@ -32,14 +29,11 @@ const highlights = [
   {
     title: {
       small: null,
-      large: 'Get activity notifications',
+      large: t => t('Get activity notifications'),
     },
     description: {
       small: null,
-      large: `
-      The activity panel keeps you informed about the status of
-      pending transactions and activity in your organization.
-    `,
+      large: t => t(`x-upgrade-get-activity-notifications`),
     },
     visual: {
       small: small2,
@@ -50,14 +44,11 @@ const highlights = [
   {
     title: {
       small: null,
-      large: 'Export your finances in one click',
+      large: t => t('Export your finances in one click'),
     },
     description: {
       small: null,
-      large: `
-      Export your finances using a standard data format. Just choose the time
-      period, and click download.
-    `,
+      large: t => t(`x-upgrade-export-finances`),
     },
     visual: {
       small: small3,
@@ -68,14 +59,11 @@ const highlights = [
   {
     title: {
       small: null,
-      large: 'Update apps from the App Center',
+      large: t => t('Update apps from the App Center'),
     },
     description: {
       small: null,
-      large: `
-      Apply security patches and add new features to the apps in your
-      organization by updating to the latest version of apps in the App Center.
-    `,
+      large: t => t(`x-upgrade-update-apps`),
     },
     visual: {
       small: small4,
@@ -86,14 +74,11 @@ const highlights = [
   {
     title: {
       small: null,
-      large: 'Complete responsive view',
+      large: t => t('Complete responsive view'),
     },
     description: {
       small: null,
-      large: `
-      Manage your organization on the go from any web3 browser with the
-      mobile-friendly Aragon web app.
-    `,
+      large: t => t(`x-upgrade-responsive-view`),
     },
     visual: {
       small: small5,
@@ -101,8 +86,8 @@ const highlights = [
       color: '#dcddf0',
     },
     upgrade: {
-      small: 'Try Bella now',
-      large: 'Upgrade your organization',
+      small: t => t('Try Bella now'),
+      large: t => t('Upgrade your organization'),
     },
   },
 ]

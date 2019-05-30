@@ -5,26 +5,28 @@ import Section from '../Section'
 import EmptyBlock from '../EmptyBlock'
 import EntityRow from './EntityRow'
 import { PermissionsConsumer } from '../../../contexts/PermissionsContext'
+import { withTranslation } from 'react-i18next'
 
 class BrowseByEntity extends React.Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     onOpenEntity: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   render() {
-    const { loading, onOpenEntity } = this.props
+    const { loading, onOpenEntity, t } = this.props
     return (
-      <Section title="Browse by entity">
+      <Section title={t('Browse by entity')}>
         <PermissionsConsumer>
           {({ getRolesByEntity }) => {
             if (loading) {
-              return <EmptyBlock>Loading permissions…</EmptyBlock>
+              return <EmptyBlock>{t('Loading permissions…')}</EmptyBlock>
             }
 
             const roles = getRolesByEntity()
             if (roles.length === 0) {
-              return <EmptyBlock>No roles found.</EmptyBlock>
+              return <EmptyBlock>{t('No roles found.')}</EmptyBlock>
             }
 
             return (
@@ -36,11 +38,11 @@ class BrowseByEntity extends React.Component {
                       above('medium') && (
                         <TableRow>
                           <TableHeader
-                            title="Entity"
+                            title={t('Entity')}
                             style={{ width: '20%' }}
                           />
-                          <TableHeader title="Type" />
-                          <TableHeader title="Actions" />
+                          <TableHeader title={t('Type')} />
+                          <TableHeader title={t('Actions')} />
                           <TableHeader title="" />
                         </TableRow>
                       )
@@ -52,6 +54,7 @@ class BrowseByEntity extends React.Component {
                         entity={entity}
                         roles={roles}
                         onOpen={onOpenEntity}
+                        t={t}
                       />
                     ))}
                   </Table>
@@ -65,4 +68,4 @@ class BrowseByEntity extends React.Component {
   }
 }
 
-export default BrowseByEntity
+export default withTranslation()(BrowseByEntity)

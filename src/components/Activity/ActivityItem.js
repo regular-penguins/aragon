@@ -8,6 +8,7 @@ import {
   blockExplorerUrl,
   theme,
 } from '@aragon/ui'
+import { withTranslation } from 'react-i18next'
 import { network } from '../../environment'
 import { cssgu } from '../../utils'
 import { transformAddresses } from '../../web3-utils'
@@ -23,7 +24,7 @@ import {
   ACTIVITY_STATUS_TIMED_OUT,
 } from '../../symbols'
 
-const ActivityItem = ({ activity, onDiscard }) => {
+const ActivityItem = ({ activity, onDiscard, t }) => {
   const { app } = activity
 
   const handleClose = useCallback(() => {
@@ -47,7 +48,7 @@ const ActivityItem = ({ activity, onDiscard }) => {
         border-bottom: 1px solid ${theme.contentBorder};
       `}
     >
-      <CloseButton onClick={handleClose} />
+      <CloseButton onClick={handleClose} t={t} />
       <h1
         css={`
           grid-area: title;
@@ -67,7 +68,7 @@ const ActivityItem = ({ activity, onDiscard }) => {
             color: ${theme.textPrimary};
           `}
         >
-          {app ? app.name : 'Unknown'}
+          {app ? app.name : t('Unknown')}
         </div>
       </h1>
       <div
@@ -101,6 +102,7 @@ const ActivityItem = ({ activity, onDiscard }) => {
 ActivityItem.propTypes = {
   activity: PropTypes.object.isRequired,
   onDiscard: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 const ItemContent = React.memo(
@@ -125,6 +127,7 @@ ItemContent.propTypes = {
 }
 
 function getStatusData(activity) {
+  const { t } = this.props
   const txLink = (
     <SafeLink
       target="_blank"
@@ -132,19 +135,22 @@ function getStatusData(activity) {
         networkType: network.type,
       })}
     >
-      Transaction
+      {t('Transaction')}
     </SafeLink>
   )
   if (activity.status === ACTIVITY_STATUS_CONFIRMED) {
-    return [<IconSuccess />, <span>{txLink} confirmed.</span>]
+    return [
+      <IconSuccess />,
+      <span>{t('{txLink} confirmed.', { txLink })}</span>,
+    ]
   }
   if (activity.status === ACTIVITY_STATUS_FAILED) {
-    return [<IconError />, <span>{txLink} failed.</span>]
+    return [<IconError />, <span>{t('{txLink} failed.', { txLink })}</span>]
   }
   if (activity.status === ACTIVITY_STATUS_TIMED_OUT) {
-    return [<IconError />, <span>{txLink} timed out.</span>]
+    return [<IconError />, <span>{t('{txLink} timed out.', { txLink })}</span>]
   }
-  return [<IconPending />, <span>{txLink} pending.</span>]
+  return [<IconPending />, <span>{t('{txLink} pending.', { txLink })}</span>]
 }
 
 const StatusMessage = ({ activity }) => {
@@ -170,10 +176,10 @@ StatusMessage.propTypes = {
   activity: PropTypes.object.isRequired,
 }
 
-const CloseButton = props => (
+const CloseButton = ({ t, ...props }) => (
   <ButtonIcon
     {...props}
-    label="Close"
+    label={t('Close')}
     css={`
       position: absolute;
       top: 0;
@@ -184,4 +190,8 @@ const CloseButton = props => (
   </ButtonIcon>
 )
 
-export default ActivityItem
+CloseButton.propTypes = {
+  t: PropTypes.func.isRequired,
+}
+
+export default withTranslation()(ActivityItem)

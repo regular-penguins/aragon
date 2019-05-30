@@ -7,6 +7,7 @@ import EmptyBlock from './EmptyBlock'
 import AppInstanceLabel from '../../components/AppInstanceLabel'
 import { PermissionsConsumer } from '../../contexts/PermissionsContext'
 import { EthereumAddressType } from '../../prop-types'
+import { withTranslation } from 'react-i18next'
 
 class EntityPermissions extends React.PureComponent {
   static propTypes = {
@@ -15,17 +16,15 @@ class EntityPermissions extends React.PureComponent {
     loading: PropTypes.bool.isRequired,
     noPermissionsLabel: PropTypes.string,
     title: PropTypes.string.isRequired,
-  }
-  static defaultProps = {
-    loadPermissionsLabel: 'Loading entity permissions…',
-    noPermissionsLabel: 'No permissions set.',
+    t: PropTypes.func.isRequired,
   }
   render() {
     const {
       address,
       loading,
-      loadPermissionsLabel,
-      noPermissionsLabel,
+      t,
+      loadPermissionsLabel = t('Loading entity permissions…'),
+      noPermissionsLabel = t('No permissions set.'),
       title,
     } = this.props
 
@@ -47,10 +46,10 @@ class EntityPermissions extends React.PureComponent {
                       header={
                         <TableRow>
                           <TableHeader
-                            title="Action"
+                            title={t('Action')}
                             style={{ width: '20%' }}
                           />
-                          <TableHeader title="On app" />
+                          <TableHeader title={t('On app')} />
                           <TableHeader />
                         </TableRow>
                       }
@@ -60,12 +59,13 @@ class EntityPermissions extends React.PureComponent {
                           <Row
                             key={i}
                             entityAddress={address}
-                            id={(role && role.id) || 'Unknown'}
+                            id={(role && role.id) || t('Unknown')}
                             roleBytes={roleBytes}
-                            action={(role && role.name) || 'Unknown'}
+                            action={(role && role.name) || t('Unknown')}
                             app={roleFrom.app}
                             proxyAddress={proxyAddress}
                             onRevoke={revokePermission}
+                            t={t}
                           />
                         )
                       )}
@@ -87,7 +87,7 @@ class Row extends React.Component {
     onRevoke({ entityAddress, proxyAddress, roleBytes })
   }
   render() {
-    const { action, app, proxyAddress } = this.props
+    const { action, app, proxyAddress, t } = this.props
     return (
       <TableRow>
         <FirstTableCell>
@@ -103,7 +103,7 @@ class Row extends React.Component {
             compact
             onClick={this.handleRevoke}
           >
-            Revoke
+            {t('Revoke')}
           </Button>
         </LastTableCell>
       </TableRow>
@@ -118,6 +118,7 @@ Row.propTypes = {
   onRevoke: PropTypes.func.isRequired,
   proxyAddress: EthereumAddressType.isRequired,
   roleBytes: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
-export default EntityPermissions
+export default withTranslation()(EntityPermissions)

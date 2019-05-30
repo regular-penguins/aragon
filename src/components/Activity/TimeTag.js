@@ -4,6 +4,7 @@ import { font, theme } from '@aragon/ui'
 import { formatDistance, formatDistanceStrict } from 'date-fns'
 import { useNow } from '../../hooks'
 
+// TODO Make i18n
 function getRelativeTime(now, targetDate) {
   const past = targetDate < now
   const fn = past ? formatDistance : formatDistanceStrict

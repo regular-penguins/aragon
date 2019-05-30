@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { withTranslation } from 'react-i18next'
 import EagleAnimation from './EagleAnimation'
 import { theme, breakpoint, Button } from '@aragon/ui'
 const medium = css => breakpoint('medium', css)
@@ -13,9 +14,9 @@ class ErrorCard extends React.Component {
     showReloadButton: PropTypes.bool,
     supportUrl: PropTypes.string,
     title: PropTypes.string,
+    t: PropTypes.func.isRequired,
   }
   static defaultProps = {
-    title: 'Error :(',
     supportUrl: '',
     showReloadButton: false,
   }
@@ -37,7 +38,8 @@ class ErrorCard extends React.Component {
       detailsContent,
       showReloadButton,
       supportUrl,
-      title,
+      t,
+      title = t('Error :('),
     } = this.props
     const { showDetails } = this.state
     return (
@@ -49,7 +51,7 @@ class ErrorCard extends React.Component {
           {(detailsContent || detailsTitle) && (
             <div>
               <DetailsButton onClick={this.toggleMoreDetails}>
-                {showDetails ? 'Hide details…' : 'More details…'}
+                {showDetails ? t('Hide details…') : t('More details…')}
               </DetailsButton>
               {showDetails && (
                 <DetailsContainer>
@@ -63,13 +65,13 @@ class ErrorCard extends React.Component {
             <ButtonBox>
               {supportUrl && (
                 <IssueLink mode="text" href={supportUrl} target="_blank">
-                  Tell us what went wrong
+                  {t('Tell us what went wrong')}
                 </IssueLink>
               )}
               {supportUrl && showReloadButton && <ButtonsSpacer />}
               {showReloadButton && (
                 <Button mode="strong" onClick={this.handleReloadClick} compact>
-                  Reload
+                  {t('Reload')}
                 </Button>
               )}
             </ButtonBox>
@@ -158,4 +160,4 @@ const IssueLink = styled(Button.Anchor)`
   }
 `
 
-export default ErrorCard
+export default withTranslation()(ErrorCard)

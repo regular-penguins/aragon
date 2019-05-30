@@ -38,66 +38,87 @@ class SigningStatus extends React.Component {
     status: SignerStatusType.isRequired,
     signError: PropTypes.instanceOf(Error),
     walletProviderId: PropTypes.string,
+    t: PropTypes.func.isRequired,
   }
   getLabel() {
-    const { status } = this.props
-    if (isSigning(status)) return 'Waiting for signature…'
-    if (status === STATUS_TX_SIGNED) return 'Transaction signed!'
-    if (status === STATUS_MSG_SIGNED) return 'Message signed!'
-    if (status === STATUS_TX_ERROR) return 'Error signing the transaction.'
-    if (status === STATUS_MSG_ERROR) return 'Error signing the message.'
+    const { status, t } = this.props
+    if (isSigning(status)) return t('Waiting for signature…')
+    if (status === STATUS_TX_SIGNED) return t('Transaction signed!')
+    if (status === STATUS_MSG_SIGNED) return t('Message signed!')
+    if (status === STATUS_TX_ERROR) return t('Error signing the transaction.')
+    if (status === STATUS_MSG_ERROR) return t('Error signing the message.')
   }
   getInfo() {
-    const { status, signError, walletProviderId } = this.props
+    const { status, signError, walletProviderId, t } = this.props
     if (status === STATUS_TX_SIGNING) {
       return (
         <p>
-          {`Open ${providerString(
-            'your Ethereum provider',
-            walletProviderId
-          )} to sign your transaction.`}
+          {t(`Open {provider} to sign your transaction.`, {
+            provider: providerString(
+              t('your Ethereum provider'),
+              walletProviderId
+            ),
+          })}
         </p>
       )
     }
     if (status === STATUS_MSG_SIGNING) {
       return (
-        <p>{`Open ${providerString(
-          'your Ethereum provider',
-          walletProviderId
-        )} to sign your message.`}</p>
+        <p>
+          {t(`Open {provider} to sign your message.`, {
+            provider: providerString(
+              t('your Ethereum provider'),
+              walletProviderId
+            ),
+          })}
+        </p>
       )
     }
     if (status === STATUS_TX_SIGNED) {
       return (
         <p>
-          Success! Your transaction has been sent to the network for processing.
+          {t(
+            'Success! Your transaction has been sent to the network for processing.'
+          )}
         </p>
       )
     }
     if (status === STATUS_MSG_SIGNED) {
-      return <p>Success! Your message has been signed.</p>
+      return <p>{t('Success! Your message has been signed.')}</p>
     }
     if (status === STATUS_TX_ERROR) {
       return (
         <React.Fragment>
-          <p>Your transaction wasn't signed and no tokens were sent.</p>
-          {signError && <p>Error: “{cleanErrorMessage(signError.message)}”</p>}
+          <p>{t(`Your transaction wasn't signed and no tokens were sent.`)}</p>
+          {signError && (
+            <p>
+              {t(`Error: {error}“`, {
+                error: cleanErrorMessage(signError.message),
+              })}
+            </p>
+          )}
         </React.Fragment>
       )
     }
     if (status === STATUS_MSG_ERROR) {
       return (
         <React.Fragment>
-          <p>Your message wasn't signed.</p>
-          {signError && <p>Error: “{cleanErrorMessage(signError.message)}”</p>}
+          <p>{t(`Your message wasn't signed.`)}</p>
+          {signError && (
+            <p>
+              {t(`Error: {error}“`, {
+                error: cleanErrorMessage(signError.message),
+              })}
+            </p>
+          )}
         </React.Fragment>
       )
     }
   }
   getCloseButton() {
-    const { status, onClose } = this.props
+    const { status, onClose, t } = this.props
     if (isSignatureCompleted(status)) {
-      return <SignerButton onClick={onClose}>Close</SignerButton>
+      return <SignerButton onClick={onClose}>{t('Close')}</SignerButton>
     }
     return null
   }

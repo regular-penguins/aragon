@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button, ButtonIcon, theme, unselectable } from '@aragon/ui'
+import { useTranslation } from 'react-i18next'
 import { ActivityContext } from '../../contexts/ActivityContext'
 import { AppType } from '../../prop-types'
 import ActivityList from './ActivityList'
@@ -16,6 +17,7 @@ const ActivityPanel = React.memo(
   ({ apps, displayBackButton, onClearAll, onClose, open, shouldClose }) => {
     const frameRef = React.createRef()
     const { activities, clearActivity } = React.useContext(ActivityContext)
+    const { t } = useTranslation()
 
     useEffect(() => {
       if (open) {
@@ -49,7 +51,7 @@ const ActivityPanel = React.memo(
               {displayBackButton && (
                 <ButtonIcon
                   onClick={onClose}
-                  label="Close"
+                  label={t('Close')}
                   css={`
                     margin-left: -5px;
                     margin-right: 5px;
@@ -59,10 +61,10 @@ const ActivityPanel = React.memo(
                   <IconArrowLeft />
                 </ButtonIcon>
               )}
-              <ActivityHeaderTitle>Activity</ActivityHeaderTitle>
+              <ActivityHeaderTitle>{t('Activity')}</ActivityHeaderTitle>
             </div>
             <Button mode="text" onClick={onClearAll} css="margin-right: -15px">
-              Clear all
+              {t('Clear all')}
             </Button>
           </ActivityHeader>
           <ActivityContent>

@@ -5,9 +5,11 @@ import { Button, Viewport, springs } from '@aragon/ui'
 import Banner, { BANNER_HEIGHT } from '../Banner/Banner'
 import UpgradeModal from './UpgradeModal'
 import { banner } from './content'
+import { useTranslation } from 'react-i18next'
 
 const UpgradeBanner = React.memo(({ visible, onUpgrade }) => {
   const [showModal, setShowModal] = useState(false)
+  const { t } = useTranslation()
 
   const handleMoreInfo = useCallback(() => {
     setShowModal(true)
@@ -40,7 +42,9 @@ const UpgradeBanner = React.memo(({ visible, onUpgrade }) => {
               (({ height }) => (
                 <animated.div style={{ overflow: 'hidden', height }}>
                   <Banner
-                    text={width > 500 ? banner.text.large : banner.text.small}
+                    text={
+                      width > 500 ? banner.text.large(t) : banner.text.small(t)
+                    }
                     button={
                       <Button
                         onClick={handleMoreInfo}

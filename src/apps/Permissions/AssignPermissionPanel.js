@@ -6,6 +6,7 @@ import { AppType } from '../../prop-types'
 import { isAddress, isEmptyAddress } from '../../web3-utils'
 import AppInstanceLabel from '../../components/AppInstanceLabel'
 import EntitySelector from './EntitySelector'
+import { withTranslation } from 'react-i18next'
 
 const DEFAULT_STATE = {
   assignEntityIndex: 0,
@@ -22,6 +23,7 @@ class AssignPermissionPanel extends React.PureComponent {
     getAppRoles: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     opened: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   state = {
@@ -55,17 +57,19 @@ class AssignPermissionPanel extends React.PureComponent {
   }
 
   getAppsItems() {
-    return ['Select an app', ...this.appsLabels()]
+    const { t } = this.props
+    return [t('Select an app'), ...this.appsLabels()]
   }
 
   getRolesItems() {
+    const { t } = this.props
     const roles = this.getRoles()
     const names = roles.map(
       role =>
         (role && role.name) ||
-        `Unknown action (${(role && role.id) || 'no ID'})`
+        t(`Unknown action ({id})`, (role && role.id) || t('no ID'))
     )
-    return ['Select an action', ...names]
+    return [t('Select an action'), ...names]
   }
 
   getSelectedApp() {
@@ -128,7 +132,7 @@ class AssignPermissionPanel extends React.PureComponent {
   }
 
   render() {
-    const { opened, onClose } = this.props
+    const { opened, onClose, t } = this.props
     const { assignEntityIndex, appIndex, roleIndex } = this.state
 
     const appsItems = this.getAppsItems()
@@ -137,13 +141,13 @@ class AssignPermissionPanel extends React.PureComponent {
 
     return (
       <SidePanel
-        title={'Add permission'}
+        title={t('Add permission')}
         opened={opened}
         onClose={onClose}
         onTransitionEnd={this.handlePanelTransitionEnd}
       >
         <React.Fragment>
-          <Field label="On app">
+          <Field label={t('On app')}>
             <DropDown
               items={appsItems}
               active={appIndex}
@@ -154,15 +158,15 @@ class AssignPermissionPanel extends React.PureComponent {
 
           <EntitySelector
             includeAnyEntity
-            label="Grant permission to"
-            labelCustomAddress="Grant permission to"
+            label={t('Grant permission to')}
+            labelCustomAddress={t('Grant permission to')}
             activeIndex={assignEntityIndex}
             apps={this.getNamedApps()}
             onChange={this.handleEntityChange}
           />
 
           {selectedApp && (
-            <Field label="To perform action">
+            <Field label={t('To perform action')}>
               <DropDown
                 items={rolesItems}
                 active={roleIndex}
@@ -179,13 +183,12 @@ class AssignPermissionPanel extends React.PureComponent {
               disabled={!this.canSubmit()}
               wide
             >
-              {'Add permission'}
+              {t('Add permission')}
             </Button>
           </Field>
 
-          <Info.Action title="Adding the permission might create a vote">
-            The Voting app will automatically create a new vote if granting the
-            permission requires a vote to pass.
+          <Info.Action title={t('Adding the permission might create a vote')}>
+            {t('x-permisisons-create-vote')}
           </Info.Action>
         </React.Fragment>
       </SidePanel>
@@ -193,10 +196,12 @@ class AssignPermissionPanel extends React.PureComponent {
   }
 }
 
+const AssignPermissionPanelT = withTranslation()(AssignPermissionPanel)
+
 export default props => (
   <PermissionsConsumer>
     {({ getAppRoles, createPermission, grantPermission }) => (
-      <AssignPermissionPanel
+      <AssignPermissionPanelT
         {...props}
         {...{ getAppRoles, createPermission, grantPermission }}
       />

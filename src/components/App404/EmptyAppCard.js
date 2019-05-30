@@ -1,18 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { EmptyStateCard } from '@aragon/ui'
 import notFoundIcon from './assets/not-found.svg'
 
-const EmptyAppCard = ({ onActivate }) => (
-  <StyledEmptyStateCard
-    actionText="Go back"
-    icon={NotFoundIcon}
-    onActivate={onActivate}
-    text="Are you trying to access an Aragon app that is not installed?"
-    title="Error: unknown app."
-  />
-)
+const EmptyAppCard = ({ onActivate }) => {
+  const { t } = useTranslation()
+  return (
+    <StyledEmptyStateCard
+      actionText={t('Go back')}
+      icon={NotFoundIcon}
+      onActivate={onActivate}
+      text={t('Are you trying to access an Aragon app that is not installed?')}
+      title={t('Error: unknown app.')}
+    />
+  )
+}
 
 EmptyAppCard.propTypes = {
   onActivate: PropTypes.func.isRequired,

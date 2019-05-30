@@ -73,7 +73,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <TextContainer>
               <Text size="large" color={theme.textSecondary} align="center">
-                <Trans i18nKey="choose-voting-settings">
+                <Trans i18nKey="i-choose-voting-settings">
                   Choose your voting settings below. You can’t change the
                   support required later, so pick carefully.
                 </Trans>
@@ -85,7 +85,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                   adornment="%"
                   adornmentPosition="end"
                   adornmentSettings={adornmentSettings}
-                  placeholder="e.g. 50"
+                  placeholder={t('e.g. 50')}
                   value={fields.support === -1 ? '' : fields.support}
                   onChange={handleSupportChange}
                 />
@@ -95,7 +95,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                   adornment="%"
                   adornmentPosition="end"
                   adornmentSettings={adornmentSettings}
-                  placeholder="e.g. 15"
+                  placeholder={t('e.g. 15')}
                   value={fields.minQuorum === -1 ? '' : fields.minQuorum}
                   onChange={handleMinQuorumChange}
                 />
@@ -105,7 +105,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                   adornment="H"
                   adornmentPosition="end"
                   adornmentSettings={adornmentSettings}
-                  placeholder="e.g. 24"
+                  placeholder={t('e.g. 24')}
                   onChange={handleVoteDurationChange}
                   value={fields.voteDuration === -1 ? '' : fields.voteDuration}
                 />
@@ -113,7 +113,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
             </Fields>
             <TextContainer>
               <Text size="xsmall" color={theme.textSecondary} align="left">
-                <Trans i18nKey="quorum-threshold">
+                <Trans i18nKey="i-quorum-threshold">
                   The support and minimum quorum thresholds are <em>strict</em>{' '}
                   requirements, such that votes will only pass if they achieve
                   approval percentages <em>greater than</em> these thresholds.

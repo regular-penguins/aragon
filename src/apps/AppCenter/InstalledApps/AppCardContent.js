@@ -4,8 +4,9 @@ import color from 'onecolor'
 import { Badge, Button, font, theme } from '@aragon/ui'
 import AppIcon from '../../../components/AppIcon/AppIcon'
 import { RepoType } from '../../../prop-types'
+import { withTranslation } from 'react-i18next'
 
-const AppCardContent = ({ repo, onOpen }) => {
+const AppCardContent = ({ repo, onOpen, t }) => {
   const { name, repoName, baseUrl, currentVersion, latestVersion } = repo
   const { description, icons } = latestVersion.content
   const canUpgrade = currentVersion.version !== latestVersion.version
@@ -52,7 +53,7 @@ const AppCardContent = ({ repo, onOpen }) => {
                 .cssa()}
               foreground={theme.positive}
             >
-              New version available
+              {t('New version available')}
             </Badge>
           </div>
         )}
@@ -71,7 +72,7 @@ const AppCardContent = ({ repo, onOpen }) => {
           onClick={() => onOpen(repoName)}
           wide
         >
-          {canUpgrade ? 'Upgrade' : 'View details'}
+          {canUpgrade ? t('Upgrade') : t('View details')}
         </Button>
       </div>
     </section>
@@ -81,6 +82,7 @@ const AppCardContent = ({ repo, onOpen }) => {
 AppCardContent.propTypes = {
   repo: RepoType.isRequired,
   onOpen: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
-export default AppCardContent
+export default withTranslation()(AppCardContent)

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import { LocalIdentityModalContext } from '../LocalIdentityModal/LocalIdentityModalManager'
 import { isAddress } from '../../web3-utils'
 import {
@@ -15,6 +16,7 @@ const LocalIdentityBadge = ({ entity, ...props }) => {
   const { resolve, identityEvents$ } = React.useContext(IdentityContext)
   const { showLocalIdentityModal } = React.useContext(LocalIdentityModalContext)
   const [label, setLabel] = React.useState(null)
+  const { t } = useTranslation()
   const handleResolve = useCallback(async () => {
     try {
       const { name = null } = await resolve(address)
@@ -75,11 +77,11 @@ const LocalIdentityBadge = ({ entity, ...props }) => {
       customLabel={label || ''}
       entity={address}
       popoverAction={{
-        label: `${label ? 'Edit' : 'Add'} custom label`,
+        label: label ? t('Edit custom label') : t('Add custom label'),
         onClick: handleClick,
       }}
       popoverTitle={
-        label ? <LocalIdentityPopoverTitle label={label} /> : 'Address'
+        label ? <LocalIdentityPopoverTitle label={label} /> : t('Address')
       }
     />
   )

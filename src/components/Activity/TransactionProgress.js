@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { ProgressBar } from '@aragon/ui'
 import { Transition, animated } from 'react-spring'
+import { useTranslation } from 'react-i18next'
 import { ActivityStatusType } from '../../prop-types'
 import { norm } from '../../math-utils'
 import { useNow } from '../../hooks'
@@ -33,6 +34,7 @@ const TransactionProgress = React.memo(function TransactionProgress({
   status,
 }) {
   const now = useNow().getTime()
+  const { t } = useTranslation()
 
   // Only animate things if the panel is ready (opened).
   const animate = useContext(ActivityPanelReadyContext)
@@ -72,7 +74,7 @@ const TransactionProgress = React.memo(function TransactionProgress({
             {(showTimer || showConfirmed) && (
               <TimeTag
                 date={estimate}
-                label={showConfirmed && 'confirmed'}
+                label={showConfirmed && t('confirmed')}
                 css="margin-left: 8px"
               />
             )}

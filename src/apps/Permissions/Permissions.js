@@ -13,6 +13,7 @@ import AssignPermissionPanel from './AssignPermissionPanel'
 import ManageRolePanel from './ManageRolePanel'
 import { PermissionsConsumer } from '../../contexts/PermissionsContext'
 import AppLayout from '../../components/AppLayout/AppLayout'
+import { withTranslation } from 'react-i18next'
 
 class Permissions extends React.Component {
   static propTypes = {
@@ -22,6 +23,7 @@ class Permissions extends React.Component {
     onParamsRequest: PropTypes.func.isRequired,
     params: PropTypes.string,
     permissionsLoading: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   state = {
@@ -130,6 +132,7 @@ class Permissions extends React.Component {
 
   // Assemble the navigation items
   getNavigationItems(location, resolveEntity) {
+    const { t } = this.props
     const items = ['Permissions']
     const openedApp = location.screen === 'app' ? location.app : null
     const openedEntityAddress =
@@ -139,7 +142,9 @@ class Permissions extends React.Component {
       return [
         ...items,
         <NavigationItem
-          title={openedApp ? openedApp.name || 'Unknown app' : 'Permissions'}
+          title={
+            openedApp ? openedApp.name || t('Unknown app') : t('Permissions')
+          }
           badge={{
             label:
               (openedApp && openedApp.identifier) ||
@@ -156,10 +161,10 @@ class Permissions extends React.Component {
       return [
         ...items,
         <NavigationItem
-          title="Entity permissions"
+          title={t('Entity permissions')}
           badge={{
             label: entity.app.identifier || shortenAddress(location.address),
-            title: `Address: ${location.address}`,
+            title: t(`Address: {{address}}`, { address: location.address }),
           }}
         />,
       ]
@@ -169,7 +174,7 @@ class Permissions extends React.Component {
       return [
         ...items,
         <NavigationItem
-          title="Entity permissions"
+          title={t('Entity permissions')}
           address={openedEntityAddress}
           entity={entity}
         />,
@@ -180,7 +185,7 @@ class Permissions extends React.Component {
   }
 
   render() {
-    const { apps, appsLoading, permissionsLoading, params } = this.props
+    const { apps, appsLoading, permissionsLoading, params, t } = this.props
     const { showAssignPermissionPanel, animateScreens } = this.state
     const location = this.getLocation(params)
 
@@ -202,14 +207,14 @@ class Permissions extends React.Component {
           return (
             <React.Fragment>
               <AppLayout
-                title="Permissions"
+                title={t('Permissions')}
                 navigationItems={navigationItems}
                 onNavigationBack={this.goToHome}
                 onMenuOpen={this.handleMenuPanelOpen}
                 smallViewPadding={30}
                 mainButton={{
                   icon: <IconPlus />,
-                  label: 'Add permission',
+                  label: t('Add permission'),
                   onClick: this.createPermission,
                   disabled: appsLoading || permissionsLoading,
                 }}
@@ -246,7 +251,7 @@ class Permissions extends React.Component {
                         )}
                         {location.screen === 'entity' && (
                           <EntityPermissions
-                            title="Permissions granted to this entity"
+                            title={t('Permissions granted to this entity')}
                             loading={appsLoading || permissionsLoading}
                             address={location.address}
                           />
@@ -297,4 +302,4 @@ const ScrollTopElement = styled.div`
   height: 1px;
 `
 
-export default Permissions
+export default withTranslation()(Permissions)

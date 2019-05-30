@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { theme } from '@aragon/ui'
 import { FavoriteDaoType, DaoItemType } from '../../../prop-types'
 import { FavoriteDaosConsumer } from '../../../contexts/FavoriteDaosContext'
@@ -101,11 +102,12 @@ const LoaderLabel = styled.span`
 `
 
 const OrganizationSwitcherWithFavorites = ({ loading, ...props }) => {
+  const { t } = useTranslation()
   if (loading) {
     return (
       <Loader>
         <LoadingRing spin />
-        <LoaderLabel>Loading…</LoaderLabel>
+        <LoaderLabel>{t('Loading…')}</LoaderLabel>
       </Loader>
     )
   }

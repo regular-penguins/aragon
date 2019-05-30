@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Spring, animated } from 'react-spring'
+import { withTranslation } from 'react-i18next'
 import throttle from 'lodash.throttle'
 import color from 'onecolor'
 import { ButtonBase, springs, theme, unselectable } from '@aragon/ui'
@@ -64,6 +65,7 @@ class MenuPanel extends React.PureComponent {
     onRequestEnable: PropTypes.func.isRequired,
     unreadActivityCount: PropTypes.number,
     viewportHeight: PropTypes.number,
+    t: PropTypes.func.isRequired,
   }
 
   _animateTimer = -1
@@ -136,6 +138,7 @@ class MenuPanel extends React.PureComponent {
       onOpenPreferences,
       unreadActivityCount,
       onRequestEnable,
+      t,
     } = this.props
 
     const { animate, scrollVisible, systemAppsOpened } = this.state
@@ -166,7 +169,7 @@ class MenuPanel extends React.PureComponent {
           </Header>
           <Content ref={this._contentRef}>
             <div className="in" ref={this._innerContentRef}>
-              <h1>Apps</h1>
+              <h1>{t('Apps')}</h1>
 
               <div>
                 {menuApps.map(app =>
@@ -203,7 +206,7 @@ class MenuPanel extends React.PureComponent {
                           align-items: flex-end;
                         `}
                       >
-                        <span>System</span>
+                        <span>{t('System')}</span>
                         <SystemAppsToggleArrow
                           style={{
                             marginLeft: '5px',
@@ -421,4 +424,4 @@ const Content = styled.nav`
     align-items: center;
   }
 `
-export default MenuPanel
+export default withTranslation()(MenuPanel)

@@ -14,6 +14,7 @@ import LocalIdentityBadge from '../../../components/IdentityBadge/LocalIdentityB
 import AppInstanceLabel from '../../../components/AppInstanceLabel'
 import ViewDetailsButton from './ViewDetailsButton'
 import { FirstTableCell, LastTableCell } from '../Table'
+import { withTranslation } from 'react-i18next'
 
 class EntityRow extends React.PureComponent {
   static propTypes = {
@@ -21,6 +22,7 @@ class EntityRow extends React.PureComponent {
     entity: PropTypes.object.isRequired,
     onOpen: PropTypes.func.isRequired,
     roles: PropTypes.array.isRequired,
+    t: PropTypes.func.isRequired,
   }
   static defaultProps = {
     smallView: false,
@@ -42,7 +44,7 @@ class EntityRow extends React.PureComponent {
   }
   renderEntity(entity) {
     if (entity.type === 'any') {
-      return <LocalIdentityBadge entity="Any account" />
+      return <LocalIdentityBadge entity="Any account" /> // Do not translate 'Any account'
     }
     if (entity.type === 'app' && entity.app.name) {
       return <AppInstanceLabel app={entity.app} proxyAddress={entity.address} />
@@ -50,19 +52,26 @@ class EntityRow extends React.PureComponent {
     return <LocalIdentityBadge entity={entity.address} />
   }
   roleTitle({ role, roleBytes, appEntity, proxyAddress }) {
+    const { t } = this.props
     if (!appEntity || !appEntity.app) {
-      return `${role ? role.name : 'Unknown'} (from unknown)`
+      return role
+        ? t('{{name}} from unknown', { name: role.name })
+        : t('Unknown (from unkwown)')
     }
     const { app } = appEntity
     const roleLabel = (role && role.name) || roleBytes
-    return `${roleLabel} (from app: ${appEntity.name || app.proxyAddress})`
+    return t(`{{roleLabel}} (from app: {app})`, {
+      roleLabel,
+      app: appEntity.name || app.proxyAddress,
+    })
   }
   renderRoles(roles) {
+    const { t } = this.props
     roles = uniqBy(roles, ({ roleBytes, proxyAddress }) => {
       return roleBytes + proxyAddress
     })
     if (roles.length === 0) {
-      return <Text color={theme.textSecondary}>Unknown roles</Text>
+      return <Text color={theme.textSecondary}>{t('Unknown roles')}</Text>
     }
     return roles
       .map(roleData => {
@@ -70,10 +79,10 @@ class EntityRow extends React.PureComponent {
         return {
           key: roleBytes + proxyAddress,
           title: this.roleTitle(roleData),
-          label: (role && role.name) || 'Unknown',
+          label: (role && role.name) || t('Unknown'),
         }
       })
-      .sort(({ label }) => (label === 'Unknown' ? 1 : -1))
+      .sort(({ label }) => (label === t('Unknown') ? 1 : -1))
       .map(({ key, title, label }, index) => (
         <span key={key}>
           {index > 0 && <span>, </span>}
@@ -90,7 +99,7 @@ class EntityRow extends React.PureComponent {
     }
   }
   render() {
-    const { entity, roles, smallView } = this.props
+    const { entity, roles, smallView, t } = this.props
     if (!entity) {
       return null
     }
@@ -123,7 +132,7 @@ class EntityRow extends React.PureComponent {
           `}
         >
           <ViewDetailsButton
-            label="View details"
+            label={t('View details')}
             onClick={this.handleDetailsClick}
           />
         </LastTableCell>
@@ -143,8 +152,10 @@ const StyledTableRow = styled(TableRow)`
   )}
 `
 
+const EntityRowT = withTranslation()(EntityRow)
+
 export default props => (
   <Viewport>
-    {({ below }) => <EntityRow {...props} smallView={below('medium')} />}
+    {({ below }) => <EntityRowT {...props} smallView={below('medium')} />}
   </Viewport>
 )

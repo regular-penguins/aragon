@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   Card,
@@ -12,27 +13,37 @@ import {
 } from '@aragon/ui'
 import { appsInDevelopment } from './discover-apps-data'
 import AppIcon from '../../../components/AppIcon/AppIcon'
+import { withTranslation, Trans } from 'react-i18next'
 
-const statuses = {
+const statusesLabels = {
+  'pre-alpha': t => t('pre-alpha'),
+  alpha: t => t('alpha'),
+  experimental: t => t('experimental'),
+  ready: t => t('ready'),
+}
+
+const statusesColors = {
   'pre-alpha': colors.Gold.Brandy,
   alpha: colors.Blue.Danube,
   experimental: colors.Blue.Danube,
   ready: colors.Green['Spring Green'],
 }
 
-const DiscoverApps = React.memo(() => (
+const DiscoverApps = React.memo(({ t }) => (
   <div>
-    <p>
-      You will soon be able to <em>browse</em> and <em>install</em> new apps
-      into your Aragon organization from here.
-    </p>
-    <p>
-      In the meantime, you can{' '}
-      <SafeLink href="https://hack.aragon.org/" target="_blank">
-        learn how to create apps
-      </SafeLink>{' '}
-      or preview some of the apps being developed.
-    </p>
+    <Trans i18nKey="i-new-apps">
+      <p>
+        You will soon be able to <em>browse</em> and <em>install</em> new apps
+        into your Aragon organization from here.
+      </p>
+      <p>
+        In the meantime, you can{' '}
+        <SafeLink href="https://hack.aragon.org/" target="_blank">
+          learn how to create apps
+        </SafeLink>{' '}
+        or preview some of the apps being developed.
+      </p>
+    </Trans>
 
     <h1
       css={`
@@ -40,7 +51,7 @@ const DiscoverApps = React.memo(() => (
         font-weight: 600;
       `}
     >
-      Apps in development
+      {t('Apps in development')}
     </h1>
     <AppsGrid>
       {appsInDevelopment.map((app, i) => (
@@ -50,14 +61,16 @@ const DiscoverApps = React.memo(() => (
           </Icon>
           <Name>{app.name}</Name>
           <TagWrapper>
-            <Tag background={statuses[app.status]}>{app.status}</Tag>
+            <Tag background={statusesColors[app.status]}>
+              {statusesLabels[app.status](t)}
+            </Tag>
           </TagWrapper>
           <Description color={theme.textSecondary}>
             {app.description}
           </Description>
           <Action href={app.link} target="_blank">
             <Text weight="bold" color={theme.textSecondary}>
-              Learn more
+              {t('Learn more')}
             </Text>
           </Action>
         </Main>
@@ -65,6 +78,10 @@ const DiscoverApps = React.memo(() => (
     </AppsGrid>
   </div>
 ))
+
+DiscoverApps.propTypes = {
+  t: PropTypes.func.isRequired,
+}
 
 const AppsGrid = styled.div`
   display: grid;
@@ -133,4 +150,4 @@ const Action = styled(SafeLink)`
   text-decoration: none;
 `
 
-export default DiscoverApps
+export default withTranslation()(DiscoverApps)

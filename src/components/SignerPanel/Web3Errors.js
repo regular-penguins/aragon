@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Info, SafeLink, theme } from '@aragon/ui'
 import styled from 'styled-components'
+import { useTranslation, Trans } from 'react-i18next'
 
 import AddressLink from './AddressLink'
 import SignerButton from './SignerButton'
@@ -13,21 +14,24 @@ const Web3ProviderError = ({
   onClose,
   neededText,
   actionText,
-}) => (
-  <React.Fragment>
-    <Info.Action title="You can't perform any action">
-      {neededText} in order to perform{' '}
-      {description ? `“${description}”` : 'this action'}
-      {name && (
-        <React.Fragment>
-          on <AddressLink to={to}>{name}</AddressLink>
-        </React.Fragment>
-      )}
-      .<p css="margin-top: 15px">{actionText}</p>
-    </Info.Action>
-    <SignerButton onClick={onClose}>Close</SignerButton>
-  </React.Fragment>
-)
+}) => {
+  const { t } = useTranslation()
+  return (
+    <React.Fragment>
+      <Info.Action title={t(`You can't perform any action`)}>
+        {neededText} in order to perform{' '}
+        {description ? `“${description}”` : 'this action'}
+        {name && (
+          <React.Fragment>
+            on <AddressLink to={to}>{name}</AddressLink>
+          </React.Fragment>
+        )}
+        .<p css="margin-top: 15px">{actionText}</p>
+      </Info.Action>
+      <SignerButton onClick={onClose}>{t('Close')}</SignerButton>
+    </React.Fragment>
+  )
+}
 
 Web3ProviderError.propTypes = {
   actionText: PropTypes.node.isRequired,
@@ -37,21 +41,24 @@ Web3ProviderError.propTypes = {
 }
 
 export const NoWeb3Provider = ({ intent, onClose }) => {
+  const { t } = useTranslation()
   const onElectron = isElectron()
   const neededText = onElectron
-    ? 'You need to have Frame installed and enabled'
-    : 'You need to have an Ethereum provider installed and enabled'
+    ? t('You need to have Frame installed and enabled')
+    : t('You need to have an Ethereum provider installed and enabled')
 
   const actionText = (
     <span>
-      Please install and enable{' '}
-      <SafeLink
-        href={onElectron ? 'https://frame.sh/' : 'https://metamask.io/'}
-        target="_blank"
-      >
-        {onElectron ? 'Frame' : 'Metamask'}
-      </SafeLink>
-      .
+      {t('Please install and enable {provider}.', {
+        provider: (
+          <SafeLink
+            href={onElectron ? 'https://frame.sh/' : 'https://metamask.io/'}
+            target="_blank"
+          >
+            {onElectron ? 'Frame' : 'Metamask'}
+          </SafeLink>
+        ),
+      })}
     </span>
   )
 
@@ -76,20 +83,22 @@ export const AccountLocked = ({
   onRequestEnable,
   walletProviderId,
 }) => {
-  const providerMessage = providerString(
-    'your Ethereum provider',
-    walletProviderId
-  )
+  const { t } = useTranslation()
+  const provider = providerString(t('your Ethereum provider'), walletProviderId)
   return (
     <Web3ProviderError
       intent={intent}
       onClose={onClose}
-      neededText={`You need to unlock and enable ${providerMessage}`}
+      neededText={t(`You need to unlock and enable {providerMessage}`, {
+        providerMessage: provider,
+      })}
       actionText={
         <span>
-          Please unlock and{' '}
-          <ButtonLink onClick={onRequestEnable}>enable</ButtonLink>{' '}
-          {providerMessage}.
+          <Trans i18nKey="i-unlock-enable">
+            Please unlock and{' '}
+            <ButtonLink onClick={onRequestEnable}>enable</ButtonLink>{' '}
+            {{ provider }}.
+          </Trans>
         </span>
       }
     />
@@ -118,21 +127,22 @@ export const WrongNetwork = ({
   networkType,
   onClose,
   walletProviderId,
-}) => (
-  <Web3ProviderError
-    intent={intent}
-    onClose={onClose}
-    neededText={`
-      You need to be connected to the ${networkType} network
-    `}
-    actionText={`
-      Please connect ${providerString(
-        'your Ethereum provider',
-        walletProviderId
-      )} to the ${networkType} network.
-    `}
-  />
-)
+}) => {
+  const { t } = useTranslation()
+  return (
+    <Web3ProviderError
+      intent={intent}
+      onClose={onClose}
+      neededText={t(`You need to be connected to the {networkType} network`, {
+        networkType,
+      })}
+      actionText={t(`Please connect {provider} to the {networkType} network.`, {
+        provider: providerString(t('your Ethereum provider'), walletProviderId),
+        networkType,
+      })}
+    />
+  )
+}
 
 WrongNetwork.propTypes = {
   intent: PropTypes.object.isRequired,

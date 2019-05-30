@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Spring, animated } from 'react-spring'
+import { withTranslation } from 'react-i18next'
 import { IconError, Button, theme } from '@aragon/ui'
 import color from 'onecolor'
 import { AppsStatusType } from '../../prop-types'
@@ -21,6 +22,7 @@ class MenuPanelAppsLoader extends React.Component {
     expandedInstancesCount: PropTypes.number.isRequired,
     appsCount: PropTypes.number.isRequired,
     onRetry: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -73,7 +75,7 @@ class MenuPanelAppsLoader extends React.Component {
   }
 
   render() {
-    const { children, appsStatus, onRetry } = this.props
+    const { children, appsStatus, onRetry, t } = this.props
     const { showApps, transitionDone } = this.state
     return (
       <Spring
@@ -143,19 +145,19 @@ class MenuPanelAppsLoader extends React.Component {
                 </StatusIndicatorWrapper>
                 {(() => {
                   if (appsStatus === APPS_STATUS_LOADING) {
-                    return 'Loading apps…'
+                    return t('Loading apps…')
                   }
                   if (appsStatus === APPS_STATUS_READY) {
-                    return 'Apps loaded.'
+                    return t('Apps loaded.')
                   }
                   if (appsStatus === APPS_STATUS_ERROR) {
                     return (
                       <div>
                         <div style={{ marginBottom: '5px' }}>
-                          Apps loading error
+                          {t('Apps loading error')}
                         </div>
                         <Button size="mini" onClick={onRetry}>
-                          Retry
+                          {t('Retry')}
                         </Button>
                       </div>
                     )
@@ -239,4 +241,4 @@ const StatusContent = styled(animated.div)`
   z-index: 2;
 `
 
-export default MenuPanelAppsLoader
+export default withTranslation()(MenuPanelAppsLoader)

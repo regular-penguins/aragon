@@ -16,6 +16,7 @@ import { AppType } from '../../prop-types'
 import { isAddress, isEmptyAddress } from '../../web3-utils'
 import AppInstanceLabel from '../../components/AppInstanceLabel'
 import EntitySelector from './EntitySelector'
+import { withTranslation } from 'react-i18next'
 
 const CREATE_PERMISSION = Symbol('CREATE_PERMISSION')
 const VIEW_PERMISSION = Symbol('VIEW_PERMISSION')
@@ -24,26 +25,19 @@ const SET_PERMISSION_MANAGER = Symbol('SET_PERMISSION_MANAGER')
 const REMOVE_PERMISSION_MANAGER = Symbol('REMOVE_PERMISSION_MANAGER')
 
 const UPDATE_ACTIONS = new Map([
-  [NO_UPDATE_ACTION, { label: 'Select an action', message: null }],
+  [NO_UPDATE_ACTION, { label: t => t('Select an action'), message: t => null }],
   [
     SET_PERMISSION_MANAGER,
     {
-      label: 'Change the manager',
-      message: `
-        The new manager will be the only entity allowed to grant or revoke
-        the permission, and make further changes to the manager.
-      `,
+      label: t => t('Change the manager'),
+      message: t => t(`x-manage-role-change-manager`),
     },
   ],
   [
     REMOVE_PERMISSION_MANAGER,
     {
-      label: 'Remove the manager',
-      message: `
-        After having removed its manager, the permission can only be granted or
-        revoked if it is initialized again (requiring the “Create permission”
-        action on the ACL app).
-      `,
+      label: t => t('Remove the manager'),
+      message: t => t(`x-manage-role-remove-manager`),
     },
   ],
 ])
@@ -53,23 +47,15 @@ const ACTIONS = new Map([
   [
     CREATE_PERMISSION,
     {
-      label: null,
-      message: `
-        As part of the initialization process for a permission, a manager must
-        also be set. Be careful with this setting: the manager is the only
-        entity afterwards who can grant or revoke this permisison!
-      `,
+      label: t => null,
+      message: t => t(`x-manage-role-create-permisison`),
     },
   ],
   [
     VIEW_PERMISSION,
     {
-      label: null,
-      message: `
-        This permission's manager has been discarded to an unrecoverable address.
-        No further management actions can be taken on the permission, making it
-        effectively frozen.
-      `,
+      label: t => null,
+      message: t => t(`x-manage-role-view-permission`),
     },
   ],
 ])
@@ -94,6 +80,7 @@ class ManageRolePanel extends React.PureComponent {
     removePermissionManager: PropTypes.func.isRequired,
     role: PropTypes.object,
     setPermissionManager: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   state = {
@@ -126,7 +113,8 @@ class ManageRolePanel extends React.PureComponent {
   }
 
   getUpdateActionsItems() {
-    return [...UPDATE_ACTIONS.values()].map(({ label }) => label)
+    const { t } = this.props
+    return [...UPDATE_ACTIONS.values()].map(({ label }) => label(t))
   }
 
   getManager() {
@@ -140,8 +128,9 @@ class ManageRolePanel extends React.PureComponent {
   }
 
   getMessage(action) {
+    const { t } = this.props
     const data = ACTIONS.get(action)
-    return (data && data.message) || ''
+    return (data && data.message(t)) || ''
   }
 
   // Filter and validate the role manager value. Returns false if invalid.
@@ -236,10 +225,11 @@ class ManageRolePanel extends React.PureComponent {
   }
 
   renderManager = () => {
+    const { t } = this.props
     const manager = this.getManager()
     const emptyManager = isEmptyAddress(manager.address)
     if (emptyManager) {
-      return 'No manager'
+      return t('No manager')
     }
     if (manager.type === 'app') {
       return (
@@ -248,13 +238,13 @@ class ManageRolePanel extends React.PureComponent {
     }
     return (
       <LocalIdentityBadge
-        entity={manager.type === 'burn' ? 'Discarded' : manager.address}
+        entity={manager.type === 'burn' ? t('Discarded') : manager.address}
       />
     )
   }
 
   render() {
-    const { opened, onClose, app, role } = this.props
+    const { opened, onClose, app, role, t } = this.props
     const { assignManagerIndex, assignEntityIndex } = this.state
 
     const updateActionsItems = this.getUpdateActionsItems()
@@ -268,17 +258,17 @@ class ManageRolePanel extends React.PureComponent {
       <SidePanel
         title={
           action === CREATE_PERMISSION
-            ? 'Initialize permission'
+            ? t('Initialize permission')
             : action === VIEW_PERMISSION
-            ? 'View permission'
-            : 'Manage permission'
+            ? t('View permission')
+            : t('Manage permission')
         }
         opened={opened}
         onClose={onClose}
         onTransitionEnd={this.handlePanelTransitionEnd}
       >
         <React.Fragment>
-          <Field label="App">
+          <Field label={t('App')}>
             {app && (
               <AppInstanceLabel
                 app={app}
@@ -288,16 +278,16 @@ class ManageRolePanel extends React.PureComponent {
             )}
           </Field>
 
-          <Field label="Action description">{role && role.name}</Field>
+          <Field label={t('Action description')}>{role && role.name}</Field>
 
           {(action === VIEW_PERMISSION || isUpdateAction) && (
-            <Field label="Manager">
+            <Field label={t('Manager')}>
               <FlexRow>{this.renderManager()}</FlexRow>
             </Field>
           )}
 
           {isUpdateAction && (
-            <Field label="Action">
+            <Field label={t('Action')}>
               <DropDown
                 items={updateActionsItems}
                 active={updateActionIndex}
@@ -309,8 +299,8 @@ class ManageRolePanel extends React.PureComponent {
 
           {action === SET_PERMISSION_MANAGER && (
             <EntitySelector
-              label="New manager"
-              labelCustomAddress="Address for new manager"
+              label={t('New manager')}
+              labelCustomAddress={t('Address for new manager')}
               activeIndex={assignManagerIndex}
               apps={this.getNamedApps()}
               onChange={this.handleRoleManagerChange}
@@ -321,15 +311,15 @@ class ManageRolePanel extends React.PureComponent {
             <React.Fragment>
               <EntitySelector
                 includeAnyEntity
-                label="Grant permission to"
-                labelCustomAddress="Grant permission to"
+                label={t('Grant permission to')}
+                labelCustomAddress={t('Grant permission to')}
                 activeIndex={assignEntityIndex}
                 apps={this.getNamedApps()}
                 onChange={this.handleEntityChange}
               />
               <EntitySelector
-                label="Manager"
-                labelCustomAddress="Address for manager"
+                label={t('Manager')}
+                labelCustomAddress={t('Address for manager')}
                 activeIndex={assignManagerIndex}
                 apps={this.getNamedApps()}
                 onChange={this.handleRoleManagerChange}
@@ -345,17 +335,21 @@ class ManageRolePanel extends React.PureComponent {
                 disabled={!this.canSubmit()}
                 wide
               >
-                {isUpdateAction ? 'Update permission' : 'Initialize permission'}
+                {isUpdateAction
+                  ? t('Update permission')
+                  : t('Initialize permission')}
               </Button>
             </Field>
           )}
 
-          {message && <Info.Action title="Info">{message}</Info.Action>}
+          {message && <Info.Action title={t('Info')}>{message}</Info.Action>}
         </React.Fragment>
       </SidePanel>
     )
   }
 }
+
+const ManageRolePanelT = withTranslation(ManageRolePanel)
 
 const FlexRow = styled.div`
   display: inline-flex;
@@ -377,7 +371,7 @@ export default props => (
       removePermissionManager,
       setPermissionManager,
     }) => (
-      <ManageRolePanel
+      <ManageRolePanelT
         {...props}
         {...{
           createPermission,

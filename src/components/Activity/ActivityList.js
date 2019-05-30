@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import { springs, theme } from '@aragon/ui'
 import { Transition, animated } from 'react-spring'
 import { AppType } from '../../prop-types'
@@ -13,6 +14,7 @@ const getAppByProxyAddress = (proxyAddress, apps) =>
 
 const ActivityList = React.memo(({ apps, activities, clearActivity }) => {
   const [activitiesReady, setActivitiesReady] = React.useState({})
+  const { t } = useTranslation()
 
   const activityItems = useMemo(
     () =>
@@ -67,7 +69,7 @@ const ActivityList = React.memo(({ apps, activities, clearActivity }) => {
                   color: ${theme.textSecondary};
                 `}
               >
-                No activity.
+                {t('No activity.')}
               </p>
             </div>
           ))

@@ -90,7 +90,7 @@ class Start extends React.Component {
             <Content style={screenTransitionStyles}>
               {below('medium') && (
                 <Warning>
-                  <Trans i18nKey="use-desktop-browser">
+                  <Trans i18nKey="i-use-desktop-browser">
                     If you want to <span>create</span> an organization, please
                     use your desktop browser.
                   </Trans>
@@ -213,7 +213,7 @@ class StartContent extends React.PureComponent {
                   <IconAttention />
                 </span>
                 <p>
-                  <Trans i18nKey="warning-mainnet-real-funds">
+                  <Trans i18nKey="i-warning-mainnet-real-funds">
                     Mainnet uses real funds.{' '}
                     <StrongSafeLink
                       href={MAINNET_RISKS_BLOG_POST}
@@ -301,7 +301,7 @@ class StartContent extends React.PureComponent {
                       compact={!smallMode}
                       onClick={onOpenOrganization}
                     >
-                      {smallMode ? 'Next' : 'Open organization'}
+                      {smallMode ? t('Next') : t('Open organization')}
                     </StyledSubmitButton>
                   )}
                   {domainCheckStatus === DomainCheckRejected && (
@@ -317,7 +317,7 @@ class StartContent extends React.PureComponent {
         {demoDao && (
           <p>
             <Text size="normal" color={theme.textSecondary}>
-              <Trans i18nKey="demo-organization">
+              <Trans i18nKey="i-demo-organization">
                 Not ready to create an organization? Try browsing this{' '}
                 <ButtonLink onClick={this.handleOpenDemoOrganization}>
                   demo organization
@@ -344,7 +344,7 @@ class StartContent extends React.PureComponent {
         <ActionInfo>
           {isElectron() ? (
             <React.Fragment>
-              <Trans i18nKey="missing-provider-frame">
+              <Trans i18nKey="i-missing-provider-frame">
                 Please install{' '}
                 <SafeLink href="https://frame.sh/" target="_blank">
                   Frame
@@ -354,7 +354,7 @@ class StartContent extends React.PureComponent {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Trans i18nKey="missing-provider">
+              <Trans i18nKey="i-missing-provider">
                 Please install an Ethereum provider (e.g.{' '}
                 <SafeLink href="https://metamask.io/" target="_blank">
                   MetaMask
@@ -368,14 +368,18 @@ class StartContent extends React.PureComponent {
       )
     }
     if (!hasAccount) {
+      const provider = providerString(
+        t('your Ethereum provider'),
+        walletProviderId
+      ) // TODO check this
       return (
         <ActionInfo>
-          <Trans i18nKey="unlock-enable">
+          <Trans i18nKey="i-unlock-enable">
             Please unlock and{' '}
             <ButtonLink onClick={onRequestEnable} style={{ color: '#000' }}>
               enable
             </ButtonLink>{' '}
-            {providerString('your Ethereum provider', walletProviderId)}.
+            {{ provider }}.
           </Trans>
         </ActionInfo>
       )
@@ -383,7 +387,7 @@ class StartContent extends React.PureComponent {
     if (network.type === 'unknown') {
       return (
         <ActionInfo>
-          <Trans i18nKey="unsupported-network">
+          <Trans i18nKey="i-unsupported-network">
             This app was configured to connect to an unsupported network. Please
             change the network environment settings.
           </Trans>

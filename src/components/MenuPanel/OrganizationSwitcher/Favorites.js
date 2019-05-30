@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { withTranslation } from 'react-i18next'
 import { IconPlus, theme } from '@aragon/ui'
 import { FavoriteDaoType, DaoItemType } from '../../../prop-types'
 import FavoriteRow from './FavoriteRow'
@@ -11,6 +12,7 @@ class Favorites extends React.Component {
     favoriteDaos: PropTypes.arrayOf(FavoriteDaoType),
     currentDao: DaoItemType,
     onUpdate: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   state = { localDaos: [] }
@@ -85,12 +87,13 @@ class Favorites extends React.Component {
 
   render() {
     const { localDaos } = this.state
+    const { t } = this.props
     const currentDao = this.currentDaoWithFavoriteState()
     const daosListWithoutCurrent = localDaos.filter(
       dao => dao.address !== currentDao.address
     )
     return (
-      <section aria-label="Organizations">
+      <section aria-label={t('Organizations')}>
         <ItemButton
           onClick={this.handleGoHome}
           css={`
@@ -111,10 +114,10 @@ class Favorites extends React.Component {
           >
             <IconPlus />
           </span>
-          <span>Open organization…</span>
+          <span>{t('Open organization…')}</span>
         </ItemButton>
 
-        <SectionTitle>Current</SectionTitle>
+        <SectionTitle>{t('Current')}</SectionTitle>
         <FavoriteRow
           dao={currentDao}
           onOpen={this.handleDaoOpened}
@@ -122,7 +125,7 @@ class Favorites extends React.Component {
         />
         {daosListWithoutCurrent.length > 0 && (
           <React.Fragment>
-            <SectionTitle>Favorites</SectionTitle>
+            <SectionTitle>{t('Favorites')}</SectionTitle>
             <List>
               {daosListWithoutCurrent.map(dao => (
                 <li key={dao.address}>
@@ -155,4 +158,4 @@ const List = styled.ul`
   list-style: none;
 `
 
-export default Favorites
+export default withTranslation()(Favorites)

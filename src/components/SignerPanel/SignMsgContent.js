@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { Info, Text, SidePanelSeparator, theme } from '@aragon/ui'
 
 import SignerButton from './SignerButton'
@@ -15,14 +16,17 @@ const SignMsgContent = ({ apps, account, intent, onSign, signingEnabled }) => {
     apps.find(({ proxyAddress }) => proxyAddress === requestingApp)
 
   const humanReadableMessage = isHumanReadable(intent.message)
+  const { t } = useTranslation()
   return (
     <React.Fragment>
       <span css="margin-right: 4px">
-        You are about to sign this message with the connected account{' '}
-        <LocalIdentityBadge entity={account} />
+        {t(
+          'You are about to sign this message with the connected account {account}',
+          { account: <LocalIdentityBadge entity={account} /> }
+        )}
       </span>
       <Separator />
-      <Label>Signature requested by</Label>
+      <Label>{t('Signature requested by')}</Label>
       <AppInstanceLabel
         app={locateAppInfo(apps, intent.requestingApp)}
         proxyAddress={intent.requestingApp}
@@ -31,12 +35,15 @@ const SignMsgContent = ({ apps, account, intent, onSign, signingEnabled }) => {
       <Separator />
       {humanReadableMessage ? (
         <React.Fragment>
-          <Label>Message</Label>
+          <Label>{t('Message')}</Label>
           <Info>{intent.message}</Info>
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <ToggleContent labelOpen="Hide message" labelClosed="Show message">
+          <ToggleContent
+            labelOpen={t('Hide message')}
+            labelClosed={t('Show message')}
+          >
             <React.Fragment>
               <LongMessage>{intent.message}</LongMessage>
             </React.Fragment>
@@ -44,7 +51,7 @@ const SignMsgContent = ({ apps, account, intent, onSign, signingEnabled }) => {
         </React.Fragment>
       )}
       <SignerButton onClick={onSign} disabled={!signingEnabled}>
-        Sign message
+        {t('Sign message')}
       </SignerButton>
     </React.Fragment>
   )

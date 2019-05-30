@@ -69,7 +69,7 @@ class ConfigureTokenNameContent extends React.PureComponent {
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <p style={{ textAlign: 'center' }}>
               <Text size="large" color={theme.textSecondary}>
-                <Trans i18nKey="choose-token-symbol">
+                <Trans i18nKey="i-choose-token-symbol">
                   Choose the token name and symbol. You can’t change these
                   later, so pick carefully.
                 </Trans>

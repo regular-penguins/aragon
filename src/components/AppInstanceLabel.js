@@ -7,7 +7,7 @@ import { shortenAddress } from '../web3-utils'
 import AppIcon from './AppIcon/AppIcon'
 
 const AppInstanceLabel = React.memo(
-  ({ app, proxyAddress, showIcon = true }) => {
+  ({ app, proxyAddress, showIcon = true, t }) => {
     const { above } = useViewport()
 
     return (
@@ -25,7 +25,7 @@ const AppInstanceLabel = React.memo(
             <AppIcon app={app} />
           </div>
         )}
-        <AppName>{app ? app.name : 'Unknown'}</AppName>
+        <AppName>{app ? app.name : t('Unknown')}</AppName>
         <StyledBadge title={proxyAddress}>
           {(app && app.identifier) || shortenAddress(proxyAddress)}
         </StyledBadge>
@@ -38,6 +38,7 @@ AppInstanceLabel.propTypes = {
   app: AppType.isRequired,
   proxyAddress: EthereumAddressType.isRequired,
   showIcon: PropTypes.bool,
+  t: PropTypes.func.isRequired,
 }
 
 const Main = styled.div`

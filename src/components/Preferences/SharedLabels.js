@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation, Trans } from 'react-i18next'
 import {
   Button,
   Checkbox,
@@ -26,6 +27,7 @@ const SharedLabels = React.memo(function SharedLabels({
   toast,
   wrapper,
 }) {
+  const { t } = useTranslation()
   const { identityEvents$ } = React.useContext(IdentityContext)
   const { selected, setSelected, allSelected, someSelected } = useSelected(
     new Map()
@@ -77,9 +79,11 @@ const SharedLabels = React.memo(function SharedLabels({
           line-height: 22px;
         `}
       >
-        These labels have been shared with you. By clicking on the “Save”
-        button, you will make them appear on this device (labels will be stored
-        locally).
+        <Trans i18nKey="i-shared-labels">
+          These labels have been shared with you. By clicking on the “Save”
+          button, you will make them appear on this device (labels will be
+          stored locally).
+        </Trans>
       </div>
       <Headers style={{ marginTop: `${5 * GU}px` }}>
         <div>
@@ -88,7 +92,7 @@ const SharedLabels = React.memo(function SharedLabels({
             onChange={onToggleAll}
             indeterminate={!allSelected && someSelected}
           />
-          Custom label
+          {t('Custom label')}
         </div>
         <div
           css={`
@@ -110,7 +114,7 @@ const SharedLabels = React.memo(function SharedLabels({
               text-align: left;
             `}
           >
-            Address
+            {t('Address')}
           </span>
         </div>
       </Headers>
@@ -118,7 +122,7 @@ const SharedLabels = React.memo(function SharedLabels({
         {saving && (
           <Saving>
             <LoadingRing spin />
-            <div>Loading…</div>
+            <div>{t('Loading…')}</div>
           </Saving>
         )}
         {labels.map(({ address, name }) => (
@@ -154,16 +158,16 @@ const SharedLabels = React.memo(function SharedLabels({
 
       <Controls>
         <Button
-          label="Cancel"
+          label={t('Cancel')}
           mode="secondary"
           onClick={onClose}
           css="width: 117px"
           disabled={saving}
         >
-          Cancel
+          {t('Cancel')}
         </Button>
         <Button
-          label="Save"
+          label={t('Save')}
           mode="strong"
           disabled={!someSelected || saving}
           onClick={handleSave}

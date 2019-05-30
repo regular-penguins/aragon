@@ -5,18 +5,20 @@ import { Text, Card, Badge, theme, unselectable } from '@aragon/ui'
 import { AppType } from '../../prop-types'
 import { shortenAddress } from '../../web3-utils'
 import AppIcon from '../../components/AppIcon/AppIcon'
+import { withTranslation } from 'react-i18next'
 
 class AppCard extends React.PureComponent {
   static propTypes = {
     app: AppType.isRequired,
     onOpen: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   handleClick = () => {
     this.props.onOpen(this.props.app.proxyAddress)
   }
   render() {
-    const { app } = this.props
+    const { app, t } = this.props
     const {
       name,
       identifier,
@@ -27,9 +29,9 @@ class AppCard extends React.PureComponent {
 
     const instanceTitle = `Address: ${proxyAddress}`
     const instanceLabel = isAragonOsInternalApp
-      ? 'System App'
+      ? t('System App')
       : !hasWebApp
-      ? 'Background App'
+      ? t('Background App')
       : identifier || shortenAddress(proxyAddress)
 
     return (
@@ -38,14 +40,14 @@ class AppCard extends React.PureComponent {
           <AppIcon app={app} size={28} />
         </div>
         <Name>
-          <span>{name || 'Unknown'}</span>
+          <span>{name || t('Unknown')}</span>
         </Name>
         <IdentifierWrapper>
           <Identifier title={instanceTitle}>{instanceLabel}</Identifier>
         </IdentifierWrapper>
         <Action>
           <Text weight="bold" color={theme.textSecondary}>
-            View
+            {t('View')}
           </Text>
         </Action>
       </Main>
@@ -97,4 +99,4 @@ const Action = styled.div`
   text-align: center;
 `
 
-export default AppCard
+export default withTranslation()(AppCard)

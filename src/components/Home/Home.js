@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { withTranslation } from 'react-i18next'
 import { Text, theme } from '@aragon/ui'
 import HomeCard from './HomeCard'
 import { AppType } from '../../prop-types'
@@ -20,25 +21,25 @@ const CARD_MARGIN = 30
 const actions = [
   {
     id: 'assign-tokens',
-    label: 'Assign Tokens',
+    label: t => t('Assign Tokens'),
     appName: 'Token Manager',
     img: imgAssignTokens,
   },
   {
     id: 'vote',
-    label: 'Vote',
+    label: t => t('Vote'),
     appName: 'Voting',
     img: imgVote,
   },
   {
     id: 'check-finance',
-    label: 'Check Finance',
+    label: t => t('Check Finance'),
     appName: 'Finance',
     img: imgFinance,
   },
   {
     id: 'new-payment',
-    label: 'New Payment',
+    label: t => t('New Payment'),
     appName: 'Finance',
     img: imgPayment,
   },
@@ -50,6 +51,7 @@ class Home extends React.Component {
     dao: PropTypes.string.isRequired,
     onMessage: PropTypes.func.isRequired,
     onOpenApp: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
   handleCardAction = actionId => {
     const { onOpenApp, apps } = this.props
@@ -68,7 +70,7 @@ class Home extends React.Component {
     })
   }
   render() {
-    const { apps, dao } = this.props
+    const { apps, dao, t } = this.props
 
     const appActions = actions.filter(({ appName }) =>
       apps.find(({ name }) => name === appName)
@@ -83,25 +85,27 @@ class Home extends React.Component {
           <Content>
             <h1 css="margin-bottom: 30px">
               <Text weight="bold" size="xxlarge">
-                Welcome to Aragon!
+                {t('Welcome to Aragon!')}
               </Text>
               <div>
                 <Text size="small">
                   {dao.endsWith('.eth')
-                    ? `You are interacting with ${dao}`
-                    : 'You are using Aragon 0.7 — Bella'}
+                    ? t(`You are interacting with {dao}`, { dao })
+                    : t('You are using Aragon 0.7 — Bella')}
                 </Text>
               </div>
             </h1>
             <p>
-              <Text color={theme.textSecondary}>What do you want to do?</Text>
+              <Text color={theme.textSecondary}>
+                {t('What do you want to do?')}
+              </Text>
             </p>
             <Cards>
               {appActions.map(({ id, label, img }) => (
                 <CardWrap key={id}>
                   <HomeCard
                     id={id}
-                    title={label}
+                    title={label(t)}
                     icon={img}
                     onActivate={this.handleCardAction}
                   />
@@ -154,4 +158,4 @@ const CardWrap = styled.div`
   margin-left: ${CARD_MARGIN}px;
 `
 
-export default Home
+export default withTranslation()(Home)

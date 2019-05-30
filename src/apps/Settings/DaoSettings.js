@@ -11,6 +11,7 @@ import airdrop, { testTokensEnabled } from '../../testnet/airdrop'
 import Option from './Option'
 import Note from './Note'
 import { withTranslation, Trans } from 'react-i18next'
+
 const AppsList = styled.ul`
   list-style: none;
 `
@@ -24,6 +25,7 @@ const DaoSettings = React.memo(
     onOpenApp,
     walletNetwork,
     walletWeb3,
+    t,
   }) => {
     const handleDepositTestTokens = () => {
       const finance = apps.find(app => app.appId === appIds.Finance)
@@ -48,39 +50,45 @@ const DaoSettings = React.memo(
     return (
       <div>
         <Option
-          name="Organization address"
-          text={`This organization is deployed on the ${network.name}.`}
+          name={t('Organization address')}
+          text={t(`This organization is deployed on the {network}.`, {
+            network: network.name,
+          })}
         >
           {checksummedDaoAddr ? (
             <div>
-              <Label>t('Address')</Label>
+              <Label>{t('Address')}</Label>
               <LocalIdentityBadge
                 entity={checksummedDaoAddr}
                 shorten={shortAddresses}
               />
             </div>
           ) : (
-            <p>t('Resolving DAO address…')</p>
+            <p>{t('Resolving DAO address…')}</p>
           )}
           <Note>
-            <strong>t('Do not send ether or tokens to this address!')</strong>
+            <strong>{t('Do not send ether or tokens to this address!')}</strong>
             <br />
-            SEM Go to the{' '}
-            {financeApp ? (
-              <ButtonLink onClick={handleOpenFinance}>Finance app</ButtonLink>
-            ) : (
-              'Finance app'
-            )}{' '}
-            to deposit funds into your organization instead.
+            {t(
+              'Go to the {financeAppButton} to deposit funds into your organization instead.',
+              {
+                financeAppButton: financeApp ? (
+                  <ButtonLink onClick={handleOpenFinance}>
+                    {t('Finance app')}
+                  </ButtonLink>
+                ) : (
+                  t('Finance app')
+                ),
+              }
+            )}
           </Note>
         </Option>
         {testTokensEnabled(network.type) && (
           <Option
-            name="Request test tokens"
-            text={`
-                Deposit some tokens into your organization for testing
-                purposes.
-              `}
+            name={t('Request test tokens')}
+            text={t(
+              `Deposit some tokens into your organization for testing purposes.`
+            )}
           >
             <div>
               <Button
@@ -89,21 +97,24 @@ const DaoSettings = React.memo(
                 disabled={!enableTransactions}
                 style={{ opacity: enableTransactions ? 1 : 0.6 }}
               >
-                t('Request test tokens')
+                {t('Request test tokens')}
               </Button>
               {!enableTransactions && (
                 <Text size="small" style={{ marginLeft: '10px' }}>
                   {(() =>
                     walletNetwork !== network.type
-                      ? `Please select the ${sanitizeNetworkType(
-                          network.type
-                        )} network in your Ethereum provider.`
-                      : `Please unlock your account in your Ethereum provider.`)()}
+                      ? t(
+                          `Please select the {network} network in your Ethereum provider.`,
+                          { network: sanitizeNetworkType(network.type) }
+                        )
+                      : t(
+                          `Please unlock your account in your Ethereum provider.`
+                        ))()}
                 </Text>
               )}
             </div>
             <Note>
-              <Trans i18nKey="token-request">
+              <Trans i18nKey="i-token-request">
                 Requesting tokens will assign random <strong>TEST</strong>{' '}
                 tokens to your organization. The tokens are named after existing
                 projects, but keep in mind <strong>THEY ARE NOT</strong> the
@@ -114,19 +125,17 @@ const DaoSettings = React.memo(
           </Option>
         )}
         {appsLoading && (
-          <Option name="Aragon apps" text={'Loading apps…'}>
+          <Option name={t('Aragon apps')} text={t('Loading apps…')}>
             <div css={'height:20px'} />
           </Option>
         )}
         {apmApps.length > 0 && (
           <Option
-            name="Aragon apps"
+            name={t('Aragon apps')}
             text={
               appsLoading
-                ? 'Loading apps…'
-                : `This organization has ${apmApps.length} ${
-                    apmApps.length === 1 ? 'app' : 'apps'
-                  } installed.`
+                ? t('Loading apps…')
+                : t('x-settings-installed-apps', { count: apmApps.length })
             }
           >
             {!appsLoading && (
@@ -171,6 +180,7 @@ DaoSettings.propTypes = {
   onOpenApp: PropTypes.func.isRequired,
   walletNetwork: PropTypes.string.isRequired,
   walletWeb3: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 DaoSettings.defaultProps = {

@@ -12,12 +12,14 @@ import {
 import { RepoType } from '../../prop-types'
 import { TextLabel } from '../../components/TextStyles'
 import { GU } from '../../utils'
+import { withTranslation, Trans } from 'react-i18next'
 
 class UpgradeAppPanel extends React.PureComponent {
   static propTypes = {
     repo: RepoType,
     onClose: PropTypes.func.isRequired,
     onUpgrade: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
   state = {
     repo: null,
@@ -40,7 +42,7 @@ class UpgradeAppPanel extends React.PureComponent {
   }
   render() {
     const { repo } = this.state
-    const { repo: propsRepo, onClose } = this.props
+    const { repo: propsRepo, onClose, t } = this.props
 
     if (!repo) {
       return null
@@ -55,49 +57,49 @@ class UpgradeAppPanel extends React.PureComponent {
 
     return (
       <SidePanel
-        title={`Upgrade “${name || 'Unknown'}”`}
+        title={name ? t(`Upgrade “{name}“`, { name }) : t(`Upgrade “Unknown”`)}
         opened={Boolean(propsRepo)}
         onClose={onClose}
       >
         <SidePanelSplit>
           <div>
-            <Heading2>Current version</Heading2>
+            <Heading2>{t('Current version')}</Heading2>
             <div>{currentVersion.version}</div>
           </div>
           <div>
-            <Heading2>New version</Heading2>
+            <Heading2>{t('New version')}</Heading2>
             <div>{latestVersion.version}</div>
           </div>
         </SidePanelSplit>
 
         <Part>
-          <Heading2>Changelog</Heading2>
+          <Heading2>{t('Changelog')}</Heading2>
           <p>
             {changelogUrl ? (
               <SafeLink href={changelogUrl} target="_blank">
                 {changelogUrl}
               </SafeLink>
             ) : (
-              'There is no changelog for this version.'
+              t('There is no changelog for this version.')
             )}
           </p>
 
-          <Heading2>Source code</Heading2>
+          <Heading2>{t('Source code')}</Heading2>
           <p>
             {sourceUrl ? (
               <SafeLink href={sourceUrl} target="_blank">
                 {sourceUrl}
               </SafeLink>
             ) : (
-              'There is no available source for this app.'
+              t('There is no available source for this app.')
             )}
           </p>
         </Part>
 
         <SidePanelSeparator />
         <Part>
-          <Heading2>Permissions</Heading2>
-          <p>This upgrade doesn’t introduce any new permissions.</p>
+          <Heading2>{t('Permissions')}</Heading2>
+          <p>{t('This upgrade doesn’t introduce any new permissions.')}</p>
         </Part>
 
         <SidePanelSeparator />
@@ -109,13 +111,15 @@ class UpgradeAppPanel extends React.PureComponent {
             `}
           >
             <Button mode="strong" wide onClick={this.handleUpgradeClick}>
-              Upgrade
+              {t('Upgrade')}
             </Button>
           </div>
 
           <Info.Action>
-            All the “{name}” app instances installed on your organization will
-            be upgraded.
+            <Trans i18nKey="i-apps-will-be-upgraded">
+              All the “{{ name }}” app instances installed on your organization
+              be upgraded.
+            </Trans>
           </Info.Action>
         </Part>
       </SidePanel>
@@ -134,4 +138,4 @@ const Part = styled.div`
   }
 `
 
-export default UpgradeAppPanel
+export default withTranslation()(UpgradeAppPanel)

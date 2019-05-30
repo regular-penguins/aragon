@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import { saveAs } from 'file-saver'
+import { useTranslation, Trans } from 'react-i18next'
 import {
   Button,
   ButtonIcon,
@@ -216,6 +217,7 @@ const ShareableLocalIdentities = React.memo(function ShareableLocalIdentities({
 }) {
   const [shareModalOpen, setShareModalOpen] = useState(false)
   const inputRef = useRef()
+  const { t } = useTranslation()
 
   const handleShare = () => setShareModalOpen(true)
   const handleClose = () => setShareModalOpen(false)
@@ -225,12 +227,12 @@ const ShareableLocalIdentities = React.memo(function ShareableLocalIdentities({
     inputRef.current.select()
     try {
       document.execCommand('copy')
-      toast('Link copied')
+      toast(t('Link copied'))
       setTimeout(handleClose, (TIMEOUT_TOAST * 7) / 8)
     } catch (err) {
       console.warn(err)
     }
-  }, [inputRef, toast])
+  }, [inputRef, toast, t])
   const shareLink = useMemo(() => {
     const base = `${window.location.origin}/#/${dao}`
     try {
@@ -262,7 +264,7 @@ const ShareableLocalIdentities = React.memo(function ShareableLocalIdentities({
             font-weight: bold;
           `}
         >
-          Share custom labels
+          {t('Share custom labels')}
         </header>
         <main style={{ marginTop: `${2 * GU}px` }}>
           <div
@@ -271,8 +273,9 @@ const ShareableLocalIdentities = React.memo(function ShareableLocalIdentities({
               line-height: 22px;
             `}
           >
-            These labels will be shared with everyone that has access to this
-            link.
+            {t(
+              'These labels will be shared with everyone that has access to this link.'
+            )}
           </div>
           <div style={{ marginTop: `${2.5 * GU}px` }}>
             <div
@@ -283,7 +286,7 @@ const ShareableLocalIdentities = React.memo(function ShareableLocalIdentities({
                 color: ##6d777b;
               `}
             >
-              Link
+              {t('Link')}
             </div>
             <div
               css={`
@@ -356,23 +359,23 @@ const ShareableLocalIdentities = React.memo(function ShareableLocalIdentities({
           `}
         >
           <Button
-            label="Close modal"
+            label={t('Close modal')}
             mode="secondary"
             onClick={handleClose}
             css={'width: 117px;'}
           >
-            Close
+            {t('Close')}
           </Button>
           <Button
             mode="strong"
-            label="Copy link to clipboard"
+            label={t('Copy link to clipboard')}
             onClick={handleCopy}
             css={`
               width: 117px;
               margin-left: ${2 * GU}px;
             `}
           >
-            Copy
+            {t('Copy')}
           </Button>
         </footer>
       </Modal>
@@ -426,6 +429,7 @@ const LocalIdentities = React.memo(function LocalIdentities({
   const { identityEvents$ } = useContext(IdentityContext)
   const { showLocalIdentityModal } = useContext(LocalIdentityModalContext)
   const [confirmationModalOpened, setConfirmationModalOpened] = useState(false)
+  const { t } = useTranslation()
   const updateLabel = useCallback(
     address => async () => {
       try {
@@ -482,9 +486,9 @@ const LocalIdentities = React.memo(function LocalIdentities({
               indeterminate={!allSelected && someSelected}
             />
           )}
-          Custom label
+          {t('Custom label')}
         </div>
-        <div>Address</div>
+        <div>{t('Address')}</div>
       </Headers>
       <List>
         {identities.map(({ address, name }) => (
@@ -502,7 +506,7 @@ const LocalIdentities = React.memo(function LocalIdentities({
               <IdentityBadge
                 entity={address}
                 popoverAction={{
-                  label: 'Edit custom label',
+                  label: t('Edit custom label'),
                   onClick: updateLabel(address),
                 }}
                 popoverTitle={<LocalIdentityPopoverTitle label={name} />}
@@ -515,23 +519,23 @@ const LocalIdentities = React.memo(function LocalIdentities({
         <Import onImport={onImport} />
         {!iOS && (
           <Button.Anchor
-            label="Export labels"
+            label={t('Export labels')}
             mode="secondary"
             onClick={handleDownload}
             disabled={!someSelected}
             style={{ marginLeft: `${3 * GU}px` }}
           >
-            Export
+            {t('Export')}
           </Button.Anchor>
         )}
         <Button
           style={{ margin: `0 ${3 * GU}px ${3 * GU}px` }}
-          label="Share labels"
+          label={t('Share labels')}
           mode="secondary"
           onClick={onShare}
           disabled={!someSelected}
         >
-          Share
+          {t('Share')}
         </Button>
         <Button
           mode="outline"
@@ -540,7 +544,7 @@ const LocalIdentities = React.memo(function LocalIdentities({
             ${breakpoint('medium', `margin-left: auto;`)}
           `}
         >
-          <IconCross /> Remove all labels
+          <IconCross /> {t('Remove all labels')}
         </Button>
       </Controls>
       <Warning />
@@ -548,25 +552,27 @@ const LocalIdentities = React.memo(function LocalIdentities({
         visible={confirmationModalOpened}
         onClose={handleCloseConfirmationModal}
       >
-        <ModalTitle>Remove labels</ModalTitle>
+        <ModalTitle>{t('Remove labels')}</ModalTitle>
         <ModalText>
-          This action will irreversibly delete the selected labels you have
-          added to your organization on this device
+          <Trans i18nKey="i-delete-labels-warning">
+            This action will irreversibly delete the selected labels you have
+            added to your organization on this device
+          </Trans>
         </ModalText>
         <ModalControls>
           <Button
-            label="Cancel"
+            label={t('Cancel')}
             mode="secondary"
             onClick={handleCloseConfirmationModal}
           >
-            Cancel
+            {t('Cancel')}
           </Button>
           <RemoveButton
-            label="Remove labels"
+            label={t('Remove labels')}
             mode="strong"
             onClick={handleClearAll}
           >
-            Remove
+            {t('Remove')}
           </RemoveButton>
         </ModalControls>
       </Modal>
@@ -635,12 +641,16 @@ const Label = styled.label`
 `
 
 const Warning = React.memo(function Warning() {
+  const { t } = useTranslation()
   return (
-    <StyledInfoAction title="All labels are local to your device">
+    <StyledInfoAction title={t('All labels are local to your device')}>
       <div>
-        Any labels you add or import will only be shown on this device, and not
-        stored anywhere else. If you want to share the labels with other devices
-        or users, you will need to export them and share the .json file
+        <Trans i18nKey="i-labels-only-here">
+          Any labels you add or import will only be shown on this device, and
+          not stored anywhere else. If you want to share the labels with other
+          devices or users, you will need to export them and share the .json
+          file
+        </Trans>
       </div>
     </StyledInfoAction>
   )

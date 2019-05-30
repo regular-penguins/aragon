@@ -18,6 +18,7 @@ import { network } from '../../environment'
 import { KNOWN_ICONS, isKnownRepo } from '../../repo-utils'
 import { repoBaseUrl } from '../../url-utils'
 import { GU } from '../../utils'
+import { withTranslation } from 'react-i18next'
 
 const VERSION = '0.7 Bella'
 const SOURCE = [
@@ -42,7 +43,7 @@ function getAppVersionData(repo) {
 }
 
 const UpgradeOrganizationPanel = React.memo(
-  ({ repos = [], opened, onClose, daoAddress, wrapper }) => {
+  ({ repos = [], opened, onClose, daoAddress, wrapper, t }) => {
     const [currentVersions, newVersions] = useMemo(
       () =>
         repos
@@ -90,13 +91,13 @@ const UpgradeOrganizationPanel = React.memo(
 
     return (
       <SidePanel
-        title={`Upgrade to ${VERSION}`}
+        title={t(`Upgrade to {{VERSION}}`, { VERSION })}
         opened={opened}
         onClose={onClose}
       >
         <SidePanelSplit>
           <div>
-            <Heading2>Current version</Heading2>
+            <Heading2>{t('Current version')}</Heading2>
             <div>
               {currentVersions.map(appVersion => (
                 <AppVersion key={appVersion.appId} {...appVersion} />
@@ -104,7 +105,7 @@ const UpgradeOrganizationPanel = React.memo(
             </div>
           </div>
           <div>
-            <Heading2>New version</Heading2>
+            <Heading2>{t('New version')}</Heading2>
             {newVersions.map(appVersion => (
               <AppVersion key={appVersion.appId} {...appVersion} />
             ))}
@@ -112,12 +113,12 @@ const UpgradeOrganizationPanel = React.memo(
         </SidePanelSplit>
 
         <Part>
-          <Heading2>Source code</Heading2>
+          <Heading2>{t('Source code')}</Heading2>
           <p>
             <ExternalLink href={SOURCE[1]}>{SOURCE[0]}</ExternalLink>
           </p>
 
-          <Heading2>Aragon official registry</Heading2>
+          <Heading2>{t('Aragon official registry')}</Heading2>
           <p>
             <ExternalLink href={REGISTRY[1]}>{REGISTRY[0]}</ExternalLink>
           </p>
@@ -131,14 +132,18 @@ const UpgradeOrganizationPanel = React.memo(
               margin: ${2 * GU}px 0;
             `}
           >
-            <Info.Action title="Action to be triggered">
+            <Info.Action title={t('Action to be triggered')}>
               <p
                 css={`
                   margin-top: ${GU}px;
                   font-size: 15px;
                 `}
               >
-                All your app instances will be upgraded to Aragon {VERSION}.
+                {t(
+                  'All your app instances will be upgraded to Aragon {{VERSION}}',
+                  { VERSION }
+                )}
+                .
               </p>
             </Info.Action>
           </div>
@@ -148,7 +153,7 @@ const UpgradeOrganizationPanel = React.memo(
             `}
           >
             <Button mode="strong" wide onClick={handleUpgradeAll}>
-              Upgrade your organization
+              {t('Upgrade your organization')}
             </Button>
           </div>
         </Part>
@@ -163,6 +168,7 @@ UpgradeOrganizationPanel.propTypes = {
   repos: ReposListType,
   daoAddress: DaoAddressType.isRequired,
   wrapper: AragonType,
+  t: PropTypes.func.isRequired,
 }
 
 const AppVersion = ({
@@ -241,4 +247,4 @@ const Part = styled.div`
   }
 `
 
-export default UpgradeOrganizationPanel
+export default withTranslation()(UpgradeOrganizationPanel)

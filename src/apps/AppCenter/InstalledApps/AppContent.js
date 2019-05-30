@@ -18,12 +18,14 @@ import { GU } from '../../../utils'
 import { useRepoDetails } from '../../../hooks'
 import { network } from '../../../environment'
 import Screenshots from '../Screenshots'
+import { useTranslation } from 'react-i18next'
 
 // Exclude the width of MenuPanel
 const appBelow = (below, value) =>
   below(value + (below('medium') ? 0 : MENU_PANEL_WIDTH))
 
 const AppContent = React.memo(({ repo, repoVersions, onRequestUpgrade }) => {
+  const { t } = useTranslation()
   const {
     name,
     instances,
@@ -33,7 +35,7 @@ const AppContent = React.memo(({ repo, repoVersions, onRequestUpgrade }) => {
       content: {
         author,
         icons,
-        description = 'No description.',
+        description = t('No description.'),
         screenshots = [],
         source_url: sourceUrl,
         details_url: detailsUrl,
@@ -90,7 +92,7 @@ const AppContent = React.memo(({ repo, repoVersions, onRequestUpgrade }) => {
 
             {author && (
               <React.Fragment>
-                <Heading2>Created by</Heading2>
+                <Heading2>{t('Created by')}</Heading2>
                 <div>
                   <LocalIdentityBadge entity={author} />
                 </div>
@@ -105,7 +107,7 @@ const AppContent = React.memo(({ repo, repoVersions, onRequestUpgrade }) => {
         >
           {canUpgrade && onRequestUpgrade && (
             <Button mode="strong" onClick={onRequestUpgrade}>
-              Upgrade
+              {t('Upgrade')}
             </Button>
           )}
         </div>
@@ -123,18 +125,18 @@ const AppContent = React.memo(({ repo, repoVersions, onRequestUpgrade }) => {
         `}
       >
         <DetailsGroup compact={compact}>
-          <Heading2>Description</Heading2>
+          <Heading2>{t('Description')}</Heading2>
           <div>{description}</div>
 
           {!!repoDetails && (
             <React.Fragment>
-              <Heading2>Details</Heading2>
+              <Heading2>{t('Details')}</Heading2>
               <Markdown text={repoDetails} />
             </React.Fragment>
           )}
         </DetailsGroup>
         <DetailsGroup compact={compact}>
-          <Heading2>Installed instances</Heading2>
+          <Heading2>{t('Installed instances')}</Heading2>
           {instances.map(({ proxyAddress }) => (
             <div
               key={proxyAddress}
@@ -148,18 +150,18 @@ const AppContent = React.memo(({ repo, repoVersions, onRequestUpgrade }) => {
             </div>
           ))}
 
-          <Heading2>Source code</Heading2>
+          <Heading2>{t('Source code')}</Heading2>
           <div>
             {sourceUrl ? (
               <StyledLink href={sourceUrl}>{sourceUrl}</StyledLink>
             ) : (
-              'No source code link.'
+              t('No source code link.')
             )}
           </div>
 
           {!!repoAddress && !!repoAddress && (
             <React.Fragment>
-              <Heading2>Package Name</Heading2>
+              <Heading2>{t('Package Name')}</Heading2>
               <StyledLink
                 href={blockExplorerUrl('address', repoAddress, {
                   networkType: network.type,

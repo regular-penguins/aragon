@@ -4,6 +4,7 @@ import { Button, springs } from '@aragon/ui'
 import { Transition, animated } from 'react-spring'
 import { ReactSpringStateType } from '../../prop-types'
 import RemoteImage from '../RemoteImage'
+import { useTranslation } from 'react-i18next'
 
 // Ratios based on the the design files
 export const RATIO_LEFT = 500 / 1055
@@ -31,6 +32,7 @@ const HighlightScreen = ({
 }) => {
   const visualSrc = compactMode && visual.small ? visual.small : visual.large
   const [leaving, setLeaving] = useState(false)
+  const { t } = useTranslation()
   useEffect(() => {
     if (state === 'leave') {
       setLeaving(true)
@@ -101,7 +103,7 @@ const HighlightScreen = ({
             ),
           }}
         >
-          {(compactMode && title.small) || title.large}
+          {(compactMode && title.small && title.small(t)) || title.large(t)}
         </AnimH1>
         <AnimDiv
           style={{
@@ -118,8 +120,8 @@ const HighlightScreen = ({
             `}
           >
             {compactMode && description.small
-              ? description.small
-              : description.large}
+              ? description.small(t)
+              : description.large(t)}
           </p>
           {upgrade && (
             <div css="margin-top: 30px">
@@ -133,7 +135,9 @@ const HighlightScreen = ({
                   font-weight: 600;
                 `}
               >
-                {compactMode && upgrade.small ? upgrade.small : upgrade.large}
+                {compactMode && upgrade.small
+                  ? upgrade.small(t)
+                  : upgrade.large(t)}
               </Button>
             </div>
           )}
@@ -195,25 +199,25 @@ const HighlightScreen = ({
 HighlightScreen.propTypes = {
   compactMode: PropTypes.bool,
   description: PropTypes.shape({
-    small: PropTypes.string,
-    large: PropTypes.string.isRequired,
+    small: PropTypes.func,
+    large: PropTypes.func.isRequired,
   }),
   enterProgress: PropTypes.object,
   onUpgrade: PropTypes.func.isRequired,
   showProgress: PropTypes.object,
   state: ReactSpringStateType.isRequired,
   title: PropTypes.shape({
-    small: PropTypes.string,
-    large: PropTypes.string.isRequired,
+    small: PropTypes.func,
+    large: PropTypes.func.isRequired,
   }),
   upgrade: PropTypes.shape({
-    small: PropTypes.string,
-    large: PropTypes.string.isRequired,
+    small: PropTypes.func,
+    large: PropTypes.func.isRequired,
   }),
   verticalMode: PropTypes.bool,
   visual: PropTypes.shape({
-    small: PropTypes.string,
-    large: PropTypes.string.isRequired,
+    small: PropTypes.func,
+    large: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired,
   }).isRequired,
 }

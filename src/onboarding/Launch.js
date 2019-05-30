@@ -27,7 +27,7 @@ class LaunchContent extends React.PureComponent {
           </Text>
         </Title>
         <StyledButton mode="strong" onClick={this.props.onConfirm}>
-          t('Get Started')
+          {t('Get Started')}
         </StyledButton>
       </Content>
     )

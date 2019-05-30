@@ -47,6 +47,7 @@ class Settings extends React.Component {
     walletNetwork: PropTypes.string.isRequired,
     walletWeb3: PropTypes.object.isRequired,
     wrapper: AragonType,
+    t: PropTypes.func.isRequired,
   }
   state = {
     currencies: AVAILABLE_CURRENCIES,
@@ -107,6 +108,7 @@ class Settings extends React.Component {
       walletNetwork,
       walletWeb3,
       wrapper,
+      t,
     } = this.props
     const {
       currencies,
@@ -117,7 +119,7 @@ class Settings extends React.Component {
     } = this.state
     return (
       <AppLayout
-        title="Settings"
+        title={t('Settings')}
         onMenuOpen={this.handleMenuPanelOpen}
         smallViewPadding={20}
       >
@@ -132,14 +134,8 @@ class Settings extends React.Component {
             walletWeb3={walletWeb3}
           />
           {currencies.length > 1 && selectedCurrency && (
-            <Option
-              name="Currency"
-              text={`
-                This will be the default currency for displaying purposes.
-                It will be converted to ETH under the hood.
-              `}
-            >
-              <Field label="Select currency">
+            <Option name={t('Currency')} text={t(`x-settings-currency`)}>
+              <Field label={t('Select currency')}>
                 <DropDown
                   active={currencies.indexOf(selectedCurrency)}
                   items={currencies}
@@ -149,12 +145,10 @@ class Settings extends React.Component {
             </Option>
           )}
           <Option
-            name="Node settings (advanced)"
-            text={`
-              Change the Ethereum and IPFS nodes this app is connected to.
-            `}
+            name={t('Node settings (advanced)')}
+            text={t(`x-settings-node`)}
           >
-            <Field label="Ethereum node">
+            <Field label={t('Ethereum node')}>
               <TextInput
                 onChange={this.handleDefaultEthNodeChange}
                 wide
@@ -164,22 +158,22 @@ class Settings extends React.Component {
                 <Text color={theme.negative} size="xsmall">
                   {(() => {
                     if (selectedNodeError instanceof InvalidNetworkType) {
-                      return `Node must be connected to ${sanitizeNetworkType(
-                        network.type
-                      )}`
+                      return t(`Node must be connected to {network}`, {
+                        network: sanitizeNetworkType(network.type),
+                      })
                     }
                     if (selectedNodeError instanceof InvalidURI) {
-                      return 'Must provide WebSocket endpoint to node'
+                      return t('Must provide WebSocket endpoint to node')
                     }
                     if (selectedNodeError instanceof NoConnection) {
-                      return 'Could not connect to node'
+                      return t('Could not connect to node')
                     }
-                    return 'URI does not seem to be a ETH node'
+                    return t('URI does not seem to be a ETH node')
                   })()}
                 </Text>
               )}
             </Field>
-            <Field label="IPFS gateway">
+            <Field label={t('IPFS gateway')}>
               <TextInput
                 onChange={this.handleIpfsGatewayChange}
                 wide
@@ -187,24 +181,21 @@ class Settings extends React.Component {
               />
             </Field>
             <Button mode="secondary" onClick={this.handleNodeSettingsSave}>
-              t('Save settings')
+              {t('Save settings')}
             </Button>
           </Option>
           {wrapper && (
             <Option
-              name="Troubleshooting"
-              text={`
-                Press this button to refresh the cache of the application in your
-                browser.
-              `}
+              name={t('Troubleshooting')}
+              text={t(`x-settings-troubleshooting`)}
             >
               <div>
                 <Button mode="secondary" onClick={this.handleRefreshCache}>
-                  t('Clear application cache')
+                  {t('Clear application cache')}
                 </Button>
               </div>
               <Note>
-                <Trans i18nKey="only-browser-data-deleted">
+                <Trans i18nKey="i-only-browser-data-deleted">
                   This will only delete the data stored in your browser to make
                   the app load faster. No data related to the organization
                   itself will be altered.

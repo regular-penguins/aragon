@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Button, ButtonIcon, IconArrowRight, Viewport } from '@aragon/ui'
+import { withTranslation } from 'react-i18next'
 
-const ViewDetailsButton = props => (
+const ViewDetailsButton = ({ t, ...props }) => (
   <Viewport>
     {({ below }) =>
       below('medium') ? (
@@ -10,11 +12,15 @@ const ViewDetailsButton = props => (
         </ButtonIcon>
       ) : (
         <Button mode="outline" compact {...props}>
-          View details
+          {t('View details')}
         </Button>
       )
     }
   </Viewport>
 )
 
-export default ViewDetailsButton
+ViewDetailsButton.propTypes = {
+  t: PropTypes.func.isRequired,
+}
+
+export default withTranslation()(ViewDetailsButton)

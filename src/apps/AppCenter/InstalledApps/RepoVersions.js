@@ -7,8 +7,9 @@ import { format } from 'date-fns'
 import { TextLabel } from '../../../components/TextStyles'
 import { RepoType } from '../../../prop-types'
 import { GU } from '../../../utils'
+import { withTranslation, Trans } from 'react-i18next'
 
-const RepoVersions = ({ animate, repo: { currentVersion, versions } }) => (
+const RepoVersions = ({ animate, repo: { currentVersion, versions }, t }) => (
   <div
     css={`
       display: flex;
@@ -31,10 +32,10 @@ const RepoVersions = ({ animate, repo: { currentVersion, versions } }) => (
           `}
         >
           <Td as="th">
-            <TextLabel>App version</TextLabel>
+            <TextLabel>{t('App version')}</TextLabel>
           </Td>
           <Td as="th">
-            <TextLabel>Release date</TextLabel>
+            <TextLabel>{t('Release date')}</TextLabel>
           </Td>
         </tr>
       </thead>
@@ -66,7 +67,7 @@ const RepoVersions = ({ animate, repo: { currentVersion, versions } }) => (
                   <Badge.Identity
                     style={{ marginLeft: `${GU}px`, fontVariant: 'small-caps' }}
                   >
-                    current
+                    {t('current')}
                   </Badge.Identity>
                 )}
               </Td>
@@ -85,8 +86,10 @@ const RepoVersions = ({ animate, repo: { currentVersion, versions } }) => (
       `}
     >
       <Info.Action>
-        Minor and patch upgrades are front-end only, and are performed
-        automatically.
+        <Trans i18nKey="i-minor-and-patch-updates">
+          Minor and patch upgrades are front-end only, and are performed
+          automatically.
+        </Trans>
       </Info.Action>
     </div>
   </div>
@@ -95,6 +98,7 @@ const RepoVersions = ({ animate, repo: { currentVersion, versions } }) => (
 RepoVersions.propTypes = {
   repo: RepoType.isRequired,
   animate: PropTypes.bool,
+  t: PropTypes.func.isRequired,
 }
 
 const BodyTr = styled(animated.tr)`
@@ -111,4 +115,4 @@ const Td = styled.td`
   }
 `
 
-export default RepoVersions
+export default withTranslation()(RepoVersions)

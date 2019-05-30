@@ -5,6 +5,7 @@ import { getAnyEntity } from '../../permissions'
 import { AppType } from '../../prop-types'
 import { getEmptyAddress } from '../../web3-utils'
 import AppInstanceLabel from '../../components/AppInstanceLabel'
+import { withTranslation } from 'react-i18next'
 
 class EntitySelector extends React.Component {
   static propTypes = {
@@ -14,6 +15,7 @@ class EntitySelector extends React.Component {
     label: PropTypes.string.isRequired,
     labelCustomAddress: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
   state = {
     customAddress: '',
@@ -61,12 +63,12 @@ class EntitySelector extends React.Component {
     return (app && app.proxyAddress) || getEmptyAddress()
   }
   getItems() {
-    const { includeAnyEntity } = this.props
+    const { includeAnyEntity, t } = this.props
 
     const items = [
-      'Select an entity',
+      t('Select an entity'),
       ...this.getAppsItems(),
-      'Custom address…',
+      t('Custom address…'),
     ]
     if (includeAnyEntity) {
       // Add immediately before last item
@@ -106,4 +108,4 @@ class EntitySelector extends React.Component {
   }
 }
 
-export default EntitySelector
+export default withTranslation()(EntitySelector)

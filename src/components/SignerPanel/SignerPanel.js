@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SidePanel } from '@aragon/ui'
 import { Transition, animated } from 'react-spring'
+import { withTranslation } from 'react-i18next'
 import ConfirmTransaction from './ConfirmTransaction'
 import ConfirmMsgSign from './ConfirmMsgSign'
 import SigningStatus from './SigningStatus'
@@ -43,9 +44,11 @@ const getAppName = (apps, proxyAddress) => {
   return (app && app.name) || ''
 }
 
-const getPretransactionDescription = intent =>
-  `Allow ${intent.name} to ${intent.description.slice(0, 1).toLowerCase() +
-    intent.description.slice(1)}`
+const getPretransactionDescription = (intent, t) => {
+  const { name, description } = intent
+  const to = description.slice(0, 1).toLowerCase() + description.slice(1)
+  return t(`Allow {name} to {to}`, { name, to })
+}
 
 class SignerPanel extends React.PureComponent {
   static propTypes = {
@@ -63,6 +66,7 @@ class SignerPanel extends React.PureComponent {
     walletWeb3: PropTypes.object.isRequired,
     web3: PropTypes.object.isRequired,
     walletProviderId: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   state = { ...INITIAL_STATE }
@@ -122,11 +126,13 @@ class SignerPanel extends React.PureComponent {
   }
 
   stateFromMsgSigBag({ requestingApp, message }) {
+    const { t } = this.props
     const messageToSign = message || ''
     return {
       intent: {
-        description:
-          'You are about to sign this message with the connected account',
+        description: t(
+          'You are about to sign this message with the connected account'
+        ),
         message: messageToSign,
         requestingApp,
       },
@@ -151,6 +157,7 @@ class SignerPanel extends React.PureComponent {
       setActivityConfirmed,
       setActivityFailed,
       setActivityNonce,
+      t,
     } = this.props
 
     return new Promise((resolve, reject) => {
@@ -171,7 +178,7 @@ class SignerPanel extends React.PureComponent {
 
           // Pretransactions are for so the app can get approval
           const description = isPretransaction
-            ? getPretransactionDescription(intent)
+            ? getPretransactionDescription(intent, t)
             : intent.description
 
           const hasForwarder = intent.to !== intent.transaction.to
@@ -287,6 +294,7 @@ class SignerPanel extends React.PureComponent {
       walletNetwork,
       walletProviderId,
       apps,
+      t,
     } = this.props
 
     const {
@@ -306,7 +314,7 @@ class SignerPanel extends React.PureComponent {
         onClose={this.handleSignerClose}
         onTransitionEnd={this.handleSignerTransitionEnd}
         opened={panelOpened}
-        title={isTransaction ? 'Create transaction' : 'Sign Message'}
+        title={isTransaction ? t('Create transaction') : t('Sign Message')}
       >
         <Main>
           <Transition
@@ -394,6 +402,8 @@ class SignerPanel extends React.PureComponent {
   }
 }
 
+const SignerPanelT = withTranslation(SignerPanel)
+
 const Main = styled.div`
   position: relative;
   margin: 0 -30px;
@@ -424,7 +434,7 @@ export default function(props) {
     setActivityNonce,
   } = React.useContext(ActivityContext)
   return (
-    <SignerPanel
+    <SignerPanelT
       {...props}
       addTransactionActivity={addTransactionActivity}
       setActivityConfirmed={setActivityConfirmed}

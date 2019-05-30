@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { breakpoint, font } from '@aragon/ui'
+import { withTranslation } from 'react-i18next'
 
-const AppsGrid = React.memo(({ children }) => (
+const AppsGrid = React.memo(({ children, t }) => (
   <div>
     <h1
       css={`
@@ -10,7 +11,7 @@ const AppsGrid = React.memo(({ children }) => (
         ${font({ weight: 'bold' })};
       `}
     >
-      Installed apps
+      {t('Installed apps')}
     </h1>
     <div
       css={`
@@ -36,6 +37,7 @@ const AppsGrid = React.memo(({ children }) => (
 
 AppsGrid.propTypes = {
   children: PropTypes.node,
+  t: PropTypes.func.isRequired,
 }
 
-export default AppsGrid
+export default withTranslation()(AppsGrid)

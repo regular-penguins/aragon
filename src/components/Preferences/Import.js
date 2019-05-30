@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@aragon/ui'
 import { isString } from '../../utils'
 import { isAddress } from '../../web3-utils'
@@ -49,6 +50,7 @@ const Import = ({ onImport }) => {
     onDrop: fileImport(onImport),
     multiple: false,
   })
+  const { t } = useTranslation()
 
   return (
     <label
@@ -70,8 +72,8 @@ const Import = ({ onImport }) => {
           width: 100%;
         `}
       />
-      <Button label="Import" mode="secondary">
-        Import
+      <Button label={t('Import')} mode="secondary">
+        {t('Import')}
       </Button>
     </label>
   )

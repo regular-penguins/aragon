@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { Badge, font } from '@aragon/ui'
 
 const LocalIdentityPopoverTitle = ({ label }) => {
+  const { t } = useTranslation()
   return (
     <WrapTitle>
       <Label>{label}</Label>
@@ -14,7 +16,7 @@ const LocalIdentityPopoverTitle = ({ label }) => {
           ${font({ size: 'xsmall' })};
         `}
       >
-        Custom label
+        {t('Custom label')}
       </Badge>
     </WrapTitle>
   )

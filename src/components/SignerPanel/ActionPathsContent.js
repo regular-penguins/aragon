@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withTranslation } from 'react-i18next'
 import { Info, RadioList, SafeLink } from '@aragon/ui'
 import SignerButton from './SignerButton'
 import AddressLink from './AddressLink'
@@ -19,6 +20,7 @@ class ActionPathsContent extends React.Component {
     pretransaction: PropTypes.object,
     signingEnabled: PropTypes.bool,
     walletProviderId: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
   }
   state = {
     selected: 0,
@@ -179,6 +181,7 @@ class ActionPathsContent extends React.Component {
       pretransaction,
       signingEnabled,
       walletProviderId,
+      t,
     } = this.props
     const { selected } = this.state
     const showPaths = !direct
@@ -187,17 +190,18 @@ class ActionPathsContent extends React.Component {
       <React.Fragment>
         {showPaths ? (
           <div css="margin-bottom: 40px">
-            <Info.Permissions title="Permission note:">
-              You cannot directly perform this action. You do not have the
-              necessary permissions.
+            <Info.Permissions title={t('Permission note:')}>
+              {t(
+                'You cannot directly perform this action. You do not have the necessary permissions.'
+              )}
             </Info.Permissions>
             <div css="margin-top: 25px">
               <RadioList
-                title="Action Requirement"
+                title={t('Action Requirement')}
                 description={
                   paths.length > 1
-                    ? 'Here are some options you can use to perform it:'
-                    : 'You can perform this action through:'
+                    ? t('Here are some options you can use to perform it:')
+                    : t('You can perform this action through:')
                 }
                 items={radioItems}
                 onChange={this.handleChange}
@@ -207,27 +211,33 @@ class ActionPathsContent extends React.Component {
           </div>
         ) : (
           <h2 css="margin-bottom: 10px">
-            You can directly perform this action:
+            {t('You can directly perform this action:')}
           </h2>
         )}
-        <Info.Action icon={null} title="Action to be triggered">
+        <Info.Action icon={null} title={t('Action to be triggered')}>
           {this.renderDescription(showPaths, intent)}
         </Info.Action>
         {pretransaction && (
           <div css="margin-top: 20px">
-            <Info.Action title="Two transactions required">
-              This action requires two transactions to be signed in{' '}
-              {providerString('your Ethereum provider', walletProviderId)},
-              please confirm them one after another.
+            <Info.Action title={t('Two transactions required')}>
+              {t(
+                'This action requires two transactions to be signed in {provider}, please confirm them one after another.',
+                {
+                  provider: providerString(
+                    t('your Ethereum provider'),
+                    walletProviderId
+                  ),
+                }
+              )}
             </Info.Action>
           </div>
         )}
         <SignerButton onClick={this.handleSign} disabled={!signingEnabled}>
-          Create transaction
+          {t('Create transaction')}
         </SignerButton>
       </React.Fragment>
     )
   }
 }
 
-export default ActionPathsContent
+export default withTranslation()(ActionPathsContent)

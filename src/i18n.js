@@ -11,7 +11,7 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    lng: navigator.language && navigator.language.split('-')[0],
+    lng: 'en', // navigator.language && navigator.language.split('-')[0],
     fallbackLng: 'en',
     ns: '',
     defaultNS: '',
@@ -22,6 +22,10 @@ i18n
       loadPath: (lng, ns) =>
         ns ? `locales/${lng}-${ns}.json` : `locales/${lng}.json`,
     },
+    // allow keys to be phrases having `:`, `.`
+    nsSeparator: false,
+    keySeparator: false,
+
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

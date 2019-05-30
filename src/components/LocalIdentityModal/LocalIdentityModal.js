@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useTranslation, Trans } from 'react-i18next'
 import { Button, TextInput, breakpoint, font, theme } from '@aragon/ui'
 import { ModalContext } from '../ModalManager/ModalManager'
 import EscapeOutside from '../EscapeOutside/EscapeOutside'
@@ -41,6 +42,7 @@ const Modal = ({ address, label, onCancel, onSave }) => {
   const [action, setAction] = React.useState(null)
   const [error, setError] = React.useState(null)
   const labelInput = React.useRef(null)
+  const { t } = useTranslation()
 
   const handleCancel = useCallback(() => {
     onCancel()
@@ -69,24 +71,26 @@ const Modal = ({ address, label, onCancel, onSave }) => {
   )
 
   useEffect(() => {
-    setAction(label && label.trim() ? 'Edit' : 'Add')
+    setAction(label && label.trim() ? t('Edit') : t('Add'))
     labelInput.current.focus()
     labelInput.current.select()
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [label, labelInput, handleKeyDown])
+  }, [label, labelInput, handleKeyDown, t])
 
   return (
     <EscapeOutside onEscapeOutside={onCancel}>
       <Wrap>
-        <Title>{action} custom label</Title>
+        <Title>{t('{{action}} custom label', { action })}</Title>
         <Description>
-          This label would be displayed instead of the following address and
-          only be <span>stored on this device</span>.
+          <Trans i18nKey="i-local-identity-only-here">
+            This label would be displayed instead of the following address and
+            only be <span>stored on this device</span>.
+          </Trans>
         </Description>
         <IdentityBadgeWithNetwork entity={address} />
         <Label>
-          <div>Custom Label</div>
+          <div>{t('Custom Label')}</div>
           <TextInput
             wide
             defaultValue={label}
@@ -97,10 +101,10 @@ const Modal = ({ address, label, onCancel, onSave }) => {
         </Label>
         <Controls>
           <Button mode="secondary" onClick={handleCancel}>
-            Cancel
+            {t('Cancel')}
           </Button>
           <StyledSaveButton mode="strong" onClick={handleSave}>
-            Save
+            {t('Save')}
           </StyledSaveButton>
         </Controls>
       </Wrap>

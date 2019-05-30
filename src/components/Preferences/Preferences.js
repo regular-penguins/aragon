@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Transition, animated } from 'react-spring'
+import { useTranslation, withTranslation } from 'react-i18next'
 import {
   AppBar,
   AppView,
@@ -19,12 +20,13 @@ import { useEsc, useSharedLabels } from '../../hooks'
 import SharedLabels from './SharedLabels'
 import LocalIdentities from './LocalIdentities'
 
-const TABS = ['Manage labels']
+const TABS = t => [t('Manage labels')]
 
 // checks if data is present via shared link
 // if so, displays shared labels which can be selected and saved
 // if not, displays regular selectable -> shareable -> local identities
 const Preferences = React.memo(({ dao, onClose, opened, wrapper }) => {
+  const { t } = useTranslation()
   const { below } = useViewport()
   const smallView = below('medium')
   const {
@@ -87,19 +89,19 @@ const Preferences = React.memo(({ dao, onClose, opened, wrapper }) => {
                 <StyledAppBar>
                   <Title>
                     {isSharedLink
-                      ? 'Save custom labels'
+                      ? t('Save custom labels')
                       : preferencesOpened
-                      ? 'Preferences'
+                      ? t('Preferences')
                       : ''}
                   </Title>
-                  <CloseButton onClick={handleClose} />
+                  <CloseButtonT onClick={handleClose} />
                 </StyledAppBar>
               }
             >
               <Section>
                 {!isSharedLink && (
                   <TabBar
-                    items={TABS}
+                    items={TABS(t)}
                     selected={selectedTab}
                     onChange={setSelectedTab}
                   />
@@ -159,10 +161,10 @@ const StyledAppBar = styled(AppBar)`
   )}
 `
 
-const CloseButton = styled(ButtonIcon).attrs({
+const CloseButton = styled(ButtonIcon).attrs(({ t }) => ({
   children: <IconClose />,
-  label: 'Close',
-})`
+  label: t('Close'),
+}))`
   width: auto;
   height: 100%;
   padding: 0 16px;
@@ -175,6 +177,8 @@ const CloseButton = styled(ButtonIcon).attrs({
     `
   )}
 `
+
+const CloseButtonT = withTranslation()(CloseButton)
 
 const Title = styled.h1`
   ${font({ size: 'xxlarge' })};

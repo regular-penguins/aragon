@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Transition, animated } from 'react-spring'
+import { useTranslation, Trans } from 'react-i18next'
 import {
   Button,
   ButtonIcon,
@@ -255,6 +256,7 @@ ToggleDialogueButton.propTypes = {
 
 const OptInDialogue = React.memo(({ onClose, onOptIn, optedIn, ...styles }) => {
   const { below } = useViewport()
+  const { t } = useTranslation()
 
   return (
     <animated.div {...styles}>
@@ -267,22 +269,26 @@ const OptInDialogue = React.memo(({ onClose, onOptIn, optedIn, ...styles }) => {
           {!optedIn ? (
             <React.Fragment>
               <div css={'flex: 1'}>
-                <Heading>We need your consent.</Heading>
+                <Heading>{t('We need your consent.')}</Heading>
                 <Paragraph>
-                  We want to assist you in using the product, providing help,
-                  and answers to common questions.
+                  <Trans i18nKey="i-assist-you">
+                    We want to assist you in using the product, providing help,
+                    and answers to common questions.
+                  </Trans>
                 </Paragraph>
                 <Paragraph>
-                  For that, we use a third-party system called{' '}
-                  <StyledSafeLink href="https://www.helpscout.com/">
-                    HelpScout
-                  </StyledSafeLink>
-                  . If you opt-in, we will load their program onto Aragon.
-                  HelpScout is a{' '}
-                  <StyledSafeLink href="https://bcorporation.net/directory/help-scout">
-                    Public Benefit Corp
-                  </StyledSafeLink>
-                  .
+                  <Trans i18nKey="i-heplscout-opt-in">
+                    For that, we use a third-party system called{' '}
+                    <StyledSafeLink href="https://www.helpscout.com/">
+                      HelpScout
+                    </StyledSafeLink>
+                    . If you opt-in, we will load their program onto Aragon.
+                    HelpScout is a{' '}
+                    <StyledSafeLink href="https://bcorporation.net/directory/help-scout">
+                      Public Benefit Corp
+                    </StyledSafeLink>
+                    .
+                  </Trans>
                 </Paragraph>
               </div>
               <Button
@@ -291,7 +297,7 @@ const OptInDialogue = React.memo(({ onClose, onOptIn, optedIn, ...styles }) => {
                 onClick={onOptIn}
                 css={'font-size: 15px;'}
               >
-                Yes, I’d like help
+                {t('Yes, I’d like help')}
               </Button>
             </React.Fragment>
           ) : (
@@ -304,7 +310,7 @@ const OptInDialogue = React.memo(({ onClose, onOptIn, optedIn, ...styles }) => {
               `}
             >
               <LoadingRing spin />
-              <div>Loading…</div>
+              <div>{t('Loading…')}</div>
             </div>
           )}
         </Main>
@@ -320,9 +326,10 @@ OptInDialogue.propTypes = {
 }
 
 const CloseButton = React.memo(({ onClick, ...props }) => {
+  const { t } = useTranslation()
   return (
     <ButtonIcon
-      label="Close"
+      label={t('Close')}
       onClick={onClick}
       css={`
         position: absolute;

@@ -49,13 +49,13 @@ class SignContent extends React.PureComponent {
       <React.Fragment>
         <Title>
           <Text size="great" weight="bold" color={theme.textDimmed}>
-            t('Sign transactions')
+            {t('Sign transactions')}
           </Text>
         </Title>
 
         <p>
           <Text size="large" color={theme.textSecondary}>
-            <Trans i18nKey="open-and-sign-tx">
+            <Trans i18nKey="i-open-and-sign-tx">
               Your wallet should open and you need to sign two transactions, one
               after another.
             </Trans>
@@ -92,7 +92,7 @@ class SignContent extends React.PureComponent {
         {daoCreationStatus !== DAO_CREATION_STATUS_ERROR && (
           <Note>
             <Text size="xsmall" color={theme.textSecondary}>
-              <Trans i18nKey="processing-transaction">
+              <Trans i18nKey="i-processing-transaction">
                 It might take some time before these transactions get processed,
                 depending on the status of the network. Please be patient and do
                 not close this page until it finishes.

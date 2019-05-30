@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Spring, animated } from 'react-spring'
 import { ButtonIcon, IconNotifications, springs, theme } from '@aragon/ui'
+import { withTranslation } from 'react-i18next'
 
 class ActivityAlert extends React.PureComponent {
   static propTypes = {
     unreadActivityCount: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   getUnreadCount() {
@@ -15,7 +17,7 @@ class ActivityAlert extends React.PureComponent {
   }
 
   render() {
-    const { onClick } = this.props
+    const { onClick, t } = this.props
     const unreadCount = this.getUnreadCount()
     const showCount = unreadCount > 0
 
@@ -27,7 +29,7 @@ class ActivityAlert extends React.PureComponent {
           height: 100%;
           position: relative;
         `}
-        label="Activity"
+        label={t('Activity')}
         onClick={onClick}
       >
         <IconNotifications />
@@ -79,4 +81,4 @@ const Badge = styled(animated.div)`
   letter-spacing: -0.5px;
 `
 
-export default ActivityAlert
+export default withTranslation()(ActivityAlert)

@@ -10,6 +10,7 @@ import EmptyBlock from './EmptyBlock'
 import AppInstanceLabel from '../../components/AppInstanceLabel'
 import EntityPermissions from './EntityPermissions'
 import AppRoles from './AppRoles'
+import { withTranslation } from 'react-i18next'
 
 class AppPermissions extends React.PureComponent {
   static propTypes = {
@@ -17,9 +18,10 @@ class AppPermissions extends React.PureComponent {
     app: AppType, // may not be available if still loading
     loading: PropTypes.bool.isRequired,
     onManageRole: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
   render() {
-    const { app, loading, address, onManageRole } = this.props
+    const { app, loading, address, onManageRole, t } = this.props
     return (
       <PermissionsConsumer>
         {({ revokePermission, getAppPermissions }) => {
@@ -31,12 +33,12 @@ class AppPermissions extends React.PureComponent {
                 loading={loading}
                 onManageRole={onManageRole}
               />
-              <Section title="Permissions set on this app">
+              <Section title={t('Permissions set on this app')}>
                 {loading || appPermissions.length === 0 ? (
                   <EmptyBlock>
                     {loading
-                      ? 'Loading app permissions…'
-                      : 'No permissions set.'}
+                      ? t('Loading app permissions…')
+                      : t('No permissions set.')}
                   </EmptyBlock>
                 ) : (
                   <Viewport>
@@ -46,10 +48,10 @@ class AppPermissions extends React.PureComponent {
                         header={
                           <TableRow>
                             <TableHeader
-                              title="Action"
+                              title={t('Action')}
                               style={{ width: '20%' }}
                             />
-                            <TableHeader title="Allowed for" />
+                            <TableHeader title={t('Allowed for')} />
                             <TableHeader />
                           </TableRow>
                         }
@@ -61,6 +63,7 @@ class AppPermissions extends React.PureComponent {
                             entity={entity}
                             proxyAddress={address}
                             onRevoke={revokePermission}
+                            t={t}
                           />
                         ))}
                       </Table>
@@ -69,8 +72,8 @@ class AppPermissions extends React.PureComponent {
                 )}
               </Section>
               <EntityPermissions
-                title="Permissions granted to this app"
-                noPermissionsLabel="No permissions granted."
+                title={t('Permissions granted to this app')}
+                noPermissionsLabel={t('No permissions granted.')}
                 address={address}
                 loading={loading}
                 onRevoke={revokePermission}
@@ -89,6 +92,7 @@ class Row extends React.Component {
     onRevoke: PropTypes.func.isRequired,
     proxyAddress: EthereumAddressType.isRequired,
     role: PropTypes.object.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   handleRevoke = () => {
@@ -100,9 +104,9 @@ class Row extends React.Component {
     })
   }
   renderEntity() {
-    const { entity } = this.props
+    const { entity, t } = this.props
     if (!entity) {
-      return 'Unknown'
+      return t('Unknown')
     }
     if (entity.type === 'app') {
       return <AppInstanceLabel app={entity.app} proxyAddress={entity.address} />
@@ -115,11 +119,11 @@ class Row extends React.Component {
     )
   }
   render() {
-    const { role } = this.props
+    const { role, t } = this.props
     return (
       <TableRow>
         <FirstTableCell>
-          <Text weight="bold">{role ? role.name : 'Unknown'}</Text>
+          <Text weight="bold">{role ? role.name : t('Unknown')}</Text>
         </FirstTableCell>
         <TableCell>{this.renderEntity()}</TableCell>
         <LastTableCell align="right">
@@ -129,7 +133,7 @@ class Row extends React.Component {
             compact
             onClick={this.handleRevoke}
           >
-            Revoke
+            {t('Revoke')}
           </Button>
         </LastTableCell>
       </TableRow>
@@ -137,4 +141,4 @@ class Row extends React.Component {
   }
 }
 
-export default AppPermissions
+export default withTranslation()(AppPermissions)

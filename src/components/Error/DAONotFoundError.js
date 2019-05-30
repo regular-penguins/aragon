@@ -2,43 +2,53 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { theme, Button } from '@aragon/ui'
+import { useTranslation, Trans } from 'react-i18next'
 import ErrorCard from './ErrorCard'
 import { network } from '../../environment'
 import { isAddress } from '../../web3-utils'
 
-const DAONotFoundError = ({ dao }) => (
-  <ErrorCard title="Organization not found">
-    <Paragraph>
-      It looks like there's no organization associated with that{' '}
-      {isAddress(dao) ? 'address' : 'name'} on the current network (
-      {network.name}
-      ).
-    </Paragraph>
-    <Paragraph>
-      If you got here through a link, please double check that you were given
-      the correct link.
-    </Paragraph>
-    <Paragraph>
-      Alternatively, you may{' '}
-      <StyledLink href="/">create a new organization</StyledLink>.
-    </Paragraph>
-    <ButtonBox>
-      <IssueLink mode="text" href="/" style={{ color: theme.textSecondary }}>
-        Back
-      </IssueLink>
-      <ButtonsSpacer />
-      <Button
-        mode="strong"
-        onClick={() => {
-          window.location.reload(true)
-        }}
-        compact
-      >
-        Try again
-      </Button>
-    </ButtonBox>
-  </ErrorCard>
-)
+const DAONotFoundError = ({ dao }) => {
+  const { t } = useTranslation()
+  const id = isAddress(dao) ? 'address' : 'name'
+  const { name } = network
+  return (
+    <ErrorCard title={t('Organization not found')}>
+      <Paragraph>
+        <Trans i18nKey="i-dao-not-found">
+          It looks like there's no organization associated with that {{ id }} on
+          the current network ({{ name }}).
+        </Trans>
+      </Paragraph>
+      <Paragraph>
+        <Trans i18nKey="i-check-correct-link">
+          If you got here through a link, please double check that you were
+          given the correct link.
+        </Trans>
+      </Paragraph>
+      <Paragraph>
+        <Trans i18nKey="i-alternatively-new-org">
+          Alternatively, you may{' '}
+          <StyledLink href="/">create a new organization</StyledLink>.
+        </Trans>
+      </Paragraph>
+      <ButtonBox>
+        <IssueLink mode="text" href="/" style={{ color: theme.textSecondary }}>
+          {t('Back')}
+        </IssueLink>
+        <ButtonsSpacer />
+        <Button
+          mode="strong"
+          onClick={() => {
+            window.location.reload(true)
+          }}
+          compact
+        >
+          {t('Try again')}
+        </Button>
+      </ButtonBox>
+    </ErrorCard>
+  )
+}
 DAONotFoundError.propTypes = {
   dao: PropTypes.string,
 }

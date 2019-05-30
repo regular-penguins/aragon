@@ -91,7 +91,7 @@ class ConfigureMultisigAddressesContent extends React.PureComponent {
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <Intro>
               <Text size="large" color={theme.textSecondary} align="center">
-                <Trans i18nKey="add-wallet-and-number-signatures">
+                <Trans i18nKey="i-add-wallet-and-number-signatures">
                   Add the wallet addresses of the multisig signers, and choose
                   the number of signatures needed for signing a transaction
                 </Trans>

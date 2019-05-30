@@ -15,10 +15,11 @@ import {
 } from '../../prop-types'
 import { repoBaseUrl } from '../../url-utils'
 import { log } from '../../utils'
+import { withTranslation } from 'react-i18next'
 
 const SCREENS = [
-  { id: 'installed', label: 'Installed apps' },
-  { id: 'discover', label: 'Discover apps' },
+  { id: 'installed', label: t => t('Installed apps') },
+  { id: 'discover', label: t => t('Discover apps') },
 ]
 
 class AppCenter extends React.Component {
@@ -31,6 +32,7 @@ class AppCenter extends React.Component {
     repos: PropTypes.arrayOf(RepoType).isRequired,
     reposLoading: PropTypes.bool.isRequired,
     wrapper: AragonType,
+    t: PropTypes.func.isRequired,
   }
   state = {
     upgradePanelOpened: false,
@@ -123,7 +125,7 @@ class AppCenter extends React.Component {
   }
 
   render() {
-    const { reposLoading } = this.props
+    const { reposLoading, t } = this.props
     const { upgradePanelOpened } = this.state
     const { activeTab, openedRepoName } = this.getLocation()
 
@@ -131,7 +133,7 @@ class AppCenter extends React.Component {
     const currentRepo = openedRepoName && this.getRepoFromName(openedRepoName)
 
     const navigationItems = [
-      'App Center',
+      t('App Center'),
       ...(currentRepo ? [currentRepo.name] : []),
     ]
 
@@ -151,7 +153,7 @@ class AppCenter extends React.Component {
                         `}
                       >
                         <TabBar
-                          items={SCREENS.map(screen => screen.label)}
+                          items={SCREENS.map(screen => screen.label(t))}
                           selected={activeTab}
                           onChange={this.handleScreenChange}
                         />
@@ -203,4 +205,4 @@ class AppCenter extends React.Component {
   }
 }
 
-export default AppCenter
+export default withTranslation()(AppCenter)

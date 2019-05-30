@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import { isStaticApp } from '../../static-apps'
 import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
-const LOADING_ORG = 'Loading organization…'
-const LOADING_APPS = 'Loading apps…'
-const LOADING_APP = 'Loading {APP}…'
-const LOADING_READY = 'Ready.'
+const LOADING_ORG = t => t('Loading organization…')
+const LOADING_APPS = t => t('Loading apps…')
+const LOADING_APP = (t, app) => t('Loading {app}…', { app })
+const LOADING_READY = t => t('Ready.')
 
 // Pick the loading steps depending on what is being loaded (settings, internal
 // app, external app, …). `steps` must contain the strings used to represent
@@ -53,6 +54,8 @@ function useLoadingStatus({
 
   const loadingSteps = getLoadingSteps(instanceId)
 
+  const { t } = useTranslation()
+
   // Update the step index
   useEffect(() => {
     const stepIndex = loadingSteps.stepIndex({
@@ -61,10 +64,8 @@ function useLoadingStatus({
       appLoading,
     })
 
-    const label = loadingSteps.steps[stepIndex].replace(
-      /\{APP\}/,
-      currentAppName || instanceId
-    )
+    const app = currentAppName || instanceId
+    const label = loadingSteps.steps[stepIndex](t, { app })
     const progress = stepIndex / (loadingSteps.steps.length - 1)
 
     setStatus({ label, progress })
@@ -75,6 +76,7 @@ function useLoadingStatus({
     loadingSteps,
     currentAppName,
     instanceId,
+    t,
   ])
 
   return { label, progress }

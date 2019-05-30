@@ -10,6 +10,7 @@ import EmptyBlock from './EmptyBlock'
 import AppInstanceLabel from '../../components/AppInstanceLabel'
 import { isBurnEntity } from '../../permissions'
 import { isEmptyAddress } from '../../web3-utils'
+import { withTranslation } from 'react-i18next'
 
 class AppRoles extends React.PureComponent {
   static propTypes = {
@@ -18,6 +19,7 @@ class AppRoles extends React.PureComponent {
     loading: PropTypes.bool.isRequired,
     loadingLabel: PropTypes.string,
     onManageRole: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   handleManageRole = roleBytes => {
@@ -27,8 +29,9 @@ class AppRoles extends React.PureComponent {
     const {
       app,
       loading,
-      loadingLabel = 'Loading actions…',
-      emptyLabel = 'No actions found.',
+      t,
+      loadingLabel = t('Loading actions…'),
+      emptyLabel = t('No actions found.'),
     } = this.props
 
     return (
@@ -40,7 +43,7 @@ class AppRoles extends React.PureComponent {
           }))
 
           return (
-            <Section title="Actions available on this app">
+            <Section title={t('Actions available on this app')}>
               {loading || roles.length === 0 ? (
                 <EmptyBlock>{loading ? loadingLabel : emptyLabel}</EmptyBlock>
               ) : (
@@ -51,10 +54,10 @@ class AppRoles extends React.PureComponent {
                       header={
                         <TableRow>
                           <TableHeader
-                            title="Action"
+                            title={t('Action')}
                             style={{ width: '20%' }}
                           />
-                          <TableHeader title="Managed by" />
+                          <TableHeader title={t('Managed by')} />
                           <TableHeader />
                         </TableRow>
                       }
@@ -65,6 +68,7 @@ class AppRoles extends React.PureComponent {
                           role={role}
                           manager={manager}
                           onManage={this.handleManageRole}
+                          t={t}
                         />
                       ))}
                     </Table>
@@ -87,12 +91,13 @@ class RoleRow extends React.Component {
       type: PropTypes.string,
       address: EthereumAddressType,
     }).isRequired,
+    t: PropTypes.func.isRequired,
   }
   handleManageClick = () => {
     this.props.onManage(this.props.role.bytes)
   }
   renderManager() {
-    const { manager } = this.props
+    const { manager, t } = this.props
     if (manager.type === 'app') {
       return (
         <AppInstanceLabel app={manager.app} proxyAddress={manager.address} />
@@ -100,13 +105,13 @@ class RoleRow extends React.Component {
     }
     return (
       <LocalIdentityBadge
-        entity={manager.type === 'burn' ? 'Discarded' : manager.address}
+        entity={manager.type === 'burn' ? t('Discarded') : manager.address}
       />
     )
   }
   render() {
-    const { role, manager } = this.props
-    const name = (role && role.name) || 'Unknown action'
+    const { role, manager, t } = this.props
+    const name = (role && role.name) || t('Unknown action')
     const emptyManager = isEmptyAddress(manager.address)
     const discardedManager = isBurnEntity(manager.address)
 
@@ -116,7 +121,7 @@ class RoleRow extends React.Component {
           <Text weight="bold">{name}</Text>
         </FirstTableCell>
         <TableCell>
-          {emptyManager ? 'No manager set' : this.renderManager()}
+          {emptyManager ? t('No manager set') : this.renderManager()}
         </TableCell>
         <LastTableCell align="right">
           <Button
@@ -125,7 +130,11 @@ class RoleRow extends React.Component {
             style={{ minWidth: '80px' }}
             onClick={this.handleManageClick}
           >
-            {emptyManager ? 'Initialize' : discardedManager ? 'View' : 'Manage'}
+            {emptyManager
+              ? t('Initialize')
+              : discardedManager
+              ? t('View')
+              : t('Manage')}
           </Button>
         </LastTableCell>
       </TableRow>
@@ -133,4 +142,4 @@ class RoleRow extends React.Component {
   }
 }
 
-export default AppRoles
+export default withTranslation()(AppRoles)
